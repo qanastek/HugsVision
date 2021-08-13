@@ -60,7 +60,7 @@ pip install --editable .
 Then you can access HugsVision with:
 
 ```python
-import HugsVision as sb
+import HugsVision as vision
 ```
 
 Any modification made to the `HugsVision` package will be automatically interpreted as we installed it with the `--editable` flag.
