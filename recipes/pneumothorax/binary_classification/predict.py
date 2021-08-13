@@ -12,7 +12,7 @@ print("Process the image: " + args.img)
 
 try:
 
-    label = VisionClassifierInference(model_path: args.path).predict(img_path: './data/demo/' + args.img)
+    label = VisionClassifierInference(model_path: args.path).predict(img_path: args.img)
     print("Predicted class:", label)
 
 except Exception as e:
