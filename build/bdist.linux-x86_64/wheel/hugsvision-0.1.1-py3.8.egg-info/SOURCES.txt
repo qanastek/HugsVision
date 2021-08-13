@@ -1,0 +1,9 @@
+README.md
+setup.py
+hugsvision/__init__.py
+hugsvision/version.txt
+hugsvision.egg-info/PKG-INFO
+hugsvision.egg-info/SOURCES.txt
+hugsvision.egg-info/dependency_links.txt
+hugsvision.egg-info/requires.txt
+hugsvision.egg-info/top_level.txt

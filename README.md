@@ -19,7 +19,7 @@ HugsVision is constantly evolving. New features, tutorials, and documentation wi
 Once Anaconda is installed, you can create a new environment with:
 
 ```bash
-conda create --name HugsVision python=3.6
+conda create --name HugsVision python=3.6 -y
 ```
 
 Then, activate it with:
@@ -37,13 +37,13 @@ More information on managing environments with Anaconda can be found in [the con
 Once you have created your Python environment (Python 3.6+) you can simply type:
 
 ```bash
-pip install HugsVision
+pip install hugsvision
 ```
 
 Then you can access HugsVision with:
 
 ```python
-import HugsVision as vision
+import hugsvision as vision
 ```
 
 ## Install with GitHub
@@ -60,10 +60,10 @@ pip install --editable .
 Then you can access HugsVision with:
 
 ```python
-import HugsVision as vision
+import hugsvision as vision
 ```
 
-Any modification made to the `HugsVision` package will be automatically interpreted as we installed it with the `--editable` flag.
+Any modification made to the `hugsvision` package will be automatically interpreted as we installed it with the `--editable` flag.
 
 # Running an experiment
 
@@ -99,3 +99,7 @@ Before starting implementing, please check if your model has an implementation i
 1. **[ViT](https://huggingface.co/transformers/model_doc/vit.html)** (from Google Research, Brain Team) released with the paper [An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale](https://arxiv.org/pdf/2010.11929.pdf), by Alexey Dosovitskiy, Lucas Beyer, Alexander Kolesnikov, Dirk Weissenborn, Xiaohua Zhai, Thomas Unterthiner, Mostafa Dehghani, Matthias Minderer, Georg Heigold, Sylvain Gelly, Jakob Uszkoreit, Neil Houlsby.
 2. **[DeiT](https://huggingface.co/transformers/model_doc/deit.html)** (from Facebook AI and Sorbonne University) released with the paper [Training data-efficient image transformers & distillation through attention](https://arxiv.org/pdf/2012.12877.pdf) by Hugo Touvron, Matthieu Cord, Matthijs Douze, Francisco Massa, Alexandre Sablayrolles, Hervé Jégou.
 3. **[DETR](https://huggingface.co/transformers/model_doc/detr.html)** (from Facebook AI) released with the paper [End-to-End Object Detection with Transformers](https://arxiv.org/pdf/2005.12872.pdf) by Nicolas Carion, Francisco Massa, Gabriel Synnaeve, Nicolas Usunier, Alexander Kirillov and Sergey Zagoruyko.
+
+# Build PyPi package
+
+Build: `python setup.py sdist bdist_wheel`

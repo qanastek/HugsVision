@@ -1,7 +1,7 @@
 import argparse
 
-from VisionClassifierTrainer import VisionClassifierTrainer
-from VisionDataset import VisionDataset
+from hugsvision.nnet import VisionClassifierTrainer
+from hugsvision.dataio import VisionDataset
 
 from torchvision.datasets import ImageFolder
 from transformers import DeiTFeatureExtractor, DeiTForImageClassification

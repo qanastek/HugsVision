@@ -1,0 +1,8 @@
+torch
+torchvision
+torchmetrics
+Pillow
+scikit-learn
+transformers
+tqdm
+tabulate

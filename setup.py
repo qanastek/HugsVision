@@ -10,21 +10,30 @@ with open(os.path.join("hugsvision", "version.txt")) as f:
     version = f.read().strip()
 
 setup(
-    name="hugsvision",
-    version=version,
-    description="A easy to use huggingface wrapper for computer vision.",
-    long_description=long_description,
-    long_description_content_type="text/markdown",
-    author="Yanis Labrak & Others",
-    author_email="yanis.labrak@univ-avignon.fr",
-    packages=setuptools.find_packages(),
-    package_data={"hugsvision": ["version.txt", "log-config.yaml"]},
-    install_requires=[
-        "numpy",
+    name = "hugsvision",
+    version = version,
+    description = "A easy to use huggingface wrapper for computer vision.",
+    long_description = long_description,
+    long_description_content_type = "text/markdown",
+    author = "Yanis Labrak & Others",
+    author_email = "yanis.labrak@univ-avignon.fr",
+    packages = setuptools.find_packages(),
+    package_data = {
+        "hugsvision": [
+            "version.txt"
+        ]
+    },
+    install_requires = [
         "torch",
         "torchvision",
+        "torchmetrics",
+        "Pillow",
+        "scikit-learn",
+        "transformers",
         "tqdm",
+        "tabulate",
     ],
-    python_requires=">=3.6",
-    url="https://HugsVision.github.io/",
+    python_requires = ">=3.6",
+    url = "https://HugsVision.github.io/",
+    keywords = ["python","transformers","huggingface","wrapper","toolkit","computer vision","easy","computer","vision"],
 )
