@@ -103,3 +103,5 @@ Before starting implementing, please check if your model has an implementation i
 # Build PyPi package
 
 Build: `python setup.py sdist bdist_wheel`
+
+Upload: `twine upload dist/*`

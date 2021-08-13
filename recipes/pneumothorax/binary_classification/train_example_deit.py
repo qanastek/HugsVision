@@ -1,6 +1,6 @@
 import argparse
 
-from hugsvision.nnet import VisionClassifierTrainer
+from hugsvision.nnet.VisionClassifierTrainer import VisionClassifierTrainer
 from hugsvision.dataio import VisionDataset
 
 from torchvision.datasets import ImageFolder

@@ -1,7 +1,7 @@
 import argparse
 import os.path
 
-from hugsvision.inference import VisionClassifierInference 
+from hugsvision.inference.VisionClassifierInference import VisionClassifierInference
 
 parser = argparse.ArgumentParser(description='Image classifier')
 parser.add_argument('--path', type=str, default="./out/MYVITMODEL/1_2021-08-10-00-53-58/model/", help='The model path')
@@ -12,7 +12,7 @@ print("Process the image: " + args.img)
 
 try:
 
-    label = VisionClassifierInference(model_path: args.path).predict(img_path: args.img)
+    label = VisionClassifierInference(model_path=args.path).predict(img_path=args.img)
     print("Predicted class:", label)
 
 except Exception as e:
