@@ -1,7 +1,7 @@
 import argparse
 
 from hugsvision.nnet.VisionClassifierTrainer import VisionClassifierTrainer
-from hugsvision.dataio import VisionDataset
+from hugsvision.dataio.VisionDataset import VisionDataset
 
 from torchvision.datasets import ImageFolder
 from transformers import ViTFeatureExtractor, ViTForImageClassification

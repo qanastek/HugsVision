@@ -24,7 +24,7 @@ from transformers.feature_extraction_utils import FeatureExtractionMixin
 from tqdm import tqdm
 from tabulate import tabulate
 
-from hugsvision.dataio import ImageClassificationCollator
+from hugsvision.dataio.ImageClassificationCollator import ImageClassificationCollator
 
 class VisionClassifierTrainer:
 

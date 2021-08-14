@@ -8,6 +8,7 @@ hugsvision.egg-info/dependency_links.txt
 hugsvision.egg-info/requires.txt
 hugsvision.egg-info/top_level.txt
 hugsvision/dataio/ImageClassificationCollator.py
+hugsvision/dataio/VisionDataset.py
 hugsvision/dataio/__init__.py
 hugsvision/inference/VisionClassifierInference.py
 hugsvision/inference/__init__.py

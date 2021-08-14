@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: hugsvision
-Version: 0.1.4
+Version: 0.1.5
 Summary: A easy to use huggingface wrapper for computer vision.
 Home-page: https://HugsVision.github.io/
 Author: Yanis Labrak & Others
@@ -91,7 +91,7 @@ Description: # HugsVision
         - Download the dataset [here](https://www.kaggle.com/volodymyrgavrysh/pneumothorax-binary-classification-task) ~779 MB.
         - Transform the dataset into a directory based one, thanks to the `process.py` script.
         - Train the model
-          - `python train_example.py --imgs="./pneumothorax_binary_classification_task_data/" --name="pneumo_model_vit" --epochs=1`
+          - `python train_example_vit.py --imgs="./pneumothorax_binary_classification_task_data/" --name="pneumo_model_vit" --epochs=1`
         - Rename `<MODEL_PATH>/config.json` to `<MODEL_PATH>/preprocessor_config.json` in my case, the model is situated at the path `./out/MYVITMODEL/1_2021-08-10-00-53-58/model/`
         - Make a prediction
           - `python predict.py --img="42.png" --path="./out/MYVITMODEL/1_2021-08-10-00-53-58/model/"`
