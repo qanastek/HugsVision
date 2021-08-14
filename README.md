@@ -1,7 +1,7 @@
 # HugsVision
 
 <p align="center">
-  <img src="https://github.com/qanastek/HugsVision/blob/main/ressources/images/logo_name_transparent.png" alt="drawing" width="250"/>
+  <img src="https://raw.githubusercontent.com/qanastek/HugsVision/main/ressources/images/logo_name_transparent.png" alt="drawing" width="250"/>
 </p>
 
 HugsVision is an open-source and easy to use all-in-one huggingface wrapper for computer vision.
