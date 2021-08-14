@@ -4,15 +4,15 @@
   <img src="https://github.com/qanastek/HugsVision/blob/main/ressources/images/logo_name_transparent.png" alt="drawing" width="250"/>
 </p>
 
-HugsVision is a open-source and easy to use all-in-one huggingface wrapper for computer vision.
+HugsVision is an open-source and easy to use all-in-one huggingface wrapper for computer vision.
 
-The goal is to create a fast, flexible and user-friendly toolkit than can be used to easily develop **state-of-the-art** computer vision technologies, including systems for Image Classification, Semantic Segmentation, Object Detection, Image Generation, Denoising and much more.
+The goal is to create a fast, flexible and user-friendly toolkit that can be used to easily develop **state-of-the-art** computer vision technologies, including systems for Image Classification, Semantic Segmentation, Object Detection, Image Generation, Denoising and much more.
 
 ⚠️ HugsVision is currently in beta. ⚠️
 
 # Quick installation
 
-HugsVision is constantly evolving. New features, tutorials, and documentation will appear over time. HugsVision can be installed via PyPI to rapidly use the standard library. Moreover, a local installation can be used by those users that what to run experiments and modify/customize the toolkit. HugsVision supports both CPU and GPU computations. For most all the recipes, however, a GPU is necessary during training. Please note that CUDA must be properly installed to use GPUs.
+HugsVision is constantly evolving. New features, tutorials, and documentation will appear over time. HugsVision can be installed via PyPI to rapidly use the standard library. Moreover, a local installation can be used by those users than want to run experiments and modify/customize the toolkit. HugsVision supports both CPU and GPU computations. For most recipes, however, a GPU is necessary during training. Please note that CUDA must be properly installed to use GPUs.
 
 ## Anaconda setup
 
@@ -38,6 +38,12 @@ Once you have created your Python environment (Python 3.6+) you can simply type:
 
 ```bash
 pip install hugsvision
+```
+
+If you already have a older version:
+
+```bash
+pip install hugsvision --upgrade
 ```
 
 Then you can access HugsVision with:
