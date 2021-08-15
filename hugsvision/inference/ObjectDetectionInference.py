@@ -113,7 +113,7 @@ class ObjectDetectionInference:
   ⚙️ Predict the bounding boxes for each object in the image
   Return: image, probas, bboxes_scaled
   """
-  def predict(self, img_path: str):
+  def predict(self, img_path: str, threshold=0.2):
 
     # Load the image
     image_array = Image.open(img_path)
@@ -133,4 +133,4 @@ class ObjectDetectionInference:
       pixel_mask=None,
     )
     
-    return self.visualize_predictions(image_array, outputs)
+    return self.visualize_predictions(image_array, outputs, threshold)

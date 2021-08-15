@@ -6,4 +6,4 @@
 
 ## Predict
 
-`python predict.py --img="../../../samples/blood_cells/42.jpg" --path="/users/ylabrak/Visual Transformers - ViT2/server_DETR/out/model/2021-08-15-03-24-46/"`
+`python predict.py --img="../../../samples/blood_cells/42.jpg" --threshold=0.5 --path="/users/ylabrak/Visual Transformers - ViT3/HugsVision/recipes/blood_cells/object_detection/out/MYDETRMODEL/1_2021-08-15-21-19-03/"`
