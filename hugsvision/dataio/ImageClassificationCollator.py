@@ -1,7 +1,7 @@
 import torch
 
 """
-Image Classification Collator
+📁 Image Classification Collator
 """
 class ImageClassificationCollator:
     

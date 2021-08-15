@@ -1,6 +1,8 @@
 import argparse
 import os.path
 
+from transformers import ViTFeatureExtractor, ViTForImageClassification
+
 from hugsvision.inference.VisionClassifierInference import VisionClassifierInference
 
 parser = argparse.ArgumentParser(description='Image classifier')
@@ -12,7 +14,13 @@ print("Process the image: " + args.img)
 
 try:
 
-    label = VisionClassifierInference(model_path=args.path).predict(img_path=args.img)
+    classifier = VisionClassifierInference(
+        feature_extractor = ViTFeatureExtractor.from_pretrained(args.path),
+        model = ViTForImageClassification.from_pretrained(args.path),
+    )
+
+    label = classifier.predict(img_path=args.img)
+
     print("Predicted class:", label)
 
 except Exception as e:

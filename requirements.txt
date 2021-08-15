@@ -3,6 +3,10 @@ torchvision
 torchmetrics
 Pillow
 scikit-learn
+scikit-image
 transformers
 tqdm
 tabulate
+timm
+matplotlib
+opencv-python

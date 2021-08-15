@@ -6,11 +6,10 @@ class VisionClassifierInference:
   """
   🤗 Constructor for the image classifier trainer
   """
-  def __init__(self, model_path: str, resolution=128):
+  def __init__(self, feature_extractor, model, resolution=128):
     
-    print("Load model from: " + model_path)
-    self.feature_extractor = ViTFeatureExtractor.from_pretrained(model_path)
-    self.model = ViTForImageClassification.from_pretrained(model_path)
+    self.feature_extractor = feature_extractor
+    self.model = model
     print("Model loaded!")
     
     self.resolution = resolution
