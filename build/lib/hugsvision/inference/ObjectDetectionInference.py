@@ -1,6 +1,14 @@
-from transformers import DetrFeatureExtractor, DetrForObjectDetection, pipeline
-from PIL import Image
+import os
+from datetime import datetime
+
 import torch
+from transformers import DetrFeatureExtractor, DetrForObjectDetection, pipeline
+
+from PIL import Image
+
+import matplotlib
+matplotlib.use('agg')
+import matplotlib.pyplot as plt
 
 class ObjectDetectionInference:
     
@@ -33,11 +41,11 @@ class ObjectDetectionInference:
 
   def plot_results(self, pil_img, prob, boxes):
 
-      self.plt.figure(figsize=(16,10))
-      self.plt.imshow(pil_img)
-      ax = self.plt.gca()
+      plt.figure(figsize=(16,10))
+      plt.imshow(pil_img)
+      ax = plt.gca()
 
-      print(self.model.config.id2label)
+      print(self.model.model.config.id2label)
 
       colors = self.COLORS * 100
 
@@ -51,7 +59,7 @@ class ObjectDetectionInference:
       for p, (xmin, ymin, xmax, ymax), c in zip(prob, boxes.tolist(), colors):
 
           # Draw the bbox as a rectangle
-          ax.add_patch(self.plt.Rectangle(
+          ax.add_patch(plt.Rectangle(
               (xmin, ymin),
               xmax - xmin,
               ymax - ymin,
@@ -64,11 +72,17 @@ class ObjectDetectionInference:
           cl = p.argmax()
 
           # Draw the label
-          text = f'{self.model.config.id2label[cl.item()]}: {p[cl]:0.2f}'
+          text = f'{self.model.model.config.id2label[cl.item()]}: {p[cl]:0.2f}'
           ax.text(xmin, ymin, text, fontsize=15, bbox=dict(facecolor='yellow', alpha=0.5))
 
-      self.plt.axis('off')
-      self.plt.savefig("./out_img/3.jpg")
+      plt.axis('off')
+
+      IMG_OUT = "./out_img/"
+
+      if not os.path.exists(IMG_OUT):
+        os.makedirs(IMG_OUT)
+
+      plt.savefig(IMG_OUT + datetime.today().strftime("%Y-%m-%d-%H-%M-%S") + ".jpg")
 
   def visualize_predictions(self, image, outputs, threshold=0.2):
 
@@ -112,7 +126,6 @@ class ObjectDetectionInference:
       images=image_array,
       return_tensors="pt"
     )
-    encoding.to(self.device)
 
     # Predict and get the corresponding bounding boxes
     outputs = self.model(

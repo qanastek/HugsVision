@@ -31,4 +31,4 @@ trainer = ObjectDetectionTrainer(
 )
 
 # Test on a single image
-trainer.testing(img='../samples/blood_cells/42.jpg')
+trainer.testing(img_path='../../../samples/blood_cells/42.jpg')

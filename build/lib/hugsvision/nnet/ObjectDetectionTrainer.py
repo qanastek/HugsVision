@@ -14,8 +14,6 @@ from torch.utils.data import DataLoader
 
 from pytorch_lightning import Trainer
 
-from transformers import Trainer
-
 from sklearn.metrics import precision_recall_fscore_support as f_score
 
 from hugsvision.models.DetrObjectDetection import DetrObjectDetection
@@ -186,13 +184,15 @@ class ObjectDetectionTrainer:
     print(self.val_dataset)
     print(self.test_dataset)
 
+    workers = int(os.cpu_count() * 0.75)
+
     # Train Dataloader
     self.train_dataloader = DataLoader(
         self.train_dataset,
         collate_fn  = self.collator,
         batch_size  = self.batch_size,
         shuffle     = self.shuffle,
-        num_workers = os.cpu_count(),
+        num_workers = workers,
     )
 
     # Validation Dataloader
@@ -200,7 +200,7 @@ class ObjectDetectionTrainer:
         self.val_dataset,
         collate_fn  = self.collator,
         batch_size  = self.batch_size,
-        num_workers = os.cpu_count(),
+        num_workers = workers,
     )
 
     # Test Dataloader
@@ -208,7 +208,7 @@ class ObjectDetectionTrainer:
         self.test_dataset,
         collate_fn  = self.collator,
         batch_size  = self.batch_size,
-        num_workers = os.cpu_count(),
+        num_workers = workers,
     )
 
     return self.train_dataloader, self.val_dataloader, self.test_dataloader
