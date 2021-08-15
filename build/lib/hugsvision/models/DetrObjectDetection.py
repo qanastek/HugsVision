@@ -32,10 +32,10 @@ class DetrObjectDetection(pl.LightningModule):
         del state_dict["class_labels_classifier.bias"]
 
         # Define new model with custom class classifier
-        model = DetrForObjectDetection(
+        model = DetrForObjectDetection(DetrConfig.from_pretrained(
             model_path,
-            num_labels = len(id2label)
-        )
+            num_labels=len(id2label)
+        ))
         model.load_state_dict(state_dict, strict=False)
         self.model = model
 

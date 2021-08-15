@@ -6,3 +6,8 @@ scikit-learn
 transformers
 tqdm
 tabulate
+timm
+matplotlib
+opencv-python
+pytorch-lightning
+pycocotools
