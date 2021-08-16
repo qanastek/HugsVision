@@ -11,6 +11,7 @@ parser.add_argument('--name', type=str, default="MyVitModel", help='The name of 
 parser.add_argument('--imgs', type=str, default="./images/", help='The directory of the input images')
 parser.add_argument('--output', type=str, default="./out/", help='The output directory of the model')
 parser.add_argument('--metric', type=str, default="f1", help='The metric')
+parser.add_argument('--epochs', type=int, default=1, help='Number of Epochs')
 args = parser.parse_args() 
 
 # Load the dataset
@@ -23,18 +24,18 @@ huggingface_model = "facebook/deit-base-distilled-patch16-224"
 
 # Train the model
 trainer = VisionClassifierTrainer(
-	model_name = args.name,
-	dataset = myDataset,
-	output_dir = args.output,
-	max_epochs = 1,
-	test_ratio = 0.15,
-	dev_ratio = 0.15,
-    lr = 2e-5,
-	batch_size = 32,
-	cores = 4,
-	fp16=True,
+	model_name  = args.name,
+	dataset     = myDataset,
+	output_dir  = args.output,
+	max_epochs  = args.epochs,
+	cores 	    = 4,
+	batch_size  = 32,
+	test_ratio  = 0.15,
+	dev_ratio   = 0.15,
+    lr  	    = 2e-5,
+	fp16	    = True,
 	eval_metric = args.metric,
-	ids2labels = id2label,
+	ids2labels  = id2label,
 	model = DeiTForImageClassification.from_pretrained(
 	    huggingface_model,
 	    num_labels = num_labels,

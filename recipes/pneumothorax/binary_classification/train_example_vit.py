@@ -24,25 +24,24 @@ huggingface_model = 'google/vit-base-patch16-224-in21k'
 
 # Train the model
 trainer = VisionClassifierTrainer(
-	model_name = args.name,
-	dataset = myDataset,
-	output_dir = args.output,
-	max_epochs = args.epochs,
-	test_ratio = 0.15,
-	dev_ratio = 0.15,
-    lr = 2e-5,
-	batch_size = 32,
-	cores = 4,
-	fp16=True,
-	balanced=True,
-	augmentation=True,
-	eval_metric = args.metric,
-	ids2labels = id2label,
+	model_name   = args.name,
+	dataset      = myDataset,
+	output_dir   = args.output,
+	max_epochs   = args.epochs,
+	cores 	     = 4,
+	batch_size   = 32,
+	test_ratio   = 0.15,
+    lr 		     = 2e-5,
+	fp16	     = True,
+	balanced     = True,
+	augmentation = True,
+	eval_metric  = args.metric,
+	ids2labels   = id2label,
 	model = ViTForImageClassification.from_pretrained(
 	    huggingface_model,
 	    num_labels = num_labels,
-	    label2id = label2id,
-	    id2label = id2label
+	    label2id   = label2id,
+	    id2label   = id2label
 	),
 	feature_extractor = ViTFeatureExtractor.from_pretrained(
 		huggingface_model,

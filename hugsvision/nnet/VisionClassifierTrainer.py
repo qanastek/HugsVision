@@ -33,23 +33,22 @@ class VisionClassifierTrainer:
   """
   def __init__(
     self,
-    model:torch.nn.Module,
-    feature_extractor:FeatureExtractionMixin,
     ids2labels,
-    model_name:str,
-    dataset:torch.utils.data.Dataset,
-    output_dir:str,
-    lr=2e-5,
-    batch_size=8,
-    max_epochs=1,
-    shuffle=True,
-    test_ratio=0.15,
-    dev_ratio=0.15,
-    cores=4,
-    fp16=True,
-    eval_metric="accuracy",
-    balanced=False,
-    augmentation=False,
+    output_dir        :str,
+    model_name        :str,
+    model             :torch.nn.Module,
+    feature_extractor :FeatureExtractionMixin,
+    dataset           :torch.utils.data.Dataset,
+    max_epochs    = 1,
+    cores         = 4,
+    batch_size    = 8,
+    test_ratio    = 0.15,
+    lr            = 2e-5,
+    eval_metric   = "accuracy",
+    fp16          = True,
+    shuffle       = True,
+    balanced      = False,
+    augmentation  = False,
   ):
 
     self.model_name        = model_name
@@ -60,7 +59,6 @@ class VisionClassifierTrainer:
     self.max_epochs        = max_epochs
     self.shuffle           = shuffle
     self.test_ratio        = test_ratio
-    self.dev_ratio         = dev_ratio
     self.model             = model
     self.feature_extractor = feature_extractor
     self.cores             = cores
@@ -81,31 +79,31 @@ class VisionClassifierTrainer:
 
     # Get the model output path
     self.output_path = self.__getOutputPath()
-    self.logs_path = self.output_path
+    self.logs_path   = self.output_path
     
     # Open the logs file
     self.__openLogs()
 
     # Split and convert to dataloaders
-    self.train, self.dev, self.test = self.__splitDatasets()
+    self.train, self.test = self.__splitDatasets()
 
     """
     🏗️ Build the trainer
     """
     self.training_args = TrainingArguments(
-        output_dir=self.output_path,
-        evaluation_strategy="epoch",
-        learning_rate=self.lr,
-        per_device_train_batch_size=self.batch_size,
-        per_device_eval_batch_size=self.batch_size,
-        num_train_epochs=self.max_epochs,
-        save_steps=10000,
-        save_total_limit=2,
-        weight_decay=0.01,
-        load_best_model_at_end=False,
-        metric_for_best_model=self.eval_metric,
-        logging_dir=self.logs_path,
-        overwrite_output_dir=True,
+        output_dir                  = self.output_path,
+        save_total_limit            = 2,
+        weight_decay                = 0.01,
+        save_steps                  = 10000,
+        learning_rate               = self.lr,
+        per_device_train_batch_size = self.batch_size,
+        per_device_eval_batch_size  = self.batch_size,
+        num_train_epochs            = self.max_epochs,
+        metric_for_best_model       = self.eval_metric,
+        logging_dir                 = self.logs_path,
+        evaluation_strategy         = "epoch",
+        load_best_model_at_end      = False,
+        overwrite_output_dir        = True,
         fp16=self.fp16,
     )
     
@@ -113,7 +111,7 @@ class VisionClassifierTrainer:
       self.model,
       self.training_args,
       train_dataset = self.train,
-      eval_dataset = self.dev,
+      eval_dataset  = self.test,
       data_collator = self.collator,
     )
     print("Trainer builded!")
@@ -159,32 +157,61 @@ class VisionClassifierTrainer:
   🧬 Apply data augmentation on the input image
   Source: https://medium.com/lunit/photometric-data-augmentation-in-projection-radiography-bed3ae9f55c3
   """
-  def __augmentation(self, image):
-
-    # im3 = ImageEnhance.Contrast(image)
-    # im3.enhance(0.05).save("/users/ylabrak/Visual Transformers - ViT2/data/test05.png")
-    # im3.enhance(0.25).save("/users/ylabrak/Visual Transformers - ViT2/data/test25.png")
-    # im3.enhance(0.50).save("/users/ylabrak/Visual Transformers - ViT2/data/test50.png")
-    # im3.enhance(1.00).save("/users/ylabrak/Visual Transformers - ViT2/data/test100.png")
-    # exit(0)
+  def __augmentation(self, image, beta=0.33):
 
     # Random augmentation
-    if random.randint(0,100) < 33:
+    if random.randint(0,100) < (beta*100):
     
+      # Random Contrast
       im3 = ImageEnhance.Contrast(image)
       im3.enhance(random.uniform(0.5, 1.0)).show()
       
-      # # Random Contrast
-      # if random.randint(0,100) < 36:
-      #   im3 = ImageEnhance.Contrast(image)
-      #   im3.enhance(random.uniform(0.5, 1.0)).show()
-
-      # # Random Noise
-      # if bool(random.getrandbits(1)) == True:
-      #   im3 = ImageEnhance.Contrast(image)
-      #   im3.enhance(random.uniform(0.5, 1.0)).show()
+      # Random Noise
 
     return image
+
+  """
+  ⚖️ Balance the dataset according to the less represented label
+  """
+  def __balance(self, train_ds, train_classes):
+
+    # Get the less represented label in train
+    less_represented_train = min(train_classes)
+
+    labels = {}
+
+    # For each image
+    for img, label in train_ds:
+
+      # Create the label array if isn't
+      if label not in labels:
+        labels[label] = []
+      
+      # Add the image to the array
+      labels[label].append(img)
+    
+    # New dataset
+    balanced_ds = []
+
+    # For each label
+    for label in labels:
+
+      # Get images
+      imgs = labels[label]
+
+      # For each image
+      for img in imgs[0:less_represented_train]:
+
+        # Create a tuple: image and label 
+        t = (img, label)
+
+        # Add it
+        balanced_ds.append(t)
+
+    print("The less represented label in train as " + str(less_represented_train) + " occurrences")
+    print("Size of train after balancing is " + str(len(balanced_ds)))
+
+    return balanced_ds
     
   """
   ✂️ Split the dataset into sub-datasets
@@ -196,54 +223,18 @@ class VisionClassifierTrainer:
     indices = torch.randperm(len(self.dataset)).tolist()
 
     # Index of the validation corpora
-    elements_test_dev = math.floor(len(indices) * .15)
+    train_index = math.floor(len(indices) * (1 - self.test_ratio))
 
     # TRAIN
-    train_ds = torch.utils.data.Subset(self.dataset, indices[:-elements_test_dev*2])
+    train_ds = torch.utils.data.Subset(self.dataset, indices[:train_index])
     ct_train = Counter([label for _, label in train_ds])
     train_classes = [ct_train[a] for a in sorted(ct_train)]
     
     # If balanced is enabled
     if self.balanced == True:
 
-      # Get the less represented label in train
-      less_represented_train = min(train_classes)
-
-      labels = {}
-
-      # For each image
-      for img, label in train_ds:
-
-        # Create the label array if isn't
-        if label not in labels:
-          labels[label] = []
-        
-        # Add the image to the array
-        labels[label].append(img)
-      
-      # New dataset
-      balanced_ds = []
-
-      # For each label
-      for label in labels:
-
-        # Get images
-        imgs = labels[label]
-
-        # For each image
-        for img in imgs[0:less_represented_train]:
-
-          # Create a tuple: image and label 
-          t = (img, label)
-
-          # Add it
-          balanced_ds.append(t)
-
-      print("The less represented label in train as " + str(less_represented_train) + " occurrences")
-      print("Size of train after balancing is " + str(len(balanced_ds)))
-
-      # Overwrite
-      train_ds = balanced_ds
+      # Balance the train dataset
+      train_ds = self.__balance(train_ds, train_classes)
       
       # Compute again the stats
       ct_train = Counter([label for _, label in train_ds])
@@ -265,19 +256,13 @@ class VisionClassifierTrainer:
       # Replace by the augmented data
       train_ds = new_ds
 
-    # DEV
-    val_ds = torch.utils.data.Subset(self.dataset, indices[-elements_test_dev*2:-elements_test_dev])
-    ct_val = Counter([label for _, label in val_ds])
-    val_classes = [ct_val[a] for a in sorted(ct_val)]
-
     # TEST
-    test_ds = torch.utils.data.Subset(self.dataset, indices[-elements_test_dev:])
+    test_ds = torch.utils.data.Subset(self.dataset, indices[train_index:])
     ct_test = Counter([label for _, label in test_ds])
     test_classes = [ct_test[a] for a in sorted(ct_test)]
 
     table_repartition = [
       ["Train"] + train_classes + [str(len(train_ds))],
-      ["Dev"] + val_classes + [str(len(val_ds))],
       ["Test"] + test_classes + [str(len(test_ds))],
     ]
 
@@ -287,7 +272,7 @@ class VisionClassifierTrainer:
     # Write logs
     self.logs_file.write(repartitions_table + "\n")
 
-    return train_ds, val_ds, test_ds
+    return train_ds, test_ds
 
   """
   🧪 Evaluate the performances of the system of the test sub-dataset given a f1-score
@@ -295,7 +280,7 @@ class VisionClassifierTrainer:
   def evaluate_f1_score(self):
 
     # Get the hypothesis and predictions
-    all_target, all_preds = self.evaluate()
+    all_target, all_preds = self.__evaluate()
 
     # Get the labels as a list
     labels = list(self.ids2labels.keys())
@@ -308,24 +293,24 @@ class VisionClassifierTrainer:
     # Add macro scores for each classes
     for i in range(len(labels)):
         table_f_score.append(
-            [
-                self.ids2labels[labels[i]],
-                str(round(precision[i] * 100,2)) + " %",
-                str(round(recall[i] * 100,2)) + " %",
-                str(round(fscore[i] * 100,2)) + " %",
-                support[i],
-            ]
+          [
+              self.ids2labels[labels[i]],
+              str(round(precision[i] * 100,2)) + " %",
+              str(round(recall[i] * 100,2)) + " %",
+              str(round(fscore[i] * 100,2)) + " %",
+              support[i],
+          ]
         )
 
     # Add global macro scores
     table_f_score.append(
-        [
-            "Macro",
-            str(round((sum(precision) / len(precision)) * 100, 2)) + " %",
-            str(round((sum(recall)    / len(recall))    * 100, 2)) + " %",
-            str(round((sum(fscore)    / len(fscore))    * 100, 2)) + " %",
-            str(sum(support)),
-        ]
+      [
+          "Macro",
+          str(round((sum(precision) / len(precision)) * 100, 2)) + " %",
+          str(round((sum(recall)    / len(recall))    * 100, 2)) + " %",
+          str(round((sum(fscore)    / len(fscore))    * 100, 2)) + " %",
+          str(sum(support)),
+      ]
     )
 
     # Print precision, recall, f-score and support for each classes
@@ -342,9 +327,15 @@ class VisionClassifierTrainer:
     return all_target, all_preds
 
   """
-  🧪 Evaluate the performances of the system of the test sub-dataset
+  🧪 Evaluate the performances of the system of the test sub-dataset for the chosen evaluation metric
   """
   def evaluate(self):
+    return self.trainer.evaluate()
+
+  """
+  🧪 Evaluate the performances of the system of the test sub-dataset
+  """
+  def __evaluate(self):
         
     all_preds  = []
     all_target = []
