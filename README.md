@@ -98,7 +98,7 @@ You can find all the currently available models or tasks under the `recipes/` fo
   
   <tr>
       <td rowspan="3" width="160">
-        <img src="https://raw.githubusercontent.com/qanastek/HugsVision/main/ressources/images/receipes/blood_cells_coco.png" width="256">
+        <img src="https://raw.githubusercontent.com/qanastek/HugsVision/main/ressources/images/receipes/new_blood_cells_coco.png" width="256">
       </td>    
       <td rowspan="3">
         <b>Training a End-To-End Object Detection with Transformers to detect blood cells:</b> A demonstration of how to train a E2E Object Detection Transformer model which can detect and identify blood cells with HugsVision.
