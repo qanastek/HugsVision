@@ -44,7 +44,7 @@ trainer = VisionClassifierTrainer(
 	    huggingface_model,
 	    num_labels = len(label2id),
 	    label2id   = label2id,
-	    id2label   = id2label
+	    id2label   = id2label,
 	),
 	feature_extractor = ViTFeatureExtractor.from_pretrained(
 		huggingface_model,

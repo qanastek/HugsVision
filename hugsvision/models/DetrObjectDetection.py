@@ -14,6 +14,7 @@ class DetrObjectDetection(pl.LightningModule):
         lr_backbone,
         weight_decay,
         id2label,
+        label2id,
         train_dataloader,
         val_dataloader,
         model_path = "facebook/detr-resnet-50"
@@ -34,7 +35,9 @@ class DetrObjectDetection(pl.LightningModule):
         # Define new model with custom class classifier
         model = DetrForObjectDetection(DetrConfig.from_pretrained(
             model_path,
-            num_labels=len(id2label)
+            num_labels=len(id2label),
+            id2label   = id2label,
+            label2id   = label2id,
         ))
         model.load_state_dict(state_dict, strict=False)
         self.model = model

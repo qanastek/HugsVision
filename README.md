@@ -20,19 +20,10 @@ HugsVision is constantly evolving. New features, tutorials, and documentation wi
 
 ## Anaconda setup
 
-Once Anaconda is installed, you can create a new environment with:
-
 ```bash
 conda create --name HugsVision python=3.6 -y
-```
-
-Then, activate it with:
-
-```bash
 conda activate HugsVision
 ```
-
-Now, you can install all the needed packages!
 
 More information on managing environments with Anaconda can be found in [the conda cheat sheet](https://docs.conda.io/projects/conda/en/4.6.0/_downloads/52a95608c49671267e40c689e0bc00ca/conda-cheatsheet.pdf).
 
@@ -44,18 +35,6 @@ Once you have created your Python environment (Python 3.6+) you can simply type:
 pip install hugsvision
 ```
 
-If you already have a older version:
-
-```bash
-pip install hugsvision --upgrade
-```
-
-Then you can access HugsVision with:
-
-```python
-import hugsvision as vision
-```
-
 ## Install with GitHub
 
 Once you have created your Python environment (Python 3.6+) you can simply type:
@@ -65,12 +44,6 @@ git clone https://github.com/qanastek/HugsVision.git
 cd HugsVision
 pip install -r requirements.txt
 pip install --editable .
-```
-
-Then you can access HugsVision with:
-
-```python
-import hugsvision as vision
 ```
 
 Any modification made to the `hugsvision` package will be automatically interpreted as we installed it with the `--editable` flag.
@@ -116,6 +89,36 @@ You can find all the currently available models or tasks under the `recipes/` fo
   <tr>
       <td align="center">
           <a href="https://colab.research.google.com/drive/1Dll0hJqbbx7OWRTU8fvvP7-UJO7E1hD1?usp=sharing">
+              <img src="https://raw.githubusercontent.com/qanastek/HugsVision/main/ressources/images/receipes/colab_logo.png" height="28">
+          </a>
+      </td>
+  </tr>
+
+  <!-- ------------------------------------------------------------------- -->
+  
+  <tr>
+      <td rowspan="3" width="160">
+        <img src="https://raw.githubusercontent.com/qanastek/HugsVision/main/ressources/images/receipes/blood_cells_coco.png" width="256">
+      </td>    
+      <td rowspan="3">
+        <b>Training a End-To-End Object Detection with Transformers to detect blood cells:</b> A demonstration of how to train a E2E Object Detection Transformer model which can detect and identify blood cells with HugsVision.
+      </td>
+      <td align="center" width="80">
+          <a href="https://nbviewer.jupyter.org/github/qanastek/HugsVision/blob/main/recipes/blood_cells/object_detection/Object_Detection.ipynb">
+              <img src="https://raw.githubusercontent.com/qanastek/HugsVision/main/ressources/images/receipes/nbviewer_logo.svg" height="34">
+          </a>
+      </td>
+  </tr>
+  <tr>
+      <td align="center">
+          <a href="https://github.com/qanastek/HugsVision/tree/main/recipes/blood_cells/object_detection/Object_Detection.ipynb">
+              <img src="https://raw.githubusercontent.com/qanastek/HugsVision/main/ressources/images/receipes/github_logo.png" height="32">
+          </a>
+      </td>
+  </tr>
+  <tr>
+      <td align="center">
+          <a href="#">
               <img src="https://raw.githubusercontent.com/qanastek/HugsVision/main/ressources/images/receipes/colab_logo.png" height="28">
           </a>
       </td>

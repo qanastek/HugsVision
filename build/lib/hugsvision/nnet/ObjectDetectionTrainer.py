@@ -40,7 +40,6 @@ class ObjectDetectionTrainer:
     batch_size   = 4,
     max_epochs   = 1,
     shuffle      = True,
-    fp16         = True,
     augmentation = False,
     weight_decay = 1e-4,
     max_steps    = 10000,
@@ -58,7 +57,6 @@ class ObjectDetectionTrainer:
     self.batch_size        = batch_size
     self.max_epochs        = max_epochs
     self.shuffle           = shuffle
-    self.fp16              = fp16
     self.augmentation      = augmentation
     self.weight_decay      = weight_decay
     self.max_steps         = max_steps
@@ -88,8 +86,17 @@ class ObjectDetectionTrainer:
     self.train, self.dev, self.test = self.__splitDatasets()
 
     # Get labels and build the id2label
-    cats     = self.train_dataset.coco.cats
-    id2label = {k: v['name'] for k,v in cats.items()}
+
+    # print("*"*100)
+    categories = self.train_dataset.coco.dataset['categories']
+    self.id2label = {}
+    self.label2id = {}
+    for category in categories:
+        self.id2label[category['id']] = category['name']
+        self.label2id[category['name']] = category['id']
+
+    print(self.id2label)
+    print(self.label2id)
     
     """
     🏗️ Build the Model
@@ -98,7 +105,8 @@ class ObjectDetectionTrainer:
         lr               = self.lr,
         lr_backbone      = self.lr_backbone,
         weight_decay     = self.weight_decay,
-        id2label         = id2label,
+        id2label         = self.id2label,
+        label2id         = self.label2id,
         train_dataloader = self.train_dataloader,
         val_dataloader   = self.val_dataloader,
         model_path       = self.model_path,
