@@ -10,16 +10,15 @@ parser = argparse.ArgumentParser(description='Image classifier')
 parser.add_argument('--name', type=str, default="MyVitModel", help='The name of the model')
 parser.add_argument('--imgs', type=str, default="./images/", help='The directory of the input images')
 parser.add_argument('--output', type=str, default="./out/", help='The output directory of the model')
-parser.add_argument('--metric', type=str, default="f1", help='The metric')
 parser.add_argument('--epochs', type=int, default=1, help='Number of Epochs')
 args = parser.parse_args() 
 
 # Load the dataset
 train, test, id2label, label2id = VisionDataset.fromImageFolder(
 	args.imgs,
-	test_ratio=0.15,
-	balanced=True,
-	augmentation=True,
+	test_ratio	 = 0.15,
+	balanced	 = True,
+	augmentation = True,
 )
 
 # # Load the dataset
@@ -33,17 +32,13 @@ huggingface_model = "facebook/deit-base-distilled-patch16-224"
 # Train the model
 trainer = VisionClassifierTrainer(
 	model_name  = args.name,
-	train      	 = train,
-	test      	 = test,
+	train		= train,
+	test		= test,
 	output_dir  = args.output,
 	max_epochs  = args.epochs,
 	cores 	    = 4,
 	batch_size  = 32,
 	test_ratio  = 0.15,
-	dev_ratio   = 0.15,
-    lr  	    = 2e-5,
-	fp16	    = True,
-	eval_metric = args.metric,
 	model = DeiTForImageClassification.from_pretrained(
 	    huggingface_model,
 	    num_labels = len(label2id),

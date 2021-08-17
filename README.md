@@ -1,8 +1,12 @@
-# HugsVision
-
 <p align="center">
   <img src="https://raw.githubusercontent.com/qanastek/HugsVision/main/ressources/images/logo_name_transparent.png" alt="drawing" width="250"/>
 </p>
+
+[![PyPI version](https://badge.fury.io/py/hugsvision.svg)](https://badge.fury.io/py/hugsvision)
+[![GitHub Issues](https://img.shields.io/github/issues/qanastek/HugsVision.svg)](https://github.com/qanastek/HugsVision/issues)
+[![Contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg)](CONTRIBUTING.md)
+[![License: MIT](https://img.shields.io/badge/License-MIT-brightgreen.svg)](https://opensource.org/licenses/MIT)
+
 
 HugsVision is an open-source and easy to use all-in-one huggingface wrapper for computer vision.
 
@@ -71,28 +75,52 @@ import hugsvision as vision
 
 Any modification made to the `hugsvision` package will be automatically interpreted as we installed it with the `--editable` flag.
 
-# Running an experiment
+# Example Usage
 
-In HugsVision, you can run experiments in this way:
+Let's train a binary classifier that can distinguish people with or without `Pneumothorax` thanks to their radiography.
 
-```bash
-cd recipes/<DATASET>/<TASK>/
-python train_example_vit.py --imgs="<PATH_TO_IMAGES_DIRECTORY>" --name="<OUTPUT_MODEL_NAME>"
-python predict.py --img="<IMG_PATH>" --path="<MODEL_PATH>"
-```
+**Steps:**
 
-For example, we can use the `Pneumothorax` dataset available on [Kaggle](https://www.kaggle.com/volodymyrgavrysh/pneumothorax-binary-classification-task) to train a binary classification model.
+1. Move to the recipe directory `cd recipes/pneumothorax/binary_classification/`
+2. Download the dataset [here](https://www.kaggle.com/volodymyrgavrysh/pneumothorax-binary-classification-task) ~779 MB.
+3. Transform the dataset into a directory based one, thanks to the `process.py` script.
+4. Train the model:  `python train_example_vit.py --imgs="./pneumothorax_binary_classification_task_data/" --name="pneumo_model_vit" --epochs=1`
+5. Rename `<MODEL_PATH>/config.json` to `<MODEL_PATH>/preprocessor_config.json` in my case, the model is situated at the output path like `./out/MYVITMODEL/1_2021-08-10-00-53-58/model/`
+6. Make a prediction: `python predict.py --img="42.png" --path="./out/MYVITMODEL/1_2021-08-10-00-53-58/model/"`
 
-Steps:
+# Models recipes
 
-- Move to the recipe directory `cd recipes/pneumothorax/binary_classification/`
-- Download the dataset [here](https://www.kaggle.com/volodymyrgavrysh/pneumothorax-binary-classification-task) ~779 MB.
-- Transform the dataset into a directory based one, thanks to the `process.py` script.
-- Train the model
-  - `python train_example_vit.py --imgs="./pneumothorax_binary_classification_task_data/" --name="pneumo_model_vit" --epochs=1`
-- Rename `<MODEL_PATH>/config.json` to `<MODEL_PATH>/preprocessor_config.json` in my case, the model is situated at the path `./out/MYVITMODEL/1_2021-08-10-00-53-58/model/`
-- Make a prediction
-  - `python predict.py --img="42.png" --path="./out/MYVITMODEL/1_2021-08-10-00-53-58/model/"`
+You can find all the currently available models or tasks under the `recipes/` folder.
+
+<table>
+  <tr>
+      <td rowspan="3" width="160">
+        <img src="https://raw.githubusercontent.com/qanastek/HugsVision/main/ressources/images/receipes/pneumothorax.png" width="256">
+      </td>    
+      <td rowspan="3">
+        <b>Training a Transformer Image Classifier to detect Pneumothorax:</b> A demonstration of how to train a Image Classifier Transformer model that can distinguish people with or without Pneumothorax thanks to their radiography with HugsVision.
+      </td>
+      <td align="center" width="80">
+          <a href="https://nbviewer.jupyter.org/github/qanastek/HugsVision/tree/main/recipes/pneumothorax/binary_classification/Image_Classifier.ipynb/">
+              <img src="https://raw.githubusercontent.com/qanastek/HugsVision/main/ressources/images/receipes/nbviewer_logo.svg" height="34">
+          </a>
+      </td>
+  </tr>
+  <tr>
+      <td align="center">
+          <a href="https://github.com/qanastek/HugsVision/tree/main/recipes/pneumothorax/binary_classification/Image_Classifier.ipynb">
+              <img src="https://raw.githubusercontent.com/qanastek/HugsVision/main/ressources/images/receipes/github_logo.png" height="32">
+          </a>
+      </td>
+  </tr>
+  <tr>
+      <td align="center">
+          <a href="https://colab.research.google.com/drive/1Dll0hJqbbx7OWRTU8fvvP7-UJO7E1hD1?usp=sharing">
+              <img src="https://raw.githubusercontent.com/qanastek/HugsVision/main/ressources/images/receipes/colab_logo.png" height="28">
+          </a>
+      </td>
+  </tr>
+</table>
 
 # Model architectures
 
