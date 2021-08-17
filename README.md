@@ -118,7 +118,7 @@ You can find all the currently available models or tasks under the `recipes/` fo
   </tr>
   <tr>
       <td align="center">
-          <a href="#">
+          <a href="https://colab.research.google.com/drive/1WWINadrSqoxGQAYvzj-Dbs7uOP136_Ag?usp=sharing">
               <img src="https://raw.githubusercontent.com/qanastek/HugsVision/main/ressources/images/receipes/colab_logo.png" height="28">
           </a>
       </td>
