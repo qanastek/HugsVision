@@ -15,17 +15,26 @@ parser.add_argument('--epochs', type=int, default=1, help='Number of Epochs')
 args = parser.parse_args() 
 
 # Load the dataset
-myDataset = ImageFolder(args.imgs)
+train, test, id2label, label2id = VisionDataset.fromImageFolder(
+	args.imgs,
+	test_ratio=0.15,
+	balanced=True,
+	augmentation=True,
+)
 
-# Both way indexes
-num_labels, label2id, id2label = VisionDataset.getConfig(myDataset)
+# # Load the dataset
+# train, test, id2label, label2id = VisionDataset.fromImageFolders(
+# 	"/<PATH>/train/",
+# 	"/<PATH>/test/",
+# )
 
 huggingface_model = 'google/vit-base-patch16-224-in21k'
 
 # Train the model
 trainer = VisionClassifierTrainer(
 	model_name   = args.name,
-	dataset      = myDataset,
+	train      	 = train,
+	test      	 = test,
 	output_dir   = args.output,
 	max_epochs   = args.epochs,
 	cores 	     = 4,
@@ -36,10 +45,9 @@ trainer = VisionClassifierTrainer(
 	balanced     = True,
 	augmentation = True,
 	eval_metric  = args.metric,
-	ids2labels   = id2label,
 	model = ViTForImageClassification.from_pretrained(
 	    huggingface_model,
-	    num_labels = num_labels,
+	    num_labels = len(label2id),
 	    label2id   = label2id,
 	    id2label   = id2label
 	),
@@ -49,6 +57,7 @@ trainer = VisionClassifierTrainer(
 )
 
 # Evaluate on the test sub-dataset
+# print(trainer.evaluate())
 hyp, ref = trainer.evaluate_f1_score()
 
 # # Test on a single image
