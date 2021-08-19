@@ -1,6 +1,6 @@
 import argparse
 
-from hugsvision.nnet.ObjectDetectionTrainer import ObjectDetectionTrainer
+from hugsvision.nnet.SemanticSegmentationTrainer import SemanticSegmentationTrainer
 
 parser = argparse.ArgumentParser(description='Object Detection')
 parser.add_argument('--name', type=str, default="MyDETRModel", help='The name of the model')
@@ -12,13 +12,13 @@ args = parser.parse_args()
 huggingface_model = "facebook/detr-resnet-50-panoptic"
 
 # Train the model
-trainer = ObjectDetectionTrainer(
+trainer = SemanticSegmentationTrainer(
 	model_name = args.name,	
 	output_dir = args.output,
 	
-	img_folder = '/content/drive/MyDrive/DETR/COCO data/val2017',
-	ann_folder = '/content/drive/MyDrive/DETR/COCO data/annotations/coco_panoptic/panoptic_val2017',
-	ann_file   = '/content/drive/MyDrive/DETR/COCO data/annotations/coco_panoptic/annotations/panoptic_val2017.json',
+	img_folder = '/users/ylabrak/datasets/coco_2017/val2017',
+	ann_folder = '/users/ylabrak/datasets/coco_2017/panoptic_annotations_trainval2017/annotations/panoptic_val2017/panoptic_val2017/',
+	ann_file   = '/users/ylabrak/datasets/coco_2017/panoptic_annotations_trainval2017/annotations/panoptic_val2017.json',
 	
 	model_path = huggingface_model,
 
