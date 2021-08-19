@@ -48,6 +48,8 @@ class SemanticSegmentationTrainer:
     model_path   = "facebook/detr-resnet-50",
   ):
 
+    print("This model hasn't been tested yet!")
+
     self.model_name        = model_name
     self.img_folder        = img_folder
     self.ann_folder        = ann_folder
