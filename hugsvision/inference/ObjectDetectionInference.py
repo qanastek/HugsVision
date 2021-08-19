@@ -13,7 +13,7 @@ import matplotlib.pyplot as plt
 class ObjectDetectionInference:
     
   """
-  🤗 Constructor for the image classifier trainer
+  🤗 Constructor for the object detection trainer
   """
   def __init__(self, feature_extractor, model):
 

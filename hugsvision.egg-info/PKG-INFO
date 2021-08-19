@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: hugsvision
-Version: 0.1.49
+Version: 0.1.55
 Summary: A easy to use huggingface wrapper for computer vision.
 Home-page: https://HugsVision.github.io/
 Author: Yanis Labrak & Others
@@ -97,6 +97,36 @@ Description: <p align="center">
           <tr>
               <td align="center">
                   <a href="https://colab.research.google.com/drive/1Dll0hJqbbx7OWRTU8fvvP7-UJO7E1hD1?usp=sharing">
+                      <img src="https://raw.githubusercontent.com/qanastek/HugsVision/main/ressources/images/receipes/colab_logo.png" height="28">
+                  </a>
+              </td>
+          </tr>
+        
+          <!-- ------------------------------------------------------------------- -->
+          
+          <tr>
+              <td rowspan="3" width="160">
+                <img src="https://raw.githubusercontent.com/qanastek/HugsVision/main/ressources/images/receipes/new_blood_cells_coco.png" width="256">
+              </td>    
+              <td rowspan="3">
+                <b>Training a End-To-End Object Detection with Transformers to detect blood cells:</b> A demonstration of how to train a E2E Object Detection Transformer model which can detect and identify blood cells with HugsVision.
+              </td>
+              <td align="center" width="80">
+                  <a href="https://nbviewer.jupyter.org/github/qanastek/HugsVision/blob/main/recipes/blood_cells/object_detection/Object_Detection.ipynb">
+                      <img src="https://raw.githubusercontent.com/qanastek/HugsVision/main/ressources/images/receipes/nbviewer_logo.svg" height="34">
+                  </a>
+              </td>
+          </tr>
+          <tr>
+              <td align="center">
+                  <a href="https://github.com/qanastek/HugsVision/tree/main/recipes/blood_cells/object_detection/Object_Detection.ipynb">
+                      <img src="https://raw.githubusercontent.com/qanastek/HugsVision/main/ressources/images/receipes/github_logo.png" height="32">
+                  </a>
+              </td>
+          </tr>
+          <tr>
+              <td align="center">
+                  <a href="https://colab.research.google.com/drive/1WWINadrSqoxGQAYvzj-Dbs7uOP136_Ag?usp=sharing">
                       <img src="https://raw.githubusercontent.com/qanastek/HugsVision/main/ressources/images/receipes/colab_logo.png" height="28">
                   </a>
               </td>

@@ -8,6 +8,8 @@ from pathlib import Path
 from datetime import datetime
 from collections import Counter
 
+import numpy
+
 import torch
 import torchmetrics
 from torch.utils.data import DataLoader
@@ -17,13 +19,13 @@ from pytorch_lightning import Trainer
 from sklearn.metrics import precision_recall_fscore_support as f_score
 
 from hugsvision.models.Detr import Detr
-from hugsvision.dataio.CocoDetectionDataset import CocoDetection
+from hugsvision.dataio.CocoSemanticDataset import CocoSemantic
 from hugsvision.dataio.ObjectDetectionCollator import ObjectDetectionCollator
 from hugsvision.inference.ObjectDetectionInference import ObjectDetectionInference
 
 from transformers import DetrFeatureExtractor
 
-class ObjectDetectionTrainer:
+class SemanticSegmentationTrainer:
 
   """
   🤗 Constructor for the DETR Object Detection trainer
@@ -31,26 +33,25 @@ class ObjectDetectionTrainer:
   def __init__(
     self,
     model_name :str,
-    train_path :str,
-    dev_path   :str,
-    test_path  :str,    
+    img_folder :str,
+    ann_folder   :str,
+    ann_file  :str,    
     output_dir :str,
     lr           = 1e-4,
     lr_backbone  = 1e-5,
-    batch_size   = 4,
+    batch_size   = 3,
     max_epochs   = 1,
     shuffle      = True,
     augmentation = False,
     weight_decay = 1e-4,
-    max_steps    = 10000,
     nbr_gpus     = -1,
     model_path   = "facebook/detr-resnet-50",
   ):
 
     self.model_name        = model_name
-    self.train_path        = train_path
-    self.dev_path          = dev_path
-    self.test_path         = test_path
+    self.img_folder        = img_folder
+    self.ann_folder        = ann_folder
+    self.ann_file          = ann_file
     self.output_dir        = output_dir
     self.lr                = lr
     self.lr_backbone       = lr_backbone
@@ -59,7 +60,6 @@ class ObjectDetectionTrainer:
     self.shuffle           = shuffle
     self.augmentation      = augmentation
     self.weight_decay      = weight_decay
-    self.max_steps         = max_steps
     self.nbr_gpus          = nbr_gpus
     self.model_path        = model_path
 
@@ -70,7 +70,7 @@ class ObjectDetectionTrainer:
     self.metric = torchmetrics.Accuracy()
 
     # Load feature extractor
-    self.feature_extractor = DetrFeatureExtractor.from_pretrained(self.model_path)
+    self.feature_extractor = DetrFeatureExtractor.from_pretrained(self.model_path, size=500, max_size=600)
     
     # Get the classifier collator
     self.collator = ObjectDetectionCollator(self.feature_extractor)
@@ -83,15 +83,12 @@ class ObjectDetectionTrainer:
     self.__openLogs()
 
     # Split and convert to dataloaders
-    self.train, self.dev, self.test = self.__splitDatasets()
+    self.train, self.dev = self.__splitDatasets()
 
     # Get labels and build the id2label
-
-    # print("*"*100)
-    categories = self.train_dataset.coco.dataset['categories']
     self.id2label = {}
     self.label2id = {}
-    for category in categories:
+    for category in self.dataset.coco["categories"]:
         self.id2label[category['id']] = category['name']
         self.label2id[category['name']] = category['id']
 
@@ -118,7 +115,6 @@ class ObjectDetectionTrainer:
     self.trainer = Trainer(
         gpus              = self.nbr_gpus,
         max_epochs        = self.max_epochs,
-        max_steps         = self.max_steps,
         gradient_clip_val = 0.1
     )
 
@@ -168,29 +164,27 @@ class ObjectDetectionTrainer:
   """
   def __splitDatasets(self):
 
+    self.dataset = CocoSemantic(
+      img_folder = self.img_folder, 
+      ann_folder = self.ann_folder,
+      ann_file   = self.ann_file,
+      feature_extractor = self.feature_extractor
+    )
+
+    # let's split it up into very tiny training and validation sets using random indices
+    numpy.random.seed(42)
+    indices = numpy.random.randint(low=0, high=len(self.dataset), size=50)
+
     print("Load Datasets...")
     
     # Train Dataset in the COCO format
-    self.train_dataset = CocoDetection(
-        img_folder        = self.train_path,
-        feature_extractor = self.feature_extractor
-    )
+    self.train_dataset = torch.utils.data.Subset(self.dataset, indices[:40])
 
     # Dev Dataset in the COCO format
-    self.val_dataset = CocoDetection(
-        img_folder        = self.dev_path,
-        feature_extractor = self.feature_extractor
-    )
-
-    # Test Dataset in the COCO format
-    self.test_dataset = CocoDetection(
-        img_folder        = self.test_path,
-        feature_extractor = self.feature_extractor
-    )
+    self.val_dataset = torch.utils.data.Subset(self.dataset, indices[40:])
 
     print(self.train_dataset)
     print(self.val_dataset)
-    print(self.test_dataset)
 
     workers = int(os.cpu_count() * 0.75)
 
@@ -211,15 +205,7 @@ class ObjectDetectionTrainer:
         num_workers = workers,
     )
 
-    # Test Dataloader
-    self.test_dataloader = DataLoader(
-        self.test_dataset,
-        collate_fn  = self.collator,
-        batch_size  = self.batch_size,
-        num_workers = workers,
-    )
-
-    return self.train_dataloader, self.val_dataloader, self.test_dataloader
+    return self.train_dataloader, self.val_dataloader
 
   """
   🧪 Evaluate the performances of the system of the test sub-dataset

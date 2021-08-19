@@ -2,7 +2,7 @@ import torch
 import pytorch_lightning as pl
 from transformers import DetrConfig, DetrForObjectDetection
 
-class DetrObjectDetection(pl.LightningModule):
+class Detr(pl.LightningModule):
 
     """
     ⚡ Constructor for the DETR Object Detection Model

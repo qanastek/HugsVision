@@ -16,7 +16,7 @@ from pytorch_lightning import Trainer
 
 from sklearn.metrics import precision_recall_fscore_support as f_score
 
-from hugsvision.models.DetrObjectDetection import DetrObjectDetection
+from hugsvision.models.Detr import Detr
 from hugsvision.dataio.CocoDetectionDataset import CocoDetection
 from hugsvision.dataio.ObjectDetectionCollator import ObjectDetectionCollator
 from hugsvision.inference.ObjectDetectionInference import ObjectDetectionInference
@@ -101,7 +101,7 @@ class ObjectDetectionTrainer:
     """
     🏗️ Build the Model
     """
-    self.model = DetrObjectDetection(
+    self.model = Detr(
         lr               = self.lr,
         lr_backbone      = self.lr_backbone,
         weight_decay     = self.weight_decay,
