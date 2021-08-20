@@ -167,8 +167,8 @@ class VisionClassifierTrainer:
     table = metrics.classification_report(
       all_target,
       all_preds,
-      labels = [int(a) for a in list(self.labels2ids.keys())],
-      target_names = list(self.ids2labels.keys()),
+      labels = [int(a) for a in list(self.ids2labels.keys())],
+      target_names = list(self.labels2ids.keys()),
       zero_division = 0,
     )
     print(table)

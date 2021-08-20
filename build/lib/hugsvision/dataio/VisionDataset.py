@@ -152,7 +152,7 @@ class VisionDataset:
         # Split
         train, test = VisionDataset.splitDatasets(dataset,id2label, test_ratio, balanced, augmentation)
 
-        return train, test, label2id, id2label
+        return train, test, id2label, label2id
 
     @staticmethod
     def fromImageFolders(train:str, test:str):
@@ -168,7 +168,7 @@ class VisionDataset:
         train = torch.utils.data.Subset(train,list(range(0,len(train))))
         test  = torch.utils.data.Subset(test,list(range(0,len(test))))
 
-        return train, test, label2id, id2label
+        return train, test, id2label, label2id
 
     @staticmethod
     def getConfig(dataset:torch.utils.data.Dataset):
