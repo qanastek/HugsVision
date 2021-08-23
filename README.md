@@ -71,7 +71,7 @@ You can find all the currently available models or tasks under the `recipes/` fo
         <img src="https://raw.githubusercontent.com/qanastek/HugsVision/main/ressources/images/receipes/pneumothorax.png" width="256">
       </td>    
       <td rowspan="3">
-        <b>Training a Transformer Image Classifier to detect Pneumothorax:</b> A demonstration of how to train a Image Classifier Transformer model that can distinguish people with or without Pneumothorax thanks to their radiography with HugsVision.
+        <b>Training a Transformer Image Classifier to help radiologists detect Pneumothorax cases:</b> A demonstration of how to train a Image Classifier Transformer model that can distinguish people with or without Pneumothorax thanks to their radiography with HugsVision.
       </td>
       <td align="center" width="80">
           <a href="https://nbviewer.jupyter.org/github/qanastek/HugsVision/blob/main/recipes/pneumothorax/binary_classification/Image_Classifier.ipynb">
