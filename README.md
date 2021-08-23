@@ -131,7 +131,7 @@ You can find all the currently available models or tasks under the `recipes/` fo
         <img src="https://raw.githubusercontent.com/qanastek/HugsVision/main/ressources/images/receipes/kvasir_v2.png" width="256">
       </td>    
       <td rowspan="3">  
-        <b>Training a Transformer Image Classifier to help endoscopists:</b> A demonstration of how to train a Image Classifier Transformer model that can help endoscopists and automate detection of various anatomical landmarks, phatological findings or endoscopic procedures in the gastrointestinal tract with HugsVision.
+        <b>Training a Transformer Image Classifier to help endoscopists:</b> A demonstration of how to train a Image Classifier Transformer model that can help endoscopists to automate detection of various anatomical landmarks, phatological findings or endoscopic procedures in the gastrointestinal tract with HugsVision.
       </td>
       <td align="center" width="80">
           <a href="https://nbviewer.jupyter.org/github/qanastek/HugsVision/blob/main/recipes/kvasir_v2/binary_classification/Kvasir_v2_Image_Classifier.ipynb">
