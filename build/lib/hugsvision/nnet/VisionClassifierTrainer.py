@@ -203,7 +203,7 @@ class VisionClassifierTrainer:
         # Get hypothesis
         all_target.append(label)
 
-    return all_preds, all_target
+    return all_target, all_preds
 
   """
   🧪 Test on a single image

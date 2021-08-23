@@ -51,7 +51,7 @@ trainer = VisionClassifierTrainer(
 )
 
 # Evaluate on the test sub-dataset
-hyp, ref = trainer.evaluate_f1_score()
+ref, hyp = trainer.evaluate_f1_score()
 
 # Test on a single image
 trainer.testing(img='./data/demo/42.png',expected=2)

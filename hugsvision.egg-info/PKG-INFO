@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: hugsvision
-Version: 0.1.63
+Version: 0.1.64
 Summary: A easy to use huggingface wrapper for computer vision.
 Home-page: https://HugsVision.github.io/
 Author: Yanis Labrak & Others
@@ -79,7 +79,7 @@ Description: <p align="center">
                 <img src="https://raw.githubusercontent.com/qanastek/HugsVision/main/ressources/images/receipes/pneumothorax.png" width="256">
               </td>    
               <td rowspan="3">
-                <b>Training a Transformer Image Classifier to detect Pneumothorax:</b> A demonstration of how to train a Image Classifier Transformer model that can distinguish people with or without Pneumothorax thanks to their radiography with HugsVision.
+                <b>Training a Transformer Image Classifier to help radiologists detect Pneumothorax cases:</b> A demonstration of how to train a Image Classifier Transformer model that can distinguish people with or without Pneumothorax thanks to their radiography with HugsVision.
               </td>
               <td align="center" width="80">
                   <a href="https://nbviewer.jupyter.org/github/qanastek/HugsVision/blob/main/recipes/pneumothorax/binary_classification/Image_Classifier.ipynb">
@@ -96,7 +96,7 @@ Description: <p align="center">
           </tr>
           <tr>
               <td align="center">
-                  <a href="https://colab.research.google.com/drive/1Dll0hJqbbx7OWRTU8fvvP7-UJO7E1hD1?usp=sharing">
+                  <a href="https://colab.research.google.com/drive/1IIs3iWaVcH3sRkijdsXqQit0XXewJ0pJ?usp=sharing">
                       <img src="https://raw.githubusercontent.com/qanastek/HugsVision/main/ressources/images/receipes/colab_logo.png" height="28">
                   </a>
               </td>
@@ -126,7 +126,37 @@ Description: <p align="center">
           </tr>
           <tr>
               <td align="center">
-                  <a href="https://colab.research.google.com/drive/1WWINadrSqoxGQAYvzj-Dbs7uOP136_Ag?usp=sharing">
+                  <a href="https://colab.research.google.com/drive/1Q7_HYfZKrQJHV052OCGnZBHwKMIep3kv?usp=sharing">
+                      <img src="https://raw.githubusercontent.com/qanastek/HugsVision/main/ressources/images/receipes/colab_logo.png" height="28">
+                  </a>
+              </td>
+          </tr>
+        
+          <!-- ------------------------------------------------------------------- -->
+          
+          <tr>
+              <td rowspan="3" width="160">
+                <img src="https://raw.githubusercontent.com/qanastek/HugsVision/main/ressources/images/receipes/kvasir_v2.png" width="256">
+              </td>    
+              <td rowspan="3">  
+                <b>Training a Transformer Image Classifier to help endoscopists:</b> A demonstration of how to train a Image Classifier Transformer model that can help endoscopists to automate detection of various anatomical landmarks, phatological findings or endoscopic procedures in the gastrointestinal tract with HugsVision.
+              </td>
+              <td align="center" width="80">
+                  <a href="https://nbviewer.jupyter.org/github/qanastek/HugsVision/blob/main/recipes/kvasir_v2/binary_classification/Kvasir_v2_Image_Classifier.ipynb">
+                      <img src="https://raw.githubusercontent.com/qanastek/HugsVision/main/ressources/images/receipes/nbviewer_logo.svg" height="34">
+                  </a>
+              </td>
+          </tr>
+          <tr>
+              <td align="center">
+                  <a href="https://github.com/qanastek/HugsVision/blob/main/recipes/kvasir_v2/binary_classification/Kvasir_v2_Image_Classifier.ipynb">
+                      <img src="https://raw.githubusercontent.com/qanastek/HugsVision/main/ressources/images/receipes/github_logo.png" height="32">
+                  </a>
+              </td>
+          </tr>
+          <tr>
+              <td align="center">
+                  <a href="https://colab.research.google.com/drive/1PMV-5c54ZlyoVh6dtkazaDdJR7I8VaqN?usp=sharing">
                       <img src="https://raw.githubusercontent.com/qanastek/HugsVision/main/ressources/images/receipes/colab_logo.png" height="28">
                   </a>
               </td>
