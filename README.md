@@ -88,7 +88,7 @@ You can find all the currently available models or tasks under the `recipes/` fo
   </tr>
   <tr>
       <td align="center">
-          <a href="https://colab.research.google.com/drive/1Dll0hJqbbx7OWRTU8fvvP7-UJO7E1hD1?usp=sharing">
+          <a href="https://colab.research.google.com/drive/1IIs3iWaVcH3sRkijdsXqQit0XXewJ0pJ?usp=sharing">
               <img src="https://raw.githubusercontent.com/qanastek/HugsVision/main/ressources/images/receipes/colab_logo.png" height="28">
           </a>
       </td>
@@ -118,7 +118,7 @@ You can find all the currently available models or tasks under the `recipes/` fo
   </tr>
   <tr>
       <td align="center">
-          <a href="https://colab.research.google.com/drive/1WWINadrSqoxGQAYvzj-Dbs7uOP136_Ag?usp=sharing">
+          <a href="https://colab.research.google.com/drive/1Q7_HYfZKrQJHV052OCGnZBHwKMIep3kv?usp=sharing">
               <img src="https://raw.githubusercontent.com/qanastek/HugsVision/main/ressources/images/receipes/colab_logo.png" height="28">
           </a>
       </td>
@@ -148,7 +148,7 @@ You can find all the currently available models or tasks under the `recipes/` fo
   </tr>
   <tr>
       <td align="center">
-          <a href="https://colab.research.google.com/drive/1n4cTDtimj2rz01p7i7UYR2Ru1IV_aQJw?usp=sharing">
+          <a href="https://colab.research.google.com/drive/1PMV-5c54ZlyoVh6dtkazaDdJR7I8VaqN?usp=sharing">
               <img src="https://raw.githubusercontent.com/qanastek/HugsVision/main/ressources/images/receipes/colab_logo.png" height="28">
           </a>
       </td>
