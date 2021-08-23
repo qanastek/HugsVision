@@ -123,6 +123,36 @@ You can find all the currently available models or tasks under the `recipes/` fo
           </a>
       </td>
   </tr>
+
+  <!-- ------------------------------------------------------------------- -->
+  
+  <tr>
+      <td rowspan="3" width="160">
+        <img src="https://raw.githubusercontent.com/qanastek/HugsVision/main/ressources/images/receipes/kvasir_v2.png" width="256">
+      </td>    
+      <td rowspan="3">  
+        <b>Training a Transformer Image Classifier to help endoscopists:</b> A demonstration of how to train a Image Classifier Transformer model that can help endoscopists and automate detection of various anatomical landmarks, phatological findings or endoscopic procedures in the gastrointestinal tract with HugsVision.
+      </td>
+      <td align="center" width="80">
+          <a href="https://nbviewer.jupyter.org/github/qanastek/HugsVision/blob/main/recipes/kvasir_v2/binary_classification/Kvasir_v2_Image_Classifier.ipynb">
+              <img src="https://raw.githubusercontent.com/qanastek/HugsVision/main/ressources/images/receipes/nbviewer_logo.svg" height="34">
+          </a>
+      </td>
+  </tr>
+  <tr>
+      <td align="center">
+          <a href="https://github.com/qanastek/HugsVision/blob/main/recipes/kvasir_v2/binary_classification/Kvasir_v2_Image_Classifier.ipynb">
+              <img src="https://raw.githubusercontent.com/qanastek/HugsVision/main/ressources/images/receipes/github_logo.png" height="32">
+          </a>
+      </td>
+  </tr>
+  <tr>
+      <td align="center">
+          <a href="https://colab.research.google.com/drive/1n4cTDtimj2rz01p7i7UYR2Ru1IV_aQJw?usp=sharing">
+              <img src="https://raw.githubusercontent.com/qanastek/HugsVision/main/ressources/images/receipes/colab_logo.png" height="28">
+          </a>
+      </td>
+  </tr>
 </table>
 
 # Model architectures

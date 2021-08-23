@@ -17,7 +17,6 @@ from sklearn import metrics
 from sklearn.metrics import precision_recall_fscore_support as f_score
 
 from transformers import Trainer
-from transformers import default_data_collator
 from transformers.training_args import TrainingArguments
 from transformers.feature_extraction_utils import FeatureExtractionMixin
 

@@ -18,6 +18,7 @@ hugsvision/inference/SemanticSegmentationInference.py
 hugsvision/inference/VisionClassifierInference.py
 hugsvision/inference/__init__.py
 hugsvision/models/Detr.py
+hugsvision/models/ViTForImageClassification.py
 hugsvision/models/__init__.py
 hugsvision/nnet/ObjectDetectionTrainer.py
 hugsvision/nnet/SemanticSegmentationTrainer.py
