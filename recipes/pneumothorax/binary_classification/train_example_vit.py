@@ -37,9 +37,6 @@ trainer = VisionClassifierTrainer(
 	max_epochs   = args.epochs,
 	cores 	     = 4,
 	batch_size   = 32,
-	test_ratio   = 0.15,
-	balanced     = True,
-	augmentation = True,
 	model = ViTForImageClassification.from_pretrained(
 	    huggingface_model,
 	    num_labels = len(label2id),

@@ -42,13 +42,9 @@ class VisionClassifierTrainer:
     max_epochs    = 1,
     cores         = 4,
     batch_size    = 8,
-    test_ratio    = 0.15,
     lr            = 2e-5,
     eval_metric   = "accuracy",
     fp16          = True,
-    shuffle       = True,
-    balanced      = False,
-    augmentation  = False,
   ):
 
     self.model_name        = model_name
@@ -58,15 +54,11 @@ class VisionClassifierTrainer:
     self.lr                = lr
     self.batch_size        = batch_size
     self.max_epochs        = max_epochs
-    self.shuffle           = shuffle
-    self.test_ratio        = test_ratio
     self.model             = model
     self.feature_extractor = feature_extractor
     self.cores             = cores
     self.fp16              = fp16
     self.eval_metric       = eval_metric
-    self.balanced          = balanced
-    self.augmentation      = augmentation
     self.ids2labels        = self.model.config.id2label
     self.labels2ids        = self.model.config.label2id
 

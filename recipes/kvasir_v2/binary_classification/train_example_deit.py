@@ -30,11 +30,8 @@ trainer = VisionClassifierTrainer(
 	output_dir   = args.output,
 	max_epochs   = args.epochs,
 	batch_size   = 32, # On RTX 2080 Ti
-	test_ratio   = 0.15,
     lr 		     = 2e-5,
 	fp16	     = True,
-	balanced     = True,
-	augmentation = True,
 	model = DeiTForImageClassification.from_pretrained(
 	    huggingface_model,
 	    num_labels = len(label2id),
