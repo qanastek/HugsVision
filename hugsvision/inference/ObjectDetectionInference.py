@@ -28,86 +28,86 @@ class ObjectDetectionInference:
 
   # Bounding box post-processing
   def box_cxcywh_to_xyxy(self, x):
-      x_c, y_c, w, h = x.unbind(1)
-      b = [(x_c - 0.5 * w), (y_c - 0.5 * h),
-          (x_c + 0.5 * w), (y_c + 0.5 * h)]
-      return torch.stack(b, dim=1)
+    x_c, y_c, w, h = x.unbind(1)
+    b = [(x_c - 0.5 * w), (y_c - 0.5 * h),
+        (x_c + 0.5 * w), (y_c + 0.5 * h)]
+    return torch.stack(b, dim=1)
 
   def rescale_bboxes(self, out_bbox, size):
-      img_w, img_h = size
-      b = self.box_cxcywh_to_xyxy(out_bbox)
-      b = b * torch.tensor([img_w, img_h, img_w, img_h], dtype=torch.float32)
-      return b
+    img_w, img_h = size
+    b = self.box_cxcywh_to_xyxy(out_bbox)
+    b = b * torch.tensor([img_w, img_h, img_w, img_h], dtype=torch.float32)
+    return b
 
   def plot_results(self, pil_img, prob, boxes):
 
-      plt.figure(figsize=(16,10))
-      plt.imshow(pil_img)
-      ax = plt.gca()
+    plt.figure(figsize=(16,10))
+    plt.imshow(pil_img)
+    ax = plt.gca()
 
-      print(self.model.model.config.id2label)
+    print(self.model.model.config.id2label)
 
-      colors = self.COLORS * 100
+    colors = self.COLORS * 100
 
-      # print(torchvision.ops.nms(
-      #     boxes.cuda(),
-      #     prob.cuda(),
-      #     0.8,
-      # ))
+    # print(torchvision.ops.nms(
+    #     boxes.cuda(),
+    #     prob.cuda(),
+    #     0.8,
+    # ))
 
-      # For each bbox
-      for p, (xmin, ymin, xmax, ymax), c in zip(prob, boxes.tolist(), colors):
+    # For each bbox
+    for p, (xmin, ymin, xmax, ymax), c in zip(prob, boxes.tolist(), colors):
 
-          # Draw the bbox as a rectangle
-          ax.add_patch(plt.Rectangle(
-              (xmin, ymin),
-              xmax - xmin,
-              ymax - ymin,
-              fill=False,
-              color=c,
-              linewidth=3
-          ))
+        # Draw the bbox as a rectangle
+        ax.add_patch(plt.Rectangle(
+            (xmin, ymin),
+            xmax - xmin,
+            ymax - ymin,
+            fill=False,
+            color=c,
+            linewidth=3
+        ))
 
-          # Get the highest probability
-          cl = p.argmax()
+        # Get the highest probability
+        cl = p.argmax()
 
-          # Draw the label
-          text = f'{self.model.model.config.id2label[cl.item()]}: {p[cl]:0.2f}'
-          ax.text(xmin, ymin, text, fontsize=15, bbox=dict(facecolor='yellow', alpha=0.5))
+        # Draw the label
+        text = f'{self.model.model.config.id2label[cl.item()]}: {p[cl]:0.2f}'
+        ax.text(xmin, ymin, text, fontsize=15, bbox=dict(facecolor='yellow', alpha=0.5))
 
-      plt.axis('off')
+    plt.axis('off')
 
-      IMG_OUT = "./out_img/"
+    IMG_OUT = "./out_img/"
 
-      if not os.path.exists(IMG_OUT):
-        os.makedirs(IMG_OUT)
+    if not os.path.exists(IMG_OUT):
+      os.makedirs(IMG_OUT)
 
-      plt.savefig(IMG_OUT + datetime.today().strftime("%Y-%m-%d-%H-%M-%S") + ".jpg")
+    plt.savefig(IMG_OUT + datetime.today().strftime("%Y-%m-%d-%H-%M-%S") + ".jpg")
 
   def visualize_predictions(self, image, outputs, threshold=0.2):
 
-      # Get predictions probabilities
-      probas = outputs.logits.softmax(-1)[0, :, :-1]
-      print(probas.max(-1).values)
+    # Get predictions probabilities
+    probas = outputs.logits.softmax(-1)[0, :, :-1]
+    print(probas.max(-1).values)
 
-      # Keep only predictions with confidence >= threshold
-      keep = probas.max(-1).values > threshold
-      print(keep)
-      print(len(keep))
+    # Keep only predictions with confidence >= threshold
+    keep = probas.max(-1).values > threshold
+    print(keep)
+    print(len(keep))
 
-      # Convert predicted boxes from [0; 1] to image scales
-      bboxes_scaled = self.rescale_bboxes(
-        outputs.pred_boxes[0,keep].cpu(),
-        image.size
-      )
+    # Convert predicted boxes from [0; 1] to image scales
+    bboxes_scaled = self.rescale_bboxes(
+      outputs.pred_boxes[0,keep].cpu(),
+      image.size
+    )
 
-      print(bboxes_scaled)
-      print(len(bboxes_scaled))
+    print(bboxes_scaled)
+    print(len(bboxes_scaled))
 
-      # plot results
-      self.plot_results(image, probas[keep], bboxes_scaled)
+    # plot results
+    self.plot_results(image, probas[keep], bboxes_scaled)
 
-      return image, probas[keep], bboxes_scaled
+    return image, probas[keep], bboxes_scaled
 
   """
   ⚙️ Predict the bounding boxes for each object in the image
