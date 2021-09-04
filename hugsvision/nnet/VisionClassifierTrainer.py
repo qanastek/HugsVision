@@ -17,7 +17,6 @@ from sklearn import metrics
 from sklearn.metrics import precision_recall_fscore_support as f_score
 
 from transformers import Trainer
-from transformers import default_data_collator
 from transformers.training_args import TrainingArguments
 from transformers.feature_extraction_utils import FeatureExtractionMixin
 
@@ -43,13 +42,9 @@ class VisionClassifierTrainer:
     max_epochs    = 1,
     cores         = 4,
     batch_size    = 8,
-    test_ratio    = 0.15,
     lr            = 2e-5,
     eval_metric   = "accuracy",
     fp16          = True,
-    shuffle       = True,
-    balanced      = False,
-    augmentation  = False,
   ):
 
     self.model_name        = model_name
@@ -59,15 +54,11 @@ class VisionClassifierTrainer:
     self.lr                = lr
     self.batch_size        = batch_size
     self.max_epochs        = max_epochs
-    self.shuffle           = shuffle
-    self.test_ratio        = test_ratio
     self.model             = model
     self.feature_extractor = feature_extractor
     self.cores             = cores
     self.fp16              = fp16
     self.eval_metric       = eval_metric
-    self.balanced          = balanced
-    self.augmentation      = augmentation
     self.ids2labels        = self.model.config.id2label
     self.labels2ids        = self.model.config.label2id
 
@@ -167,8 +158,8 @@ class VisionClassifierTrainer:
     table = metrics.classification_report(
       all_target,
       all_preds,
-      labels = [int(a) for a in list(self.labels2ids.keys())],
-      target_names = list(self.ids2labels.keys()),
+      labels = [int(a) for a in list(self.ids2labels.keys())],
+      target_names = list(self.labels2ids.keys()),
       zero_division = 0,
     )
     print(table)
@@ -204,7 +195,7 @@ class VisionClassifierTrainer:
         # Get hypothesis
         all_target.append(label)
 
-    return all_preds, all_target
+    return all_target, all_preds
 
   """
   🧪 Test on a single image

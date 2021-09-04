@@ -38,7 +38,6 @@ trainer = VisionClassifierTrainer(
 	max_epochs  = args.epochs,
 	cores 	    = 4,
 	batch_size  = 32,
-	test_ratio  = 0.15,
 	model = DeiTForImageClassification.from_pretrained(
 	    huggingface_model,
 	    num_labels = len(label2id),
@@ -51,7 +50,7 @@ trainer = VisionClassifierTrainer(
 )
 
 # Evaluate on the test sub-dataset
-hyp, ref = trainer.evaluate_f1_score()
+ref, hyp = trainer.evaluate_f1_score()
 
 # Test on a single image
 trainer.testing(img='./data/demo/42.png',expected=2)
