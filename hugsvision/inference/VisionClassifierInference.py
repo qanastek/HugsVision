@@ -14,16 +14,18 @@ class VisionClassifierInference:
     
     self.resolution = resolution
 
-  def predict(self, img_path: str):
-
-    # Load the image
-    image_array = Image.open(img_path)
+  """
+  Arguments
+  ---------
+  img: Pillow Image
+  """
+  def predict_image(self, img):
 
     # Change resolution to 128x128
-    image_array.thumbnail((self.resolution,self.resolution))
+    img.thumbnail((self.resolution,self.resolution))
 
     # Transform the image
-    encoding = self.feature_extractor(images=image_array, return_tensors="pt")
+    encoding = self.feature_extractor(images=img, return_tensors="pt")
 
     # Predict and get the corresponding label identifier
     pred = self.model(encoding['pixel_values'])
@@ -37,3 +39,11 @@ class VisionClassifierInference:
     # print(pred.logits)
     
     return label
+
+  """
+  Arguments
+  ---------
+  img_path: str
+  """
+  def predict(self, img_path: str):  
+    return self.predict_image(img=Image.open(img_path))
