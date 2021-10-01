@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: hugsvision
-Version: 0.67
+Version: 0.68
 Summary: A easy to use huggingface wrapper for computer vision.
 Home-page: https://HugsVision.github.io/
 Author: Yanis Labrak & Others

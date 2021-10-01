@@ -45,15 +45,7 @@ class ObjectDetectionInference:
     plt.imshow(pil_img)
     ax = plt.gca()
 
-    print(self.model.model.config.id2label)
-
     colors = self.COLORS * 100
-
-    # print(torchvision.ops.nms(
-    #     boxes.cuda(),
-    #     prob.cuda(),
-    #     0.8,
-    # ))
 
     # For each bbox
     for p, (xmin, ymin, xmax, ymax), c in zip(prob, boxes.tolist(), colors):
@@ -84,16 +76,13 @@ class ObjectDetectionInference:
 
     plt.savefig(IMG_OUT + datetime.today().strftime("%Y-%m-%d-%H-%M-%S") + ".jpg")
 
-  def visualize_predictions(self, image, outputs, threshold=0.2):
+  def visualize_predictions(self, image, outputs, threshold=0.2, visualize=False):
 
     # Get predictions probabilities
     probas = outputs.logits.softmax(-1)[0, :, :-1]
-    print(probas.max(-1).values)
 
     # Keep only predictions with confidence >= threshold
     keep = probas.max(-1).values > threshold
-    print(keep)
-    print(len(keep))
 
     # Convert predicted boxes from [0; 1] to image scales
     bboxes_scaled = self.rescale_bboxes(
@@ -101,11 +90,9 @@ class ObjectDetectionInference:
       image.size
     )
 
-    print(bboxes_scaled)
-    print(len(bboxes_scaled))
-
     # plot results
-    self.plot_results(image, probas[keep], bboxes_scaled)
+    if visualize == True:
+      self.plot_results(image, probas[keep], bboxes_scaled)
 
     return image, probas[keep], bboxes_scaled
 
@@ -113,17 +100,14 @@ class ObjectDetectionInference:
   ⚙️ Predict the bounding boxes for each object in the image
   Return: image, probas, bboxes_scaled
   """
-  def predict(self, img_path: str, threshold=0.2):
-
-    # Load the image
-    image_array = Image.open(img_path)
+  def predict_img(self, img, threshold=0.2, visualize=False):
 
     # # Change resolution to 128x128
-    # image_array.thumbnail((self.resolution,self.resolution))
+    # img.thumbnail((self.resolution,self.resolution))
 
     # Transform the image
     encoding = self.feature_extractor(
-      images=image_array,
+      images=img,
       return_tensors="pt"
     )
 
@@ -133,4 +117,11 @@ class ObjectDetectionInference:
       pixel_mask=None,
     )
     
-    return self.visualize_predictions(image_array, outputs, threshold)
+    return self.visualize_predictions(img, outputs, threshold, visualize=visualize)
+
+  """
+  ⚙️ Predict the bounding boxes for each object in the image
+  Return: image, probas, bboxes_scaled
+  """
+  def predict(self, img_path: str, threshold=0.2, visualize=False):    
+    return self.predict_img(img=Image.open(img_path), threshold=threshold, visualize=visualize)
