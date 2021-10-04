@@ -184,7 +184,7 @@ If you want to cite the tool you can use this:
   author={Yanis Labrak},
   publisher={GitHub},
   journal={GitHub repository},
-  howpublished={\url{https://github.com/qanstek/HugsVision}},
+  howpublished={\url{https://github.com/qanastek/HugsVision}},
   year={2021}
 }
 ```
