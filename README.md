@@ -173,3 +173,18 @@ Before starting implementing, please check if your model has an implementation i
 Build: `python setup.py sdist bdist_wheel`
 
 Upload: `twine upload dist/*`
+
+
+# Citation
+If you want to cite the tool you can use this:
+
+```bibtex
+@misc{HugsVision,
+  title={HugsVision},
+  author={Yanis Labrak},
+  publisher={GitHub},
+  journal={GitHub repository},
+  howpublished={\url{https://github.com/qanstek/HugsVision}},
+  year={2021}
+}
+```
