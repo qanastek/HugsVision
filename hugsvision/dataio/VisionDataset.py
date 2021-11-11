@@ -9,6 +9,7 @@ from datetime import datetime
 from collections import Counter
 
 import torch
+from torchvision import transforms
 from torchvision.datasets import ImageFolder
 
 from PIL import Image, ImageEnhance
@@ -16,6 +17,12 @@ from PIL import Image, ImageEnhance
 from tabulate import tabulate
 
 class VisionDataset:
+
+    transformTorchVision = transforms.Compose([        
+      transforms.Resize((224,224),interpolation=Image.NEAREST),
+      transforms.RandomHorizontalFlip(),
+      transforms.ToTensor(),
+    ])
 
     """
     🧬 Apply data augmentation on the input image
@@ -141,25 +148,32 @@ class VisionDataset:
         return torch.utils.data.Subset(train_ds, list(range(0,len(train_ds)))), torch.utils.data.Subset(test_ds, list(range(0,len(test_ds))))
 
     @staticmethod
-    def fromImageFolder(dataset:str, test_ratio=0.15, balanced=True, augmentation=False):
+    def fromImageFolder(dataset:str, test_ratio=0.15, balanced=True, augmentation=False, torch_vision=False, transform=transformTorchVision):
         
         # Create ImageFolder from path
-        dataset = ImageFolder(dataset)
+        if torch_vision == True:
+            dataset = ImageFolder(dataset, transform)
+        else:
+            dataset = ImageFolder(dataset)
 
         # Both way indexes
         label2id, id2label = VisionDataset.getConfig(dataset)
 
         # Split
-        train, test = VisionDataset.splitDatasets(dataset,id2label, test_ratio, balanced, augmentation)
+        train, test = VisionDataset.splitDatasets(dataset, id2label, test_ratio, balanced, augmentation)
 
         return train, test, id2label, label2id
 
     @staticmethod
-    def fromImageFolders(train:str, test:str):
+    def fromImageFolders(train:str, test:str, torch_vision=False, transform=transformTorchVision):
         
         # Split
-        train = ImageFolder(train)
-        test  = ImageFolder(test)
+        if torch_vision == True:
+            train = ImageFolder(train, transform)
+            test  = ImageFolder(test, transform)
+        else:
+            train = ImageFolder(train)
+            test  = ImageFolder(test)
 
         # Both way indexes
         label2id, id2label = VisionDataset.getConfig(train)
