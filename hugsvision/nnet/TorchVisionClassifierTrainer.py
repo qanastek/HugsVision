@@ -48,6 +48,7 @@ class TorchVisionClassifierTrainer:
     gamma         = 0.96,
     pretrained    = True,
     force_cpu     = False,
+    requires_grad = False, # True: Only last layer of the classifier are updated
   ):
 
     self.train             = train
@@ -65,10 +66,11 @@ class TorchVisionClassifierTrainer:
     self.ids2labels        = id2label
     self.labels2ids        = label2id
     self.best_acc          = 0
-    self.logs_path         = self.output_dir.upper() + "logs/"
-    self.config_path       = self.output_dir.upper() + "config.json"
+    self.logs_path         = self.output_dir + "logs/"
+    self.config_path       = self.output_dir + "config.json"
     self.current_date      = datetime.today().strftime("%Y-%m-%d-%H-%M-%S")
     self.config            = {}
+    self.requires_grad     = requires_grad
 
     self.data_loader_train = torch.utils.data.DataLoader(self.train, batch_size=self.batch_size, shuffle=True, num_workers=self.workers)
     self.data_loader_test = torch.utils.data.DataLoader(self.test, batch_size=self.batch_size, shuffle=True, num_workers=self.workers)
@@ -137,6 +139,10 @@ class TorchVisionClassifierTrainer:
 
       self.model = torch.nn.DataParallel(self.model).to(self.device)
 
+    if self.requires_grad:
+      for param in self.model.parameters():
+        param.requires_grad = False
+
     archi = ""
     archi += "="*50 + "\n"
     archi += "Model architecture:" + "\n"
@@ -151,8 +157,16 @@ class TorchVisionClassifierTrainer:
     self.logs_file.close()
 
     self.criterion = nn.CrossEntropyLoss().to(self.device)
-    self.optimizer = torch.optim.SGD(self.model.parameters(), self.lr, momentum=self.momentum, weight_decay=self.weight_decay)
+    self.optimizer = torch.optim.Adam(self.model.parameters(), self.lr)
+    # self.optimizer = torch.optim.SGD(self.model.parameters(), self.lr, momentum=self.momentum, weight_decay=self.weight_decay)
     self.scheduler = ExponentialLR(self.optimizer, gamma=self.gamma)
+
+    self.config["id2label"] = self.ids2labels
+    self.config["label2id"] = self.labels2ids
+    self.config["architectures"] = [self.model_name]
+    
+    with open(self.config_path, 'w') as json_file:
+      json.dump(self.config, json_file, indent=4)
 
     """
     ⚙️ Train the given model on the dataset
@@ -162,13 +176,6 @@ class TorchVisionClassifierTrainer:
 
     # Close the logs file
     self.logs_file.close()
-
-    self.config["id2label"] = self.ids2labels
-    self.config["label2id"] = self.labels2ids
-    self.config["architectures"] = [self.model_name]
-    
-    with open(self.config_path, 'w') as json_file:
-      json.dump(self.config, json_file, indent=4)
 
   """
   📜 Open the logs file
@@ -206,23 +213,6 @@ class TorchVisionClassifierTrainer:
     print("Logs saved at: \033[93m" + self.logs_path + "\033[0m")
 
     return all_target, all_preds
-
-  # """
-  # 🧪 Test on a single image
-  # TODO: Rebuild all
-  # """
-  # def testing(self, img,expected):
-  #   image_array = Image.open(img)
-  #   inputs      = self.feature_extractor(images=image_array, return_tensors="pt").to(self.device)
-  #   outputs     = self.model(**inputs)
-  #   preds       = outputs.logits.softmax(1).argmax(1).tolist()[0]
-  #   print(
-  #     "Predicted class: ",
-  #     self.ids2labels[str(preds)],
-  #     "(", str(preds), " - ", self.ids2labels[str(expected)], ") ",
-  #     str(preds == expected)
-  #   )
-  #   return preds
   
   """
   👩‍🎓 Training phase
@@ -230,6 +220,8 @@ class TorchVisionClassifierTrainer:
   def training(self):
 
     for epoch in tqdm(range(self.max_epochs)):
+
+      self.__openLogs()
 
       # Train the epoch
       self.compute_batches(epoch)
@@ -251,11 +243,11 @@ class TorchVisionClassifierTrainer:
       self.best_acc = max(total_acc, self.best_acc)
 
       torch.save(self.model, filename)
-      # torch.save({'epoch': epoch + 1, 'arch': self.model_name, 'state_dict': self.model.state_dict(), 'best_prec1': self.best_acc }, filename)
-      print("Model saved at: \033[93m" + filename + "\033[0m")
+      saved_at = "Model saved at: \033[93m" + filename + "\033[0m"
+      print(saved_at)
 
-      self.__openLogs()
       self.logs_file.write(f1_score + "\n")
+      self.logs_file.write(saved_at + "\n")
       self.logs_file.close()
 
   """
@@ -285,7 +277,9 @@ class TorchVisionClassifierTrainer:
       self.optimizer.step()
 
       if i % (len(self.data_loader_train) / 10) == 0:
-        print('Epoch: ', epoch, ' | Batch: ', i, " | Loss: ", loss.item())
+        log_line = "[Epoch " + str(epoch) + "], [Batch " + str(i) + " / " + str(self.max_epochs) + "], [Loss " + str(loss.item()) + "]"
+        print(log_line)
+        self.logs_file.write(log_line + "\n")
 
     self.scheduler.step()
 
@@ -294,21 +288,23 @@ class TorchVisionClassifierTrainer:
   """
   def evaluate(self):
 
-    all_predictions = []
-    all_targets = []
+    with torch.no_grad():
 
-    # Switch to evaluate mode
-    self.model.eval()
+      all_predictions = []
+      all_targets = []
 
-    for i, (input, target) in enumerate(self.data_loader_test):
+      # Switch to evaluate mode
+      self.model.eval()
 
-      input = input.to(self.device)
-      input_var = torch.autograd.Variable(input, volatile=True)
+      for i, (input, target) in enumerate(self.data_loader_test):
 
-      output = self.model(input_var).cpu().data.numpy()
-      output = [o.argmax() for o in output]
+        input = input.to(self.device)
+        input_var = torch.autograd.Variable(input, volatile=True)
 
-      all_targets.extend(target.tolist())
-      all_predictions.extend(output)
+        output = self.model(input_var).cpu().data.numpy()
+        output = [o.argmax() for o in output]
 
-    return all_targets, all_predictions
+        all_targets.extend(target.tolist())
+        all_predictions.extend(output)
+
+      return all_targets, all_predictions

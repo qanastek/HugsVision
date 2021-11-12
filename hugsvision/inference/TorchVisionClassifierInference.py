@@ -8,9 +8,8 @@ from PIL import Image
 class TorchVisionClassifierInference:
 
   transformTorchVision = transforms.Compose([
-      transforms.Resize((224,224),interpolation=Image.NEAREST),
+      transforms.Resize((224,224), interpolation=Image.NEAREST),
       transforms.ToTensor(),
-      # transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
   ])
 
   """
@@ -28,13 +27,16 @@ class TorchVisionClassifierInference:
     print("Model loaded!")
 
   """
-  Arguments
-  ---------
-  img: Pillow Image
+  🤔 Predict from one image at the Pillow format
   """
-  def predict_image(self, img):
+  def predict_image(self, img, save_preview=False):
     
     img = self.transform(img)
+
+    if save_preview:
+      pil_img = transforms.ToPILImage()(img)
+      pil_img.save("preview.jpg")
+
     img = torch.unsqueeze(img, 0)
 
     # Predict and get the corresponding label identifier
@@ -49,9 +51,7 @@ class TorchVisionClassifierInference:
     return label
 
   """
-  Arguments
-  ---------
-  img_path: str
+  🤔 Predict from one image path
   """
   def predict(self, img_path: str):  
     return self.predict_image(img=Image.open(img_path))

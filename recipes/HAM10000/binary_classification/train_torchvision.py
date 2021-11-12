@@ -6,7 +6,7 @@ from hugsvision.nnet.TorchVisionClassifierTrainer import TorchVisionClassifierTr
 
 parser = argparse.ArgumentParser(description='Image classifier')
 parser.add_argument('--imgs', type=str, default="/users/ylabrak/datasets/HAM10000/", help='The directory of the input images')
-parser.add_argument('--epochs', type=int, default=1, help='Number of Epochs')
+parser.add_argument('--epochs', type=int, default=100, help='Number of Epochs')
 parser.add_argument('--output', type=str, default="./OUT_TORCHVISION/HAM10000-wide_resnet50_2/", help='The output directory of the model')
 args = parser.parse_args()
 
@@ -21,7 +21,8 @@ train, test, id2label, label2id = VisionDataset.fromImageFolder(
 # Train the model
 trainer = TorchVisionClassifierTrainer(
 	output_dir   = args.output,
-	model_name   = "wide_resnet50_2",
+	model_name   = "resnet18",
+	# model_name   = "wide_resnet50_2",
 	# model_name   = "shufflenet_v2_x0_5",
 	# model_name   = "mnasnet0_5",
 	# model_name   = "resnext50_32x4d",
@@ -30,7 +31,6 @@ trainer = TorchVisionClassifierTrainer(
 	# model_name   = "mobilenet_v3_large",
 	# model_name   = "mobilenet_v2",
 	# model_name   = "alexnet",
-	# model_name   = "resnet18",
 	# model_name   = "resnet50",
 	# model_name   = "vgg16",
 	train      	 = train,
