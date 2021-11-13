@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: hugsvision
-Version: 0.68
+Version: 0.70
 Summary: A easy to use huggingface wrapper for computer vision.
 Home-page: https://HugsVision.github.io/
 Author: Yanis Labrak & Others
@@ -181,6 +181,20 @@ Description: <p align="center">
         Build: `python setup.py sdist bdist_wheel`
         
         Upload: `twine upload dist/*`
+        
+        # Citation
+        If you want to cite the tool you can use this:
+        
+        ```bibtex
+        @misc{HugsVision,
+          title={HugsVision},
+          author={Yanis Labrak},
+          publisher={GitHub},
+          journal={GitHub repository},
+          howpublished={\url{https://github.com/qanastek/HugsVision}},
+          year={2021}
+        }
+        ```
         
 Keywords: python,transformers,huggingface,wrapper,toolkit,computer vision,easy,computer,vision
 Platform: UNKNOWN
