@@ -16,7 +16,9 @@ import torch.nn as nn
 from torchmetrics import Accuracy
 import torchvision.models as models
 from torch.utils.data import DataLoader
+from torch.utils.tensorboard import SummaryWriter
 from torch.optim.lr_scheduler import ExponentialLR
+
 
 from sklearn import metrics
 from sklearn.metrics import accuracy_score
@@ -49,6 +51,7 @@ class TorchVisionClassifierTrainer:
     pretrained    = True,
     force_cpu     = False,
     requires_grad = False, # True: Only last layer of the classifier are updated
+    load_best_model_at_end = True,
   ):
 
     self.train             = train
@@ -71,6 +74,9 @@ class TorchVisionClassifierTrainer:
     self.current_date      = datetime.today().strftime("%Y-%m-%d-%H-%M-%S")
     self.config            = {}
     self.requires_grad     = requires_grad
+    self.load_best_model_at_end = load_best_model_at_end
+
+    self.tensor_board = SummaryWriter()
 
     self.data_loader_train = torch.utils.data.DataLoader(self.train, batch_size=self.batch_size, shuffle=True, num_workers=self.workers)
     self.data_loader_test = torch.utils.data.DataLoader(self.test, batch_size=self.batch_size, shuffle=True, num_workers=self.workers)
@@ -174,6 +180,12 @@ class TorchVisionClassifierTrainer:
     print("Start Training!")
     self.training()
 
+    if self.load_best_model_at_end:
+      print("Best model loaded!")
+      self.model = torch.load(self.output_dir + 'best_model.pth', map_location=self.device)
+
+    self.evaluate_f1_score()
+
     # Close the logs file
     self.logs_file.close()
 
@@ -224,7 +236,7 @@ class TorchVisionClassifierTrainer:
       self.__openLogs()
 
       # Train the epoch
-      self.compute_batches(epoch)
+      batches_acc, batches_loss = self.compute_batches(epoch)
 
       # Evaluate on validation dataset
       all_targets, all_predictions = self.evaluate()
@@ -233,12 +245,12 @@ class TorchVisionClassifierTrainer:
       f1_score = classification_report(all_targets, all_predictions, target_names=list(self.ids2labels.values()))
       print(f1_score)
 
-      os.makedirs(self.output_dir.upper(), exist_ok=True)
+      os.makedirs(self.output_dir, exist_ok=True)
 
       if total_acc > self.best_acc:
-        filename = self.output_dir.upper() + 'best_model.pth'
+        filename = self.output_dir + 'best_model.pth'
       else:
-        filename = self.output_dir.upper() + 'last_model.pth'
+        filename = self.output_dir + 'last_model.pth'
 
       self.best_acc = max(total_acc, self.best_acc)
 
@@ -250,6 +262,10 @@ class TorchVisionClassifierTrainer:
       self.logs_file.write(saved_at + "\n")
       self.logs_file.close()
 
+      self.tensor_board.add_scalar('Loss/train', batches_loss, epoch)
+      self.tensor_board.add_scalar('Accuracy/train', batches_acc, epoch)
+      self.tensor_board.add_scalar('Accuracy/test', total_acc, epoch)
+
   """
   🗃️ Compute epoch batches
   """
@@ -257,6 +273,11 @@ class TorchVisionClassifierTrainer:
 
     # Switch to train mode
     self.model.train()
+
+    sum_loss = 0
+
+    all_preds = []
+    all_targets = []
 
     # For each batch
     for i, (input, target) in enumerate(self.data_loader_train):
@@ -271,6 +292,10 @@ class TorchVisionClassifierTrainer:
       output = self.model(input_var)
       loss = self.criterion(output, target_var)
 
+      sum_loss += loss
+      all_preds.extend(torch.max(output, 1)[1].cpu().detach().numpy())
+      all_targets.extend(target_var.cpu().detach().numpy())
+
       # compute gradient and do SGD step
       self.optimizer.zero_grad()
       loss.backward()
@@ -282,6 +307,12 @@ class TorchVisionClassifierTrainer:
         self.logs_file.write(log_line + "\n")
 
     self.scheduler.step()
+
+    # Compute accuracy
+    total_acc = accuracy_score(all_targets, all_preds)
+    avg_loss = sum_loss / len(self.data_loader_train)
+
+    return total_acc, avg_loss
 
   """
   🧪 Evaluate the performances of the system of the test sub-dataset

@@ -7,11 +7,14 @@ import argparse
 from pathlib import Path
 from datetime import datetime
 from collections import Counter
+from operator import itemgetter
 
 import torch
 from torchvision import transforms
 from torchvision.datasets import ImageFolder
 
+import numpy as np
+from tqdm import tqdm
 from PIL import Image, ImageEnhance
 
 from tabulate import tabulate
@@ -19,7 +22,7 @@ from tabulate import tabulate
 class VisionDataset:
 
     transformTorchVision = transforms.Compose([        
-      transforms.Resize((224,224),interpolation=Image.NEAREST),
+      transforms.Resize((224,224), interpolation=Image.NEAREST),
       transforms.RandomHorizontalFlip(),
       transforms.ToTensor(),
     ])
@@ -46,40 +49,25 @@ class VisionDataset:
     ⚖️ Balance the dataset according to the less represented label
     """
     @staticmethod
-    def __balance(train_ds, train_classes):
+    def __balance(dataset, ct):
+
+        ct_classes = [ct[a] for a in sorted(ct)]
 
         # Get the less represented label in train
-        less_represented_train = min(train_classes)
+        less_represented_train = min(ct_classes)
 
-        labels = {}
+        labels_cpt = {}
+        for label in list(ct.keys()):
+            if label not in labels_cpt:
+                labels_cpt[label] = 0
 
-        # For each image
-        for img, label in train_ds:
+        indices = []
+        for i, label in enumerate(dataset.targets):            
+            if labels_cpt[label] < less_represented_train:
+                labels_cpt[label] += 1
+                indices.append(i)
 
-            # Create the label array if isn't
-            if label not in labels:
-                labels[label] = []
-            
-            # Add the image to the array
-            labels[label].append(img)
-            
-            # New dataset
-            balanced_ds = []
-
-            # For each label
-            for label in labels:
-
-                # Get images
-                imgs = labels[label]
-
-                # For each image
-                for img in imgs[0:less_represented_train]:
-
-                    # Create a tuple: image and label 
-                    t = (img, label)
-
-                    # Add it
-                    balanced_ds.append(t)
+        balanced_ds = torch.utils.data.Subset(dataset, indices)
 
         print("The less represented label in train as " + str(less_represented_train) + " occurrences")
         print("Size of train after balancing is " + str(len(balanced_ds)))
@@ -93,6 +81,16 @@ class VisionDataset:
 
         print("Split Datasets...")
         
+        # If balanced is enabled
+        if balanced == True:
+    
+            print("Balance train dataset...")
+
+            ct = Counter(dataset.targets)
+
+            # Balance the train dataset
+            dataset = VisionDataset.__balance(dataset, ct)
+
         indices = torch.randperm(len(dataset)).tolist()
 
         # Index of the validation corpora
@@ -100,18 +98,7 @@ class VisionDataset:
 
         # TRAIN
         train_ds = torch.utils.data.Subset(dataset, indices[:train_index])
-        ct_train = Counter([label for _, label in train_ds])
-        train_classes = [ct_train[a] for a in sorted(ct_train)]
-        
-        # If balanced is enabled
-        if balanced == True:
-
-            # Balance the train dataset
-            train_ds = VisionDataset.__balance(train_ds, train_classes)
-            
-            # Compute again the stats
-            ct_train = Counter([label for _, label in train_ds])
-            train_classes = [ct_train[a] for a in sorted(ct_train)]
+        print("train_ds: ", len(train_ds))
 
         # If data augmentation is enabled
         if augmentation == True:
@@ -131,8 +118,12 @@ class VisionDataset:
 
         # TEST
         test_ds = torch.utils.data.Subset(dataset, indices[train_index:])
-        ct_test = Counter([label for _, label in test_ds])
-        test_classes = [ct_test[a] for a in sorted(ct_test)]
+        
+        ct_train = Counter(list(map(itemgetter(1), train_ds)))
+        train_classes = [ct_train[int(a)] for a in list(id2label.keys())]
+
+        ct_test = Counter(list(map(itemgetter(1), test_ds)))
+        test_classes = [ct_test[int(a)] for a in list(id2label.keys())]
 
         table_repartition = [
             ["Train"] + train_classes + [str(len(train_ds))],
@@ -158,6 +149,9 @@ class VisionDataset:
 
         # Both way indexes
         label2id, id2label = VisionDataset.getConfig(dataset)
+
+        img = transforms.ToPILImage()(dataset[0][0])
+        img.save("test_pil.jpg")
 
         # Split
         train, test = VisionDataset.splitDatasets(dataset, id2label, test_ratio, balanced, augmentation)

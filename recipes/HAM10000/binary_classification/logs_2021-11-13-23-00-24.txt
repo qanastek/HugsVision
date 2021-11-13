@@ -1,0 +1,2135 @@
+==================================================
+Model architecture:
+==================================================
+DataParallel(
+  (module): DenseNet(
+    (features): Sequential(
+      (conv0): Conv2d(3, 64, kernel_size=(7, 7), stride=(2, 2), padding=(3, 3), bias=False)
+      (norm0): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu0): ReLU(inplace=True)
+      (pool0): MaxPool2d(kernel_size=3, stride=2, padding=1, dilation=1, ceil_mode=False)
+      (denseblock1): _DenseBlock(
+        (denselayer1): _DenseLayer(
+          (norm1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu1): ReLU(inplace=True)
+          (conv1): Conv2d(64, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (norm2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu2): ReLU(inplace=True)
+          (conv2): Conv2d(128, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+        (denselayer2): _DenseLayer(
+          (norm1): BatchNorm2d(96, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu1): ReLU(inplace=True)
+          (conv1): Conv2d(96, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (norm2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu2): ReLU(inplace=True)
+          (conv2): Conv2d(128, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+        (denselayer3): _DenseLayer(
+          (norm1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu1): ReLU(inplace=True)
+          (conv1): Conv2d(128, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (norm2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu2): ReLU(inplace=True)
+          (conv2): Conv2d(128, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+        (denselayer4): _DenseLayer(
+          (norm1): BatchNorm2d(160, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu1): ReLU(inplace=True)
+          (conv1): Conv2d(160, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (norm2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu2): ReLU(inplace=True)
+          (conv2): Conv2d(128, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+        (denselayer5): _DenseLayer(
+          (norm1): BatchNorm2d(192, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu1): ReLU(inplace=True)
+          (conv1): Conv2d(192, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (norm2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu2): ReLU(inplace=True)
+          (conv2): Conv2d(128, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+        (denselayer6): _DenseLayer(
+          (norm1): BatchNorm2d(224, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu1): ReLU(inplace=True)
+          (conv1): Conv2d(224, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (norm2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu2): ReLU(inplace=True)
+          (conv2): Conv2d(128, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+      )
+      (transition1): _Transition(
+        (norm): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU(inplace=True)
+        (conv): Conv2d(256, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (pool): AvgPool2d(kernel_size=2, stride=2, padding=0)
+      )
+      (denseblock2): _DenseBlock(
+        (denselayer1): _DenseLayer(
+          (norm1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu1): ReLU(inplace=True)
+          (conv1): Conv2d(128, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (norm2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu2): ReLU(inplace=True)
+          (conv2): Conv2d(128, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+        (denselayer2): _DenseLayer(
+          (norm1): BatchNorm2d(160, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu1): ReLU(inplace=True)
+          (conv1): Conv2d(160, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (norm2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu2): ReLU(inplace=True)
+          (conv2): Conv2d(128, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+        (denselayer3): _DenseLayer(
+          (norm1): BatchNorm2d(192, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu1): ReLU(inplace=True)
+          (conv1): Conv2d(192, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (norm2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu2): ReLU(inplace=True)
+          (conv2): Conv2d(128, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+        (denselayer4): _DenseLayer(
+          (norm1): BatchNorm2d(224, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu1): ReLU(inplace=True)
+          (conv1): Conv2d(224, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (norm2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu2): ReLU(inplace=True)
+          (conv2): Conv2d(128, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+        (denselayer5): _DenseLayer(
+          (norm1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu1): ReLU(inplace=True)
+          (conv1): Conv2d(256, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (norm2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu2): ReLU(inplace=True)
+          (conv2): Conv2d(128, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+        (denselayer6): _DenseLayer(
+          (norm1): BatchNorm2d(288, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu1): ReLU(inplace=True)
+          (conv1): Conv2d(288, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (norm2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu2): ReLU(inplace=True)
+          (conv2): Conv2d(128, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+        (denselayer7): _DenseLayer(
+          (norm1): BatchNorm2d(320, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu1): ReLU(inplace=True)
+          (conv1): Conv2d(320, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (norm2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu2): ReLU(inplace=True)
+          (conv2): Conv2d(128, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+        (denselayer8): _DenseLayer(
+          (norm1): BatchNorm2d(352, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu1): ReLU(inplace=True)
+          (conv1): Conv2d(352, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (norm2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu2): ReLU(inplace=True)
+          (conv2): Conv2d(128, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+        (denselayer9): _DenseLayer(
+          (norm1): BatchNorm2d(384, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu1): ReLU(inplace=True)
+          (conv1): Conv2d(384, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (norm2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu2): ReLU(inplace=True)
+          (conv2): Conv2d(128, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+        (denselayer10): _DenseLayer(
+          (norm1): BatchNorm2d(416, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu1): ReLU(inplace=True)
+          (conv1): Conv2d(416, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (norm2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu2): ReLU(inplace=True)
+          (conv2): Conv2d(128, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+        (denselayer11): _DenseLayer(
+          (norm1): BatchNorm2d(448, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu1): ReLU(inplace=True)
+          (conv1): Conv2d(448, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (norm2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu2): ReLU(inplace=True)
+          (conv2): Conv2d(128, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+        (denselayer12): _DenseLayer(
+          (norm1): BatchNorm2d(480, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu1): ReLU(inplace=True)
+          (conv1): Conv2d(480, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (norm2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu2): ReLU(inplace=True)
+          (conv2): Conv2d(128, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+      )
+      (transition2): _Transition(
+        (norm): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU(inplace=True)
+        (conv): Conv2d(512, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (pool): AvgPool2d(kernel_size=2, stride=2, padding=0)
+      )
+      (denseblock3): _DenseBlock(
+        (denselayer1): _DenseLayer(
+          (norm1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu1): ReLU(inplace=True)
+          (conv1): Conv2d(256, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (norm2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu2): ReLU(inplace=True)
+          (conv2): Conv2d(128, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+        (denselayer2): _DenseLayer(
+          (norm1): BatchNorm2d(288, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu1): ReLU(inplace=True)
+          (conv1): Conv2d(288, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (norm2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu2): ReLU(inplace=True)
+          (conv2): Conv2d(128, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+        (denselayer3): _DenseLayer(
+          (norm1): BatchNorm2d(320, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu1): ReLU(inplace=True)
+          (conv1): Conv2d(320, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (norm2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu2): ReLU(inplace=True)
+          (conv2): Conv2d(128, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+        (denselayer4): _DenseLayer(
+          (norm1): BatchNorm2d(352, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu1): ReLU(inplace=True)
+          (conv1): Conv2d(352, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (norm2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu2): ReLU(inplace=True)
+          (conv2): Conv2d(128, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+        (denselayer5): _DenseLayer(
+          (norm1): BatchNorm2d(384, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu1): ReLU(inplace=True)
+          (conv1): Conv2d(384, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (norm2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu2): ReLU(inplace=True)
+          (conv2): Conv2d(128, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+        (denselayer6): _DenseLayer(
+          (norm1): BatchNorm2d(416, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu1): ReLU(inplace=True)
+          (conv1): Conv2d(416, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (norm2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu2): ReLU(inplace=True)
+          (conv2): Conv2d(128, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+        (denselayer7): _DenseLayer(
+          (norm1): BatchNorm2d(448, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu1): ReLU(inplace=True)
+          (conv1): Conv2d(448, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (norm2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu2): ReLU(inplace=True)
+          (conv2): Conv2d(128, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+        (denselayer8): _DenseLayer(
+          (norm1): BatchNorm2d(480, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu1): ReLU(inplace=True)
+          (conv1): Conv2d(480, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (norm2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu2): ReLU(inplace=True)
+          (conv2): Conv2d(128, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+        (denselayer9): _DenseLayer(
+          (norm1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu1): ReLU(inplace=True)
+          (conv1): Conv2d(512, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (norm2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu2): ReLU(inplace=True)
+          (conv2): Conv2d(128, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+        (denselayer10): _DenseLayer(
+          (norm1): BatchNorm2d(544, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu1): ReLU(inplace=True)
+          (conv1): Conv2d(544, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (norm2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu2): ReLU(inplace=True)
+          (conv2): Conv2d(128, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+        (denselayer11): _DenseLayer(
+          (norm1): BatchNorm2d(576, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu1): ReLU(inplace=True)
+          (conv1): Conv2d(576, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (norm2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu2): ReLU(inplace=True)
+          (conv2): Conv2d(128, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+        (denselayer12): _DenseLayer(
+          (norm1): BatchNorm2d(608, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu1): ReLU(inplace=True)
+          (conv1): Conv2d(608, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (norm2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu2): ReLU(inplace=True)
+          (conv2): Conv2d(128, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+        (denselayer13): _DenseLayer(
+          (norm1): BatchNorm2d(640, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu1): ReLU(inplace=True)
+          (conv1): Conv2d(640, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (norm2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu2): ReLU(inplace=True)
+          (conv2): Conv2d(128, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+        (denselayer14): _DenseLayer(
+          (norm1): BatchNorm2d(672, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu1): ReLU(inplace=True)
+          (conv1): Conv2d(672, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (norm2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu2): ReLU(inplace=True)
+          (conv2): Conv2d(128, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+        (denselayer15): _DenseLayer(
+          (norm1): BatchNorm2d(704, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu1): ReLU(inplace=True)
+          (conv1): Conv2d(704, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (norm2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu2): ReLU(inplace=True)
+          (conv2): Conv2d(128, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+        (denselayer16): _DenseLayer(
+          (norm1): BatchNorm2d(736, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu1): ReLU(inplace=True)
+          (conv1): Conv2d(736, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (norm2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu2): ReLU(inplace=True)
+          (conv2): Conv2d(128, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+        (denselayer17): _DenseLayer(
+          (norm1): BatchNorm2d(768, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu1): ReLU(inplace=True)
+          (conv1): Conv2d(768, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (norm2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu2): ReLU(inplace=True)
+          (conv2): Conv2d(128, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+        (denselayer18): _DenseLayer(
+          (norm1): BatchNorm2d(800, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu1): ReLU(inplace=True)
+          (conv1): Conv2d(800, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (norm2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu2): ReLU(inplace=True)
+          (conv2): Conv2d(128, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+        (denselayer19): _DenseLayer(
+          (norm1): BatchNorm2d(832, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu1): ReLU(inplace=True)
+          (conv1): Conv2d(832, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (norm2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu2): ReLU(inplace=True)
+          (conv2): Conv2d(128, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+        (denselayer20): _DenseLayer(
+          (norm1): BatchNorm2d(864, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu1): ReLU(inplace=True)
+          (conv1): Conv2d(864, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (norm2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu2): ReLU(inplace=True)
+          (conv2): Conv2d(128, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+        (denselayer21): _DenseLayer(
+          (norm1): BatchNorm2d(896, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu1): ReLU(inplace=True)
+          (conv1): Conv2d(896, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (norm2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu2): ReLU(inplace=True)
+          (conv2): Conv2d(128, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+        (denselayer22): _DenseLayer(
+          (norm1): BatchNorm2d(928, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu1): ReLU(inplace=True)
+          (conv1): Conv2d(928, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (norm2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu2): ReLU(inplace=True)
+          (conv2): Conv2d(128, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+        (denselayer23): _DenseLayer(
+          (norm1): BatchNorm2d(960, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu1): ReLU(inplace=True)
+          (conv1): Conv2d(960, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (norm2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu2): ReLU(inplace=True)
+          (conv2): Conv2d(128, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+        (denselayer24): _DenseLayer(
+          (norm1): BatchNorm2d(992, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu1): ReLU(inplace=True)
+          (conv1): Conv2d(992, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (norm2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu2): ReLU(inplace=True)
+          (conv2): Conv2d(128, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+      )
+      (transition3): _Transition(
+        (norm): BatchNorm2d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU(inplace=True)
+        (conv): Conv2d(1024, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (pool): AvgPool2d(kernel_size=2, stride=2, padding=0)
+      )
+      (denseblock4): _DenseBlock(
+        (denselayer1): _DenseLayer(
+          (norm1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu1): ReLU(inplace=True)
+          (conv1): Conv2d(512, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (norm2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu2): ReLU(inplace=True)
+          (conv2): Conv2d(128, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+        (denselayer2): _DenseLayer(
+          (norm1): BatchNorm2d(544, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu1): ReLU(inplace=True)
+          (conv1): Conv2d(544, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (norm2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu2): ReLU(inplace=True)
+          (conv2): Conv2d(128, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+        (denselayer3): _DenseLayer(
+          (norm1): BatchNorm2d(576, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu1): ReLU(inplace=True)
+          (conv1): Conv2d(576, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (norm2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu2): ReLU(inplace=True)
+          (conv2): Conv2d(128, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+        (denselayer4): _DenseLayer(
+          (norm1): BatchNorm2d(608, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu1): ReLU(inplace=True)
+          (conv1): Conv2d(608, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (norm2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu2): ReLU(inplace=True)
+          (conv2): Conv2d(128, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+        (denselayer5): _DenseLayer(
+          (norm1): BatchNorm2d(640, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu1): ReLU(inplace=True)
+          (conv1): Conv2d(640, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (norm2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu2): ReLU(inplace=True)
+          (conv2): Conv2d(128, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+        (denselayer6): _DenseLayer(
+          (norm1): BatchNorm2d(672, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu1): ReLU(inplace=True)
+          (conv1): Conv2d(672, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (norm2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu2): ReLU(inplace=True)
+          (conv2): Conv2d(128, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+        (denselayer7): _DenseLayer(
+          (norm1): BatchNorm2d(704, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu1): ReLU(inplace=True)
+          (conv1): Conv2d(704, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (norm2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu2): ReLU(inplace=True)
+          (conv2): Conv2d(128, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+        (denselayer8): _DenseLayer(
+          (norm1): BatchNorm2d(736, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu1): ReLU(inplace=True)
+          (conv1): Conv2d(736, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (norm2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu2): ReLU(inplace=True)
+          (conv2): Conv2d(128, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+        (denselayer9): _DenseLayer(
+          (norm1): BatchNorm2d(768, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu1): ReLU(inplace=True)
+          (conv1): Conv2d(768, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (norm2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu2): ReLU(inplace=True)
+          (conv2): Conv2d(128, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+        (denselayer10): _DenseLayer(
+          (norm1): BatchNorm2d(800, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu1): ReLU(inplace=True)
+          (conv1): Conv2d(800, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (norm2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu2): ReLU(inplace=True)
+          (conv2): Conv2d(128, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+        (denselayer11): _DenseLayer(
+          (norm1): BatchNorm2d(832, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu1): ReLU(inplace=True)
+          (conv1): Conv2d(832, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (norm2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu2): ReLU(inplace=True)
+          (conv2): Conv2d(128, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+        (denselayer12): _DenseLayer(
+          (norm1): BatchNorm2d(864, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu1): ReLU(inplace=True)
+          (conv1): Conv2d(864, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (norm2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu2): ReLU(inplace=True)
+          (conv2): Conv2d(128, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+        (denselayer13): _DenseLayer(
+          (norm1): BatchNorm2d(896, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu1): ReLU(inplace=True)
+          (conv1): Conv2d(896, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (norm2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu2): ReLU(inplace=True)
+          (conv2): Conv2d(128, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+        (denselayer14): _DenseLayer(
+          (norm1): BatchNorm2d(928, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu1): ReLU(inplace=True)
+          (conv1): Conv2d(928, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (norm2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu2): ReLU(inplace=True)
+          (conv2): Conv2d(128, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+        (denselayer15): _DenseLayer(
+          (norm1): BatchNorm2d(960, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu1): ReLU(inplace=True)
+          (conv1): Conv2d(960, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (norm2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu2): ReLU(inplace=True)
+          (conv2): Conv2d(128, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+        (denselayer16): _DenseLayer(
+          (norm1): BatchNorm2d(992, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu1): ReLU(inplace=True)
+          (conv1): Conv2d(992, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (norm2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu2): ReLU(inplace=True)
+          (conv2): Conv2d(128, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+      )
+      (norm5): BatchNorm2d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+    (classifier): Linear(in_features=1024, out_features=7, bias=True)
+  )
+)
+==================================================
+
+[Epoch 0], [Batch 0 / 100], [Loss 2.0378832817077637]
+              precision    recall  f1-score   support
+
+       akiec       0.00      0.00      0.00        10
+         bcc       0.00      0.00      0.00         9
+         bkl       0.00      0.00      0.00        10
+          df       0.11      0.13      0.12        15
+         mel       0.00      0.00      0.00         9
+          nv       0.16      0.21      0.18        14
+        vasc       0.30      0.93      0.45        14
+
+    accuracy                           0.22        81
+   macro avg       0.08      0.18      0.11        81
+weighted avg       0.10      0.22      0.13        81
+
+Model saved at: [93m./out_torchvision/HAM10000-best/2021-11-13-23-00-24/best_model.pth[0m
+[Epoch 1], [Batch 0 / 100], [Loss 0.9046335816383362]
+              precision    recall  f1-score   support
+
+       akiec       0.55      0.60      0.57        10
+         bcc       0.67      0.67      0.67         9
+         bkl       0.71      0.50      0.59        10
+          df       0.89      0.53      0.67        15
+         mel       1.00      0.56      0.71         9
+          nv       0.59      0.93      0.72        14
+        vasc       0.78      1.00      0.88        14
+
+    accuracy                           0.70        81
+   macro avg       0.74      0.68      0.69        81
+weighted avg       0.74      0.70      0.70        81
+
+Model saved at: [93m./out_torchvision/HAM10000-best/2021-11-13-23-00-24/best_model.pth[0m
+[Epoch 2], [Batch 0 / 100], [Loss 0.5227751135826111]
+              precision    recall  f1-score   support
+
+       akiec       0.00      0.00      0.00        10
+         bcc       1.00      0.22      0.36         9
+         bkl       0.10      0.10      0.10        10
+          df       1.00      0.07      0.12        15
+         mel       0.21      0.56      0.30         9
+          nv       0.37      0.79      0.50        14
+        vasc       1.00      1.00      1.00        14
+
+    accuracy                           0.42        81
+   macro avg       0.53      0.39      0.34        81
+weighted avg       0.57      0.42      0.37        81
+
+Model saved at: [93m./out_torchvision/HAM10000-best/2021-11-13-23-00-24/last_model.pth[0m
+[Epoch 3], [Batch 0 / 100], [Loss 0.5086531639099121]
+              precision    recall  f1-score   support
+
+       akiec       0.00      0.00      0.00        10
+         bcc       0.70      0.78      0.74         9
+         bkl       0.32      0.60      0.41        10
+          df       1.00      0.67      0.80        15
+         mel       0.39      0.78      0.52         9
+          nv       1.00      0.71      0.83        14
+        vasc       1.00      1.00      1.00        14
+
+    accuracy                           0.67        81
+   macro avg       0.63      0.65      0.61        81
+weighted avg       0.69      0.67      0.66        81
+
+Model saved at: [93m./out_torchvision/HAM10000-best/2021-11-13-23-00-24/last_model.pth[0m
+[Epoch 4], [Batch 0 / 100], [Loss 0.42607593536376953]
+              precision    recall  f1-score   support
+
+       akiec       1.00      0.20      0.33        10
+         bcc       0.75      0.33      0.46         9
+         bkl       0.33      0.10      0.15        10
+          df       0.60      0.80      0.69        15
+         mel       0.38      0.33      0.35         9
+          nv       0.46      0.86      0.60        14
+        vasc       0.78      1.00      0.88        14
+
+    accuracy                           0.58        81
+   macro avg       0.61      0.52      0.49        81
+weighted avg       0.61      0.58      0.53        81
+
+Model saved at: [93m./out_torchvision/HAM10000-best/2021-11-13-23-00-24/last_model.pth[0m
+[Epoch 5], [Batch 0 / 100], [Loss 0.18565255403518677]
+              precision    recall  f1-score   support
+
+       akiec       0.00      0.00      0.00        10
+         bcc       0.64      0.78      0.70         9
+         bkl       0.35      0.70      0.47        10
+          df       1.00      0.60      0.75        15
+         mel       0.55      0.67      0.60         9
+          nv       0.81      0.93      0.87        14
+        vasc       1.00      1.00      1.00        14
+
+    accuracy                           0.69        81
+   macro avg       0.62      0.67      0.63        81
+weighted avg       0.67      0.69      0.66        81
+
+Model saved at: [93m./out_torchvision/HAM10000-best/2021-11-13-23-00-24/last_model.pth[0m
+[Epoch 6], [Batch 0 / 100], [Loss 0.19758504629135132]
+              precision    recall  f1-score   support
+
+       akiec       0.30      0.80      0.43        10
+         bcc       0.37      0.78      0.50         9
+         bkl       0.11      0.10      0.11        10
+          df       1.00      0.20      0.33        15
+         mel       1.00      0.11      0.20         9
+          nv       0.82      0.64      0.72        14
+        vasc       1.00      0.79      0.88        14
+
+    accuracy                           0.49        81
+   macro avg       0.66      0.49      0.45        81
+weighted avg       0.70      0.49      0.48        81
+
+Model saved at: [93m./out_torchvision/HAM10000-best/2021-11-13-23-00-24/last_model.pth[0m
+[Epoch 7], [Batch 0 / 100], [Loss 0.1964365392923355]
+              precision    recall  f1-score   support
+
+       akiec       0.57      0.40      0.47        10
+         bcc       0.67      0.44      0.53         9
+         bkl       0.28      0.80      0.41        10
+          df       1.00      0.80      0.89        15
+         mel       1.00      0.11      0.20         9
+          nv       0.92      0.79      0.85        14
+        vasc       1.00      1.00      1.00        14
+
+    accuracy                           0.67        81
+   macro avg       0.78      0.62      0.62        81
+weighted avg       0.81      0.67      0.67        81
+
+Model saved at: [93m./out_torchvision/HAM10000-best/2021-11-13-23-00-24/last_model.pth[0m
+[Epoch 8], [Batch 0 / 100], [Loss 0.09224550426006317]
+              precision    recall  f1-score   support
+
+       akiec       1.00      0.10      0.18        10
+         bcc       0.50      0.22      0.31         9
+         bkl       0.14      0.10      0.12        10
+          df       1.00      0.13      0.24        15
+         mel       0.20      0.78      0.32         9
+          nv       0.55      0.86      0.67        14
+        vasc       1.00      0.71      0.83        14
+
+    accuracy                           0.43        81
+   macro avg       0.63      0.41      0.38        81
+weighted avg       0.67      0.43      0.41        81
+
+Model saved at: [93m./out_torchvision/HAM10000-best/2021-11-13-23-00-24/last_model.pth[0m
+[Epoch 9], [Batch 0 / 100], [Loss 0.12164215743541718]
+              precision    recall  f1-score   support
+
+       akiec       0.50      0.10      0.17        10
+         bcc       0.38      1.00      0.55         9
+         bkl       0.36      0.40      0.38        10
+          df       0.85      0.73      0.79        15
+         mel       0.75      0.33      0.46         9
+          nv       0.92      0.79      0.85        14
+        vasc       0.93      1.00      0.97        14
+
+    accuracy                           0.65        81
+   macro avg       0.67      0.62      0.59        81
+weighted avg       0.71      0.65      0.64        81
+
+Model saved at: [93m./out_torchvision/HAM10000-best/2021-11-13-23-00-24/last_model.pth[0m
+[Epoch 10], [Batch 0 / 100], [Loss 0.0660770982503891]
+              precision    recall  f1-score   support
+
+       akiec       0.50      0.10      0.17        10
+         bcc       0.80      0.44      0.57         9
+         bkl       0.30      0.70      0.42        10
+          df       1.00      0.53      0.70        15
+         mel       0.33      0.67      0.44         9
+          nv       0.91      0.71      0.80        14
+        vasc       1.00      1.00      1.00        14
+
+    accuracy                           0.62        81
+   macro avg       0.69      0.59      0.59        81
+weighted avg       0.74      0.62      0.63        81
+
+Model saved at: [93m./out_torchvision/HAM10000-best/2021-11-13-23-00-24/last_model.pth[0m
+[Epoch 11], [Batch 0 / 100], [Loss 0.057569656521081924]
+              precision    recall  f1-score   support
+
+       akiec       0.53      0.80      0.64        10
+         bcc       0.50      0.89      0.64         9
+         bkl       0.56      0.50      0.53        10
+          df       1.00      0.73      0.85        15
+         mel       1.00      0.44      0.62         9
+          nv       0.92      0.86      0.89        14
+        vasc       0.92      0.86      0.89        14
+
+    accuracy                           0.74        81
+   macro avg       0.78      0.73      0.72        81
+weighted avg       0.81      0.74      0.75        81
+
+Model saved at: [93m./out_torchvision/HAM10000-best/2021-11-13-23-00-24/best_model.pth[0m
+[Epoch 12], [Batch 0 / 100], [Loss 0.02851908467710018]
+              precision    recall  f1-score   support
+
+       akiec       0.57      0.80      0.67        10
+         bcc       0.73      0.89      0.80         9
+         bkl       0.56      0.50      0.53        10
+          df       1.00      0.87      0.93        15
+         mel       1.00      0.44      0.62         9
+          nv       0.80      0.86      0.83        14
+        vasc       0.93      1.00      0.97        14
+
+    accuracy                           0.79        81
+   macro avg       0.80      0.77      0.76        81
+weighted avg       0.82      0.79      0.79        81
+
+Model saved at: [93m./out_torchvision/HAM10000-best/2021-11-13-23-00-24/best_model.pth[0m
+[Epoch 13], [Batch 0 / 100], [Loss 0.03858046978712082]
+              precision    recall  f1-score   support
+
+       akiec       0.57      0.80      0.67        10
+         bcc       0.58      0.78      0.67         9
+         bkl       0.55      0.60      0.57        10
+          df       1.00      0.73      0.85        15
+         mel       1.00      0.22      0.36         9
+          nv       0.75      0.86      0.80        14
+        vasc       0.93      1.00      0.97        14
+
+    accuracy                           0.74        81
+   macro avg       0.77      0.71      0.70        81
+weighted avg       0.79      0.74      0.73        81
+
+Model saved at: [93m./out_torchvision/HAM10000-best/2021-11-13-23-00-24/last_model.pth[0m
+[Epoch 14], [Batch 0 / 100], [Loss 0.04971073940396309]
+              precision    recall  f1-score   support
+
+       akiec       0.50      0.80      0.62        10
+         bcc       0.64      0.78      0.70         9
+         bkl       0.46      0.60      0.52        10
+          df       1.00      0.73      0.85        15
+         mel       1.00      0.44      0.62         9
+          nv       0.92      0.79      0.85        14
+        vasc       1.00      1.00      1.00        14
+
+    accuracy                           0.75        81
+   macro avg       0.79      0.73      0.73        81
+weighted avg       0.82      0.75      0.76        81
+
+Model saved at: [93m./out_torchvision/HAM10000-best/2021-11-13-23-00-24/last_model.pth[0m
+[Epoch 15], [Batch 0 / 100], [Loss 0.017053507268428802]
+              precision    recall  f1-score   support
+
+       akiec       1.00      0.10      0.18        10
+         bcc       0.71      0.56      0.63         9
+         bkl       0.44      0.40      0.42        10
+          df       0.87      0.87      0.87        15
+         mel       0.35      0.67      0.46         9
+          nv       0.82      1.00      0.90        14
+        vasc       0.93      1.00      0.97        14
+
+    accuracy                           0.70        81
+   macro avg       0.73      0.66      0.63        81
+weighted avg       0.76      0.70      0.68        81
+
+Model saved at: [93m./out_torchvision/HAM10000-best/2021-11-13-23-00-24/last_model.pth[0m
+[Epoch 16], [Batch 0 / 100], [Loss 0.01662718690931797]
+              precision    recall  f1-score   support
+
+       akiec       0.75      0.30      0.43        10
+         bcc       0.73      0.89      0.80         9
+         bkl       0.56      0.90      0.69        10
+          df       1.00      0.93      0.97        15
+         mel       0.80      0.44      0.57         9
+          nv       0.81      0.93      0.87        14
+        vasc       0.93      1.00      0.97        14
+
+    accuracy                           0.80        81
+   macro avg       0.80      0.77      0.76        81
+weighted avg       0.82      0.80      0.79        81
+
+Model saved at: [93m./out_torchvision/HAM10000-best/2021-11-13-23-00-24/best_model.pth[0m
+[Epoch 17], [Batch 0 / 100], [Loss 0.026776427403092384]
+              precision    recall  f1-score   support
+
+       akiec       0.53      0.80      0.64        10
+         bcc       0.62      0.89      0.73         9
+         bkl       0.42      0.50      0.45        10
+          df       1.00      0.87      0.93        15
+         mel       1.00      0.22      0.36         9
+          nv       0.92      0.79      0.85        14
+        vasc       1.00      1.00      1.00        14
+
+    accuracy                           0.75        81
+   macro avg       0.78      0.72      0.71        81
+weighted avg       0.81      0.75      0.75        81
+
+Model saved at: [93m./out_torchvision/HAM10000-best/2021-11-13-23-00-24/last_model.pth[0m
+[Epoch 18], [Batch 0 / 100], [Loss 0.011300917714834213]
+              precision    recall  f1-score   support
+
+       akiec       0.70      0.70      0.70        10
+         bcc       0.88      0.78      0.82         9
+         bkl       0.67      0.60      0.63        10
+          df       1.00      0.87      0.93        15
+         mel       0.50      0.56      0.53         9
+          nv       0.87      0.93      0.90        14
+        vasc       0.88      1.00      0.93        14
+
+    accuracy                           0.80        81
+   macro avg       0.78      0.78      0.78        81
+weighted avg       0.81      0.80      0.80        81
+
+Model saved at: [93m./out_torchvision/HAM10000-best/2021-11-13-23-00-24/last_model.pth[0m
+[Epoch 19], [Batch 0 / 100], [Loss 0.00919814221560955]
+              precision    recall  f1-score   support
+
+       akiec       0.50      0.50      0.50        10
+         bcc       0.54      0.78      0.64         9
+         bkl       0.50      0.50      0.50        10
+          df       0.76      0.87      0.81        15
+         mel       0.67      0.22      0.33         9
+          nv       0.75      0.86      0.80        14
+        vasc       1.00      0.86      0.92        14
+
+    accuracy                           0.69        81
+   macro avg       0.67      0.65      0.64        81
+weighted avg       0.70      0.69      0.68        81
+
+Model saved at: [93m./out_torchvision/HAM10000-best/2021-11-13-23-00-24/last_model.pth[0m
+[Epoch 20], [Batch 0 / 100], [Loss 0.014295081607997417]
+              precision    recall  f1-score   support
+
+       akiec       0.60      0.30      0.40        10
+         bcc       0.83      0.56      0.67         9
+         bkl       0.54      0.70      0.61        10
+          df       0.78      0.93      0.85        15
+         mel       0.42      0.56      0.48         9
+          nv       0.91      0.71      0.80        14
+        vasc       0.88      1.00      0.93        14
+
+    accuracy                           0.72        81
+   macro avg       0.71      0.68      0.68        81
+weighted avg       0.73      0.72      0.71        81
+
+Model saved at: [93m./out_torchvision/HAM10000-best/2021-11-13-23-00-24/last_model.pth[0m
+[Epoch 21], [Batch 0 / 100], [Loss 0.010677308775484562]
+              precision    recall  f1-score   support
+
+       akiec       0.75      0.30      0.43        10
+         bcc       0.83      0.56      0.67         9
+         bkl       0.50      0.70      0.58        10
+          df       0.76      0.87      0.81        15
+         mel       0.42      0.56      0.48         9
+          nv       0.92      0.86      0.89        14
+        vasc       0.93      1.00      0.97        14
+
+    accuracy                           0.73        81
+   macro avg       0.73      0.69      0.69        81
+weighted avg       0.76      0.73      0.72        81
+
+Model saved at: [93m./out_torchvision/HAM10000-best/2021-11-13-23-00-24/last_model.pth[0m
+[Epoch 22], [Batch 0 / 100], [Loss 0.004421171732246876]
+              precision    recall  f1-score   support
+
+       akiec       0.75      0.30      0.43        10
+         bcc       0.50      0.56      0.53         9
+         bkl       0.35      0.70      0.47        10
+          df       0.92      0.80      0.86        15
+         mel       0.62      0.56      0.59         9
+          nv       0.86      0.86      0.86        14
+        vasc       1.00      0.86      0.92        14
+
+    accuracy                           0.69        81
+   macro avg       0.72      0.66      0.66        81
+weighted avg       0.75      0.69      0.70        81
+
+Model saved at: [93m./out_torchvision/HAM10000-best/2021-11-13-23-00-24/last_model.pth[0m
+[Epoch 23], [Batch 0 / 100], [Loss 0.004392384085804224]
+              precision    recall  f1-score   support
+
+       akiec       0.67      0.40      0.50        10
+         bcc       0.56      0.56      0.56         9
+         bkl       0.54      0.70      0.61        10
+          df       0.78      0.93      0.85        15
+         mel       0.75      0.33      0.46         9
+          nv       0.72      0.93      0.81        14
+        vasc       1.00      0.93      0.96        14
+
+    accuracy                           0.73        81
+   macro avg       0.72      0.68      0.68        81
+weighted avg       0.74      0.73      0.71        81
+
+Model saved at: [93m./out_torchvision/HAM10000-best/2021-11-13-23-00-24/last_model.pth[0m
+[Epoch 24], [Batch 0 / 100], [Loss 0.0028225467540323734]
+              precision    recall  f1-score   support
+
+       akiec       0.55      0.60      0.57        10
+         bcc       0.75      0.67      0.71         9
+         bkl       0.50      0.50      0.50        10
+          df       0.88      0.93      0.90        15
+         mel       0.57      0.44      0.50         9
+          nv       0.93      0.93      0.93        14
+        vasc       0.93      1.00      0.97        14
+
+    accuracy                           0.77        81
+   macro avg       0.73      0.72      0.72        81
+weighted avg       0.76      0.77      0.76        81
+
+Model saved at: [93m./out_torchvision/HAM10000-best/2021-11-13-23-00-24/last_model.pth[0m
+[Epoch 25], [Batch 0 / 100], [Loss 0.0014396285405382514]
+              precision    recall  f1-score   support
+
+       akiec       0.67      0.60      0.63        10
+         bcc       0.88      0.78      0.82         9
+         bkl       0.54      0.70      0.61        10
+          df       0.93      0.93      0.93        15
+         mel       0.71      0.56      0.63         9
+          nv       0.93      0.93      0.93        14
+        vasc       0.93      1.00      0.97        14
+
+    accuracy                           0.81        81
+   macro avg       0.80      0.79      0.79        81
+weighted avg       0.82      0.81      0.81        81
+
+Model saved at: [93m./out_torchvision/HAM10000-best/2021-11-13-23-00-24/best_model.pth[0m
+[Epoch 26], [Batch 0 / 100], [Loss 0.0023051383905112743]
+              precision    recall  f1-score   support
+
+       akiec       0.80      0.40      0.53        10
+         bcc       0.83      0.56      0.67         9
+         bkl       0.53      0.80      0.64        10
+          df       0.82      0.93      0.87        15
+         mel       0.60      0.67      0.63         9
+          nv       0.92      0.86      0.89        14
+        vasc       0.93      1.00      0.97        14
+
+    accuracy                           0.78        81
+   macro avg       0.78      0.74      0.74        81
+weighted avg       0.80      0.78      0.77        81
+
+Model saved at: [93m./out_torchvision/HAM10000-best/2021-11-13-23-00-24/last_model.pth[0m
+[Epoch 27], [Batch 0 / 100], [Loss 0.003880416275933385]
+              precision    recall  f1-score   support
+
+       akiec       1.00      0.30      0.46        10
+         bcc       0.90      1.00      0.95         9
+         bkl       0.53      0.80      0.64        10
+          df       1.00      0.73      0.85        15
+         mel       0.44      0.78      0.56         9
+          nv       1.00      0.79      0.88        14
+        vasc       0.93      1.00      0.97        14
+
+    accuracy                           0.78        81
+   macro avg       0.83      0.77      0.76        81
+weighted avg       0.86      0.78      0.78        81
+
+Model saved at: [93m./out_torchvision/HAM10000-best/2021-11-13-23-00-24/last_model.pth[0m
+[Epoch 28], [Batch 0 / 100], [Loss 0.0014372150180861354]
+              precision    recall  f1-score   support
+
+       akiec       1.00      0.30      0.46        10
+         bcc       0.89      0.89      0.89         9
+         bkl       0.54      0.70      0.61        10
+          df       1.00      0.80      0.89        15
+         mel       0.38      0.67      0.48         9
+          nv       0.92      0.86      0.89        14
+        vasc       0.93      1.00      0.97        14
+
+    accuracy                           0.77        81
+   macro avg       0.81      0.74      0.74        81
+weighted avg       0.84      0.77      0.77        81
+
+Model saved at: [93m./out_torchvision/HAM10000-best/2021-11-13-23-00-24/last_model.pth[0m
+[Epoch 29], [Batch 0 / 100], [Loss 0.0110914446413517]
+              precision    recall  f1-score   support
+
+       akiec       1.00      0.20      0.33        10
+         bcc       0.75      0.67      0.71         9
+         bkl       0.44      0.80      0.57        10
+          df       0.87      0.87      0.87        15
+         mel       0.67      0.67      0.67         9
+          nv       0.93      0.93      0.93        14
+        vasc       0.93      1.00      0.97        14
+
+    accuracy                           0.77        81
+   macro avg       0.80      0.73      0.72        81
+weighted avg       0.82      0.77      0.75        81
+
+Model saved at: [93m./out_torchvision/HAM10000-best/2021-11-13-23-00-24/last_model.pth[0m
+[Epoch 30], [Batch 0 / 100], [Loss 0.0024652841966599226]
+              precision    recall  f1-score   support
+
+       akiec       0.71      0.50      0.59        10
+         bcc       0.67      0.67      0.67         9
+         bkl       0.70      0.70      0.70        10
+          df       0.83      1.00      0.91        15
+         mel       0.75      0.67      0.71         9
+          nv       0.93      0.93      0.93        14
+        vasc       0.93      1.00      0.97        14
+
+    accuracy                           0.81        81
+   macro avg       0.79      0.78      0.78        81
+weighted avg       0.81      0.81      0.81        81
+
+Model saved at: [93m./out_torchvision/HAM10000-best/2021-11-13-23-00-24/last_model.pth[0m
+[Epoch 31], [Batch 0 / 100], [Loss 0.005911219399422407]
+              precision    recall  f1-score   support
+
+       akiec       0.62      0.50      0.56        10
+         bcc       0.53      0.89      0.67         9
+         bkl       0.43      0.30      0.35        10
+          df       0.88      0.93      0.90        15
+         mel       0.86      0.67      0.75         9
+          nv       0.92      0.86      0.89        14
+        vasc       0.93      1.00      0.97        14
+
+    accuracy                           0.77        81
+   macro avg       0.74      0.74      0.73        81
+weighted avg       0.77      0.77      0.76        81
+
+Model saved at: [93m./out_torchvision/HAM10000-best/2021-11-13-23-00-24/last_model.pth[0m
+[Epoch 32], [Batch 0 / 100], [Loss 0.006176486145704985]
+              precision    recall  f1-score   support
+
+       akiec       0.75      0.60      0.67        10
+         bcc       0.75      0.67      0.71         9
+         bkl       0.54      0.70      0.61        10
+          df       0.88      0.93      0.90        15
+         mel       0.75      0.67      0.71         9
+          nv       0.92      0.86      0.89        14
+        vasc       0.93      1.00      0.97        14
+
+    accuracy                           0.80        81
+   macro avg       0.79      0.77      0.78        81
+weighted avg       0.81      0.80      0.80        81
+
+Model saved at: [93m./out_torchvision/HAM10000-best/2021-11-13-23-00-24/last_model.pth[0m
+[Epoch 33], [Batch 0 / 100], [Loss 0.0029973560012876987]
+              precision    recall  f1-score   support
+
+       akiec       0.62      0.80      0.70        10
+         bcc       0.60      0.67      0.63         9
+         bkl       0.62      0.50      0.56        10
+          df       1.00      0.87      0.93        15
+         mel       0.71      0.56      0.63         9
+          nv       0.86      0.86      0.86        14
+        vasc       0.88      1.00      0.93        14
+
+    accuracy                           0.78        81
+   macro avg       0.76      0.75      0.75        81
+weighted avg       0.78      0.78      0.78        81
+
+Model saved at: [93m./out_torchvision/HAM10000-best/2021-11-13-23-00-24/last_model.pth[0m
+[Epoch 34], [Batch 0 / 100], [Loss 0.002702303696423769]
+              precision    recall  f1-score   support
+
+       akiec       0.67      0.60      0.63        10
+         bcc       0.70      0.78      0.74         9
+         bkl       0.58      0.70      0.64        10
+          df       1.00      0.93      0.97        15
+         mel       0.78      0.78      0.78         9
+          nv       0.92      0.86      0.89        14
+        vasc       1.00      1.00      1.00        14
+
+    accuracy                           0.83        81
+   macro avg       0.81      0.81      0.81        81
+weighted avg       0.84      0.83      0.83        81
+
+Model saved at: [93m./out_torchvision/HAM10000-best/2021-11-13-23-00-24/best_model.pth[0m
+[Epoch 35], [Batch 0 / 100], [Loss 0.0011034103808924556]
+              precision    recall  f1-score   support
+
+       akiec       0.57      0.40      0.47        10
+         bcc       0.78      0.78      0.78         9
+         bkl       0.60      0.90      0.72        10
+          df       1.00      0.93      0.97        15
+         mel       0.75      0.67      0.71         9
+          nv       0.92      0.86      0.89        14
+        vasc       0.93      1.00      0.97        14
+
+    accuracy                           0.81        81
+   macro avg       0.79      0.79      0.78        81
+weighted avg       0.82      0.81      0.81        81
+
+Model saved at: [93m./out_torchvision/HAM10000-best/2021-11-13-23-00-24/last_model.pth[0m
+[Epoch 36], [Batch 0 / 100], [Loss 0.0024550659582018852]
+              precision    recall  f1-score   support
+
+       akiec       0.58      0.70      0.64        10
+         bcc       0.75      0.67      0.71         9
+         bkl       0.64      0.70      0.67        10
+          df       1.00      0.93      0.97        15
+         mel       0.78      0.78      0.78         9
+          nv       1.00      0.86      0.92        14
+        vasc       0.93      1.00      0.97        14
+
+    accuracy                           0.83        81
+   macro avg       0.81      0.80      0.81        81
+weighted avg       0.84      0.83      0.83        81
+
+Model saved at: [93m./out_torchvision/HAM10000-best/2021-11-13-23-00-24/last_model.pth[0m
+[Epoch 37], [Batch 0 / 100], [Loss 0.0018940955633297563]
+              precision    recall  f1-score   support
+
+       akiec       0.56      0.50      0.53        10
+         bcc       0.75      0.67      0.71         9
+         bkl       0.64      0.90      0.75        10
+          df       1.00      0.93      0.97        15
+         mel       0.75      0.67      0.71         9
+          nv       0.92      0.86      0.89        14
+        vasc       0.93      1.00      0.97        14
+
+    accuracy                           0.81        81
+   macro avg       0.79      0.79      0.79        81
+weighted avg       0.82      0.81      0.81        81
+
+Model saved at: [93m./out_torchvision/HAM10000-best/2021-11-13-23-00-24/last_model.pth[0m
+[Epoch 38], [Batch 0 / 100], [Loss 0.0010929073905572295]
+              precision    recall  f1-score   support
+
+       akiec       0.57      0.40      0.47        10
+         bcc       0.75      0.67      0.71         9
+         bkl       0.60      0.90      0.72        10
+          df       0.93      0.93      0.93        15
+         mel       0.75      0.67      0.71         9
+          nv       0.92      0.86      0.89        14
+        vasc       0.93      1.00      0.97        14
+
+    accuracy                           0.80        81
+   macro avg       0.78      0.77      0.77        81
+weighted avg       0.80      0.80      0.80        81
+
+Model saved at: [93m./out_torchvision/HAM10000-best/2021-11-13-23-00-24/last_model.pth[0m
+[Epoch 39], [Batch 0 / 100], [Loss 0.0014929117169231176]
+              precision    recall  f1-score   support
+
+       akiec       0.62      0.50      0.56        10
+         bcc       0.78      0.78      0.78         9
+         bkl       0.64      0.90      0.75        10
+          df       1.00      0.93      0.97        15
+         mel       0.75      0.67      0.71         9
+          nv       0.92      0.86      0.89        14
+        vasc       0.93      1.00      0.97        14
+
+    accuracy                           0.83        81
+   macro avg       0.81      0.80      0.80        81
+weighted avg       0.83      0.83      0.83        81
+
+Model saved at: [93m./out_torchvision/HAM10000-best/2021-11-13-23-00-24/last_model.pth[0m
+[Epoch 40], [Batch 0 / 100], [Loss 0.0009422603179700673]
+              precision    recall  f1-score   support
+
+       akiec       0.60      0.60      0.60        10
+         bcc       0.75      0.67      0.71         9
+         bkl       0.64      0.90      0.75        10
+          df       1.00      0.87      0.93        15
+         mel       0.86      0.67      0.75         9
+          nv       0.92      0.86      0.89        14
+        vasc       0.88      1.00      0.93        14
+
+    accuracy                           0.81        81
+   macro avg       0.81      0.79      0.79        81
+weighted avg       0.83      0.81      0.82        81
+
+Model saved at: [93m./out_torchvision/HAM10000-best/2021-11-13-23-00-24/last_model.pth[0m
+[Epoch 41], [Batch 0 / 100], [Loss 0.0014357028994709253]
+              precision    recall  f1-score   support
+
+       akiec       0.71      0.50      0.59        10
+         bcc       0.78      0.78      0.78         9
+         bkl       0.56      0.90      0.69        10
+          df       0.93      0.93      0.93        15
+         mel       0.83      0.56      0.67         9
+          nv       0.92      0.86      0.89        14
+        vasc       0.93      1.00      0.97        14
+
+    accuracy                           0.81        81
+   macro avg       0.81      0.79      0.79        81
+weighted avg       0.83      0.81      0.81        81
+
+Model saved at: [93m./out_torchvision/HAM10000-best/2021-11-13-23-00-24/last_model.pth[0m
+[Epoch 42], [Batch 0 / 100], [Loss 0.0009098342852666974]
+              precision    recall  f1-score   support
+
+       akiec       0.70      0.70      0.70        10
+         bcc       0.64      0.78      0.70         9
+         bkl       0.60      0.90      0.72        10
+          df       1.00      0.87      0.93        15
+         mel       0.83      0.56      0.67         9
+          nv       0.92      0.86      0.89        14
+        vasc       0.92      0.86      0.89        14
+
+    accuracy                           0.80        81
+   macro avg       0.80      0.79      0.78        81
+weighted avg       0.83      0.80      0.81        81
+
+Model saved at: [93m./out_torchvision/HAM10000-best/2021-11-13-23-00-24/last_model.pth[0m
+[Epoch 43], [Batch 0 / 100], [Loss 0.0007441189372912049]
+              precision    recall  f1-score   support
+
+       akiec       0.60      0.30      0.40        10
+         bcc       0.78      0.78      0.78         9
+         bkl       0.57      0.80      0.67        10
+          df       0.88      0.93      0.90        15
+         mel       0.67      0.67      0.67         9
+          nv       0.92      0.79      0.85        14
+        vasc       0.88      1.00      0.93        14
+
+    accuracy                           0.78        81
+   macro avg       0.75      0.75      0.74        81
+weighted avg       0.78      0.78      0.77        81
+
+Model saved at: [93m./out_torchvision/HAM10000-best/2021-11-13-23-00-24/last_model.pth[0m
+[Epoch 44], [Batch 0 / 100], [Loss 0.0011310954578220844]
+              precision    recall  f1-score   support
+
+       akiec       0.57      0.40      0.47        10
+         bcc       0.88      0.78      0.82         9
+         bkl       0.57      0.80      0.67        10
+          df       1.00      0.93      0.97        15
+         mel       0.67      0.67      0.67         9
+          nv       0.93      0.93      0.93        14
+        vasc       0.93      1.00      0.97        14
+
+    accuracy                           0.81        81
+   macro avg       0.79      0.79      0.78        81
+weighted avg       0.82      0.81      0.81        81
+
+Model saved at: [93m./out_torchvision/HAM10000-best/2021-11-13-23-00-24/last_model.pth[0m
+[Epoch 45], [Batch 0 / 100], [Loss 0.001304883393459022]
+              precision    recall  f1-score   support
+
+       akiec       0.80      0.40      0.53        10
+         bcc       0.78      0.78      0.78         9
+         bkl       0.54      0.70      0.61        10
+          df       0.93      0.93      0.93        15
+         mel       0.67      0.67      0.67         9
+          nv       0.93      1.00      0.97        14
+        vasc       0.93      1.00      0.97        14
+
+    accuracy                           0.81        81
+   macro avg       0.80      0.78      0.78        81
+weighted avg       0.82      0.81      0.81        81
+
+Model saved at: [93m./out_torchvision/HAM10000-best/2021-11-13-23-00-24/last_model.pth[0m
+[Epoch 46], [Batch 0 / 100], [Loss 0.014778843149542809]
+              precision    recall  f1-score   support
+
+       akiec       0.67      0.40      0.50        10
+         bcc       0.73      0.89      0.80         9
+         bkl       0.54      0.70      0.61        10
+          df       1.00      0.93      0.97        15
+         mel       0.67      0.67      0.67         9
+          nv       0.92      0.86      0.89        14
+        vasc       0.93      1.00      0.97        14
+
+    accuracy                           0.80        81
+   macro avg       0.78      0.78      0.77        81
+weighted avg       0.81      0.80      0.80        81
+
+Model saved at: [93m./out_torchvision/HAM10000-best/2021-11-13-23-00-24/last_model.pth[0m
+[Epoch 47], [Batch 0 / 100], [Loss 0.0017078978708013892]
+              precision    recall  f1-score   support
+
+       akiec       0.75      0.60      0.67        10
+         bcc       0.78      0.78      0.78         9
+         bkl       0.64      0.90      0.75        10
+          df       0.93      0.87      0.90        15
+         mel       0.88      0.78      0.82         9
+          nv       0.92      0.86      0.89        14
+        vasc       0.93      1.00      0.97        14
+
+    accuracy                           0.84        81
+   macro avg       0.83      0.83      0.82        81
+weighted avg       0.85      0.84      0.84        81
+
+Model saved at: [93m./out_torchvision/HAM10000-best/2021-11-13-23-00-24/best_model.pth[0m
+[Epoch 48], [Batch 0 / 100], [Loss 0.000626848719548434]
+              precision    recall  f1-score   support
+
+       akiec       0.60      0.90      0.72        10
+         bcc       0.86      0.67      0.75         9
+         bkl       0.60      0.60      0.60        10
+          df       0.93      0.87      0.90        15
+         mel       0.86      0.67      0.75         9
+          nv       1.00      0.86      0.92        14
+        vasc       0.88      1.00      0.93        14
+
+    accuracy                           0.81        81
+   macro avg       0.82      0.79      0.80        81
+weighted avg       0.83      0.81      0.82        81
+
+Model saved at: [93m./out_torchvision/HAM10000-best/2021-11-13-23-00-24/last_model.pth[0m
+[Epoch 49], [Batch 0 / 100], [Loss 0.0018743980908766389]
+              precision    recall  f1-score   support
+
+       akiec       0.55      0.60      0.57        10
+         bcc       0.62      0.89      0.73         9
+         bkl       0.67      0.60      0.63        10
+          df       1.00      0.87      0.93        15
+         mel       1.00      0.67      0.80         9
+          nv       0.92      0.86      0.89        14
+        vasc       0.88      1.00      0.93        14
+
+    accuracy                           0.80        81
+   macro avg       0.80      0.78      0.78        81
+weighted avg       0.83      0.80      0.81        81
+
+Model saved at: [93m./out_torchvision/HAM10000-best/2021-11-13-23-00-24/last_model.pth[0m
+[Epoch 50], [Batch 0 / 100], [Loss 0.0019022685009986162]
+              precision    recall  f1-score   support
+
+       akiec       0.67      0.80      0.73        10
+         bcc       0.70      0.78      0.74         9
+         bkl       0.75      0.60      0.67        10
+          df       0.93      0.87      0.90        15
+         mel       0.75      0.67      0.71         9
+          nv       0.92      0.86      0.89        14
+        vasc       0.88      1.00      0.93        14
+
+    accuracy                           0.81        81
+   macro avg       0.80      0.80      0.79        81
+weighted avg       0.82      0.81      0.81        81
+
+Model saved at: [93m./out_torchvision/HAM10000-best/2021-11-13-23-00-24/last_model.pth[0m
+[Epoch 51], [Batch 0 / 100], [Loss 0.0021427979227155447]
+              precision    recall  f1-score   support
+
+       akiec       0.64      0.70      0.67        10
+         bcc       0.67      0.89      0.76         9
+         bkl       0.70      0.70      0.70        10
+          df       1.00      0.87      0.93        15
+         mel       0.86      0.67      0.75         9
+          nv       0.92      0.86      0.89        14
+        vasc       0.93      1.00      0.97        14
+
+    accuracy                           0.83        81
+   macro avg       0.82      0.81      0.81        81
+weighted avg       0.84      0.83      0.83        81
+
+Model saved at: [93m./out_torchvision/HAM10000-best/2021-11-13-23-00-24/last_model.pth[0m
+[Epoch 52], [Batch 0 / 100], [Loss 0.0006905730115249753]
+              precision    recall  f1-score   support
+
+       akiec       0.78      0.70      0.74        10
+         bcc       0.75      0.67      0.71         9
+         bkl       0.62      0.80      0.70        10
+          df       0.93      0.87      0.90        15
+         mel       0.75      0.67      0.71         9
+          nv       0.92      0.86      0.89        14
+        vasc       0.88      1.00      0.93        14
+
+    accuracy                           0.81        81
+   macro avg       0.80      0.79      0.79        81
+weighted avg       0.82      0.81      0.81        81
+
+Model saved at: [93m./out_torchvision/HAM10000-best/2021-11-13-23-00-24/last_model.pth[0m
+[Epoch 53], [Batch 0 / 100], [Loss 0.0006517376750707626]
+              precision    recall  f1-score   support
+
+       akiec       0.80      0.80      0.80        10
+         bcc       0.62      0.89      0.73         9
+         bkl       0.60      0.60      0.60        10
+          df       1.00      0.87      0.93        15
+         mel       0.75      0.67      0.71         9
+          nv       0.92      0.79      0.85        14
+        vasc       0.93      1.00      0.97        14
+
+    accuracy                           0.81        81
+   macro avg       0.80      0.80      0.80        81
+weighted avg       0.83      0.81      0.82        81
+
+Model saved at: [93m./out_torchvision/HAM10000-best/2021-11-13-23-00-24/last_model.pth[0m
+[Epoch 54], [Batch 0 / 100], [Loss 0.0009680430521257222]
+              precision    recall  f1-score   support
+
+       akiec       0.78      0.70      0.74        10
+         bcc       0.78      0.78      0.78         9
+         bkl       0.69      0.90      0.78        10
+          df       0.93      0.93      0.93        15
+         mel       0.83      0.56      0.67         9
+          nv       0.86      0.86      0.86        14
+        vasc       0.93      1.00      0.97        14
+
+    accuracy                           0.84        81
+   macro avg       0.83      0.82      0.82        81
+weighted avg       0.84      0.84      0.84        81
+
+Model saved at: [93m./out_torchvision/HAM10000-best/2021-11-13-23-00-24/last_model.pth[0m
+[Epoch 55], [Batch 0 / 100], [Loss 0.001011496176943183]
+              precision    recall  f1-score   support
+
+       akiec       0.67      0.20      0.31        10
+         bcc       0.70      0.78      0.74         9
+         bkl       0.38      0.90      0.53        10
+          df       1.00      0.73      0.85        15
+         mel       0.67      0.44      0.53         9
+          nv       1.00      0.79      0.88        14
+        vasc       0.88      1.00      0.93        14
+
+    accuracy                           0.72        81
+   macro avg       0.75      0.69      0.68        81
+weighted avg       0.79      0.72      0.71        81
+
+Model saved at: [93m./out_torchvision/HAM10000-best/2021-11-13-23-00-24/last_model.pth[0m
+[Epoch 56], [Batch 0 / 100], [Loss 0.0011767195537686348]
+              precision    recall  f1-score   support
+
+       akiec       0.75      0.60      0.67        10
+         bcc       0.80      0.89      0.84         9
+         bkl       0.53      0.90      0.67        10
+          df       1.00      0.87      0.93        15
+         mel       0.80      0.44      0.57         9
+          nv       1.00      0.86      0.92        14
+        vasc       0.88      1.00      0.93        14
+
+    accuracy                           0.81        81
+   macro avg       0.82      0.79      0.79        81
+weighted avg       0.84      0.81      0.81        81
+
+Model saved at: [93m./out_torchvision/HAM10000-best/2021-11-13-23-00-24/last_model.pth[0m
+[Epoch 57], [Batch 0 / 100], [Loss 0.0009508632938377559]
+              precision    recall  f1-score   support
+
+       akiec       0.58      0.70      0.64        10
+         bcc       0.70      0.78      0.74         9
+         bkl       0.62      0.50      0.56        10
+          df       1.00      0.87      0.93        15
+         mel       0.67      0.67      0.67         9
+          nv       0.92      0.86      0.89        14
+        vasc       0.88      1.00      0.93        14
+
+    accuracy                           0.79        81
+   macro avg       0.77      0.77      0.76        81
+weighted avg       0.80      0.79      0.79        81
+
+Model saved at: [93m./out_torchvision/HAM10000-best/2021-11-13-23-00-24/last_model.pth[0m
+[Epoch 58], [Batch 0 / 100], [Loss 0.0043047890067100525]
+              precision    recall  f1-score   support
+
+       akiec       0.57      0.80      0.67        10
+         bcc       0.73      0.89      0.80         9
+         bkl       0.71      0.50      0.59        10
+          df       1.00      0.87      0.93        15
+         mel       0.86      0.67      0.75         9
+          nv       0.92      0.86      0.89        14
+        vasc       0.88      1.00      0.93        14
+
+    accuracy                           0.81        81
+   macro avg       0.81      0.80      0.79        81
+weighted avg       0.83      0.81      0.81        81
+
+Model saved at: [93m./out_torchvision/HAM10000-best/2021-11-13-23-00-24/last_model.pth[0m
+[Epoch 59], [Batch 0 / 100], [Loss 0.0023029115982353687]
+              precision    recall  f1-score   support
+
+       akiec       0.57      0.80      0.67        10
+         bcc       0.78      0.78      0.78         9
+         bkl       0.57      0.40      0.47        10
+          df       0.93      0.87      0.90        15
+         mel       0.75      0.67      0.71         9
+          nv       0.92      0.86      0.89        14
+        vasc       0.88      1.00      0.93        14
+
+    accuracy                           0.79        81
+   macro avg       0.77      0.77      0.76        81
+weighted avg       0.79      0.79      0.79        81
+
+Model saved at: [93m./out_torchvision/HAM10000-best/2021-11-13-23-00-24/last_model.pth[0m
+[Epoch 60], [Batch 0 / 100], [Loss 0.0016467059031128883]
+              precision    recall  f1-score   support
+
+       akiec       0.80      0.80      0.80        10
+         bcc       0.80      0.89      0.84         9
+         bkl       0.69      0.90      0.78        10
+          df       1.00      0.93      0.97        15
+         mel       0.86      0.67      0.75         9
+          nv       1.00      0.86      0.92        14
+        vasc       0.93      1.00      0.97        14
+
+    accuracy                           0.88        81
+   macro avg       0.87      0.86      0.86        81
+weighted avg       0.89      0.88      0.88        81
+
+Model saved at: [93m./out_torchvision/HAM10000-best/2021-11-13-23-00-24/best_model.pth[0m
+[Epoch 61], [Batch 0 / 100], [Loss 0.0023355684243142605]
+              precision    recall  f1-score   support
+
+       akiec       0.73      0.80      0.76        10
+         bcc       0.80      0.89      0.84         9
+         bkl       0.64      0.70      0.67        10
+          df       1.00      0.87      0.93        15
+         mel       0.71      0.56      0.63         9
+          nv       0.92      0.86      0.89        14
+        vasc       0.88      1.00      0.93        14
+
+    accuracy                           0.83        81
+   macro avg       0.81      0.81      0.81        81
+weighted avg       0.83      0.83      0.83        81
+
+Model saved at: [93m./out_torchvision/HAM10000-best/2021-11-13-23-00-24/last_model.pth[0m
+[Epoch 62], [Batch 0 / 100], [Loss 0.0010997577337548137]
+              precision    recall  f1-score   support
+
+       akiec       0.67      0.60      0.63        10
+         bcc       0.78      0.78      0.78         9
+         bkl       0.58      0.70      0.64        10
+          df       0.93      0.93      0.93        15
+         mel       0.67      0.67      0.67         9
+          nv       1.00      0.86      0.92        14
+        vasc       0.93      1.00      0.97        14
+
+    accuracy                           0.81        81
+   macro avg       0.79      0.79      0.79        81
+weighted avg       0.82      0.81      0.82        81
+
+Model saved at: [93m./out_torchvision/HAM10000-best/2021-11-13-23-00-24/last_model.pth[0m
+[Epoch 63], [Batch 0 / 100], [Loss 0.0008567049517296255]
+              precision    recall  f1-score   support
+
+       akiec       0.78      0.70      0.74        10
+         bcc       0.80      0.89      0.84         9
+         bkl       0.69      0.90      0.78        10
+          df       1.00      1.00      1.00        15
+         mel       0.80      0.44      0.57         9
+          nv       0.86      0.86      0.86        14
+        vasc       0.93      1.00      0.97        14
+
+    accuracy                           0.85        81
+   macro avg       0.84      0.83      0.82        81
+weighted avg       0.85      0.85      0.84        81
+
+Model saved at: [93m./out_torchvision/HAM10000-best/2021-11-13-23-00-24/last_model.pth[0m
+[Epoch 64], [Batch 0 / 100], [Loss 0.0007238285033963621]
+              precision    recall  f1-score   support
+
+       akiec       0.73      0.80      0.76        10
+         bcc       0.78      0.78      0.78         9
+         bkl       0.73      0.80      0.76        10
+          df       0.93      0.93      0.93        15
+         mel       0.86      0.67      0.75         9
+          nv       0.92      0.86      0.89        14
+        vasc       0.93      1.00      0.97        14
+
+    accuracy                           0.85        81
+   macro avg       0.84      0.83      0.83        81
+weighted avg       0.85      0.85      0.85        81
+
+Model saved at: [93m./out_torchvision/HAM10000-best/2021-11-13-23-00-24/last_model.pth[0m
+[Epoch 65], [Batch 0 / 100], [Loss 0.0013097458286210895]
+              precision    recall  f1-score   support
+
+       akiec       0.70      0.70      0.70        10
+         bcc       0.80      0.89      0.84         9
+         bkl       0.62      0.80      0.70        10
+          df       1.00      0.87      0.93        15
+         mel       0.80      0.44      0.57         9
+          nv       0.86      0.86      0.86        14
+        vasc       0.88      1.00      0.93        14
+
+    accuracy                           0.81        81
+   macro avg       0.81      0.79      0.79        81
+weighted avg       0.82      0.81      0.81        81
+
+Model saved at: [93m./out_torchvision/HAM10000-best/2021-11-13-23-00-24/last_model.pth[0m
+[Epoch 66], [Batch 0 / 100], [Loss 0.0007076387410052121]
+              precision    recall  f1-score   support
+
+       akiec       0.70      0.70      0.70        10
+         bcc       0.78      0.78      0.78         9
+         bkl       0.62      0.80      0.70        10
+          df       0.93      0.93      0.93        15
+         mel       0.83      0.56      0.67         9
+          nv       0.92      0.86      0.89        14
+        vasc       0.93      1.00      0.97        14
+
+    accuracy                           0.83        81
+   macro avg       0.82      0.80      0.80        81
+weighted avg       0.84      0.83      0.83        81
+
+Model saved at: [93m./out_torchvision/HAM10000-best/2021-11-13-23-00-24/last_model.pth[0m
+[Epoch 67], [Batch 0 / 100], [Loss 0.0009987284429371357]
+              precision    recall  f1-score   support
+
+       akiec       0.70      0.70      0.70        10
+         bcc       0.78      0.78      0.78         9
+         bkl       0.73      0.80      0.76        10
+          df       0.93      0.93      0.93        15
+         mel       0.78      0.78      0.78         9
+          nv       1.00      0.86      0.92        14
+        vasc       0.93      1.00      0.97        14
+
+    accuracy                           0.85        81
+   macro avg       0.84      0.84      0.83        81
+weighted avg       0.86      0.85      0.85        81
+
+Model saved at: [93m./out_torchvision/HAM10000-best/2021-11-13-23-00-24/last_model.pth[0m
+[Epoch 68], [Batch 0 / 100], [Loss 0.0016697644023224711]
+              precision    recall  f1-score   support
+
+       akiec       0.71      0.50      0.59        10
+         bcc       0.78      0.78      0.78         9
+         bkl       0.62      0.80      0.70        10
+          df       0.93      0.87      0.90        15
+         mel       0.62      0.56      0.59         9
+          nv       0.86      0.86      0.86        14
+        vasc       0.88      1.00      0.93        14
+
+    accuracy                           0.79        81
+   macro avg       0.77      0.77      0.76        81
+weighted avg       0.79      0.79      0.79        81
+
+Model saved at: [93m./out_torchvision/HAM10000-best/2021-11-13-23-00-24/last_model.pth[0m
+[Epoch 69], [Batch 0 / 100], [Loss 0.0007252958603203297]
+              precision    recall  f1-score   support
+
+       akiec       0.67      0.60      0.63        10
+         bcc       0.80      0.89      0.84         9
+         bkl       0.58      0.70      0.64        10
+          df       1.00      0.87      0.93        15
+         mel       0.57      0.44      0.50         9
+          nv       0.86      0.86      0.86        14
+        vasc       0.88      1.00      0.93        14
+
+    accuracy                           0.79        81
+   macro avg       0.76      0.77      0.76        81
+weighted avg       0.79      0.79      0.79        81
+
+Model saved at: [93m./out_torchvision/HAM10000-best/2021-11-13-23-00-24/last_model.pth[0m
+[Epoch 70], [Batch 0 / 100], [Loss 0.0014688782393932343]
+              precision    recall  f1-score   support
+
+       akiec       0.70      0.70      0.70        10
+         bcc       0.78      0.78      0.78         9
+         bkl       0.57      0.80      0.67        10
+          df       0.93      0.93      0.93        15
+         mel       0.80      0.44      0.57         9
+          nv       0.92      0.86      0.89        14
+        vasc       0.93      1.00      0.97        14
+
+    accuracy                           0.81        81
+   macro avg       0.81      0.79      0.79        81
+weighted avg       0.83      0.81      0.81        81
+
+Model saved at: [93m./out_torchvision/HAM10000-best/2021-11-13-23-00-24/last_model.pth[0m
+[Epoch 71], [Batch 0 / 100], [Loss 0.0008966799941845238]
+              precision    recall  f1-score   support
+
+       akiec       0.80      0.80      0.80        10
+         bcc       0.80      0.89      0.84         9
+         bkl       0.82      0.90      0.86        10
+          df       1.00      1.00      1.00        15
+         mel       0.86      0.67      0.75         9
+          nv       0.92      0.86      0.89        14
+        vasc       0.93      1.00      0.97        14
+
+    accuracy                           0.89        81
+   macro avg       0.88      0.87      0.87        81
+weighted avg       0.89      0.89      0.89        81
+
+Model saved at: [93m./out_torchvision/HAM10000-best/2021-11-13-23-00-24/best_model.pth[0m
+[Epoch 72], [Batch 0 / 100], [Loss 0.0005596071714535356]
+              precision    recall  f1-score   support
+
+       akiec       0.75      0.60      0.67        10
+         bcc       0.78      0.78      0.78         9
+         bkl       0.57      0.80      0.67        10
+          df       0.93      0.93      0.93        15
+         mel       0.71      0.56      0.63         9
+          nv       0.92      0.86      0.89        14
+        vasc       0.93      1.00      0.97        14
+
+    accuracy                           0.81        81
+   macro avg       0.80      0.79      0.79        81
+weighted avg       0.82      0.81      0.81        81
+
+Model saved at: [93m./out_torchvision/HAM10000-best/2021-11-13-23-00-24/last_model.pth[0m
+[Epoch 73], [Batch 0 / 100], [Loss 0.0006664033280685544]
+              precision    recall  f1-score   support
+
+       akiec       0.70      0.70      0.70        10
+         bcc       0.78      0.78      0.78         9
+         bkl       0.57      0.80      0.67        10
+          df       0.93      0.93      0.93        15
+         mel       0.83      0.56      0.67         9
+          nv       1.00      0.86      0.92        14
+        vasc       0.93      1.00      0.97        14
+
+    accuracy                           0.83        81
+   macro avg       0.82      0.80      0.80        81
+weighted avg       0.84      0.83      0.83        81
+
+Model saved at: [93m./out_torchvision/HAM10000-best/2021-11-13-23-00-24/last_model.pth[0m
+[Epoch 74], [Batch 0 / 100], [Loss 0.000634853495284915]
+              precision    recall  f1-score   support
+
+       akiec       0.73      0.80      0.76        10
+         bcc       0.80      0.89      0.84         9
+         bkl       0.64      0.70      0.67        10
+          df       1.00      0.93      0.97        15
+         mel       0.71      0.56      0.63         9
+          nv       0.92      0.86      0.89        14
+        vasc       0.93      1.00      0.97        14
+
+    accuracy                           0.84        81
+   macro avg       0.82      0.82      0.82        81
+weighted avg       0.84      0.84      0.84        81
+
+Model saved at: [93m./out_torchvision/HAM10000-best/2021-11-13-23-00-24/last_model.pth[0m
+[Epoch 75], [Batch 0 / 100], [Loss 0.0016320388531312346]
+              precision    recall  f1-score   support
+
+       akiec       0.70      0.70      0.70        10
+         bcc       0.78      0.78      0.78         9
+         bkl       0.62      0.80      0.70        10
+          df       0.93      0.93      0.93        15
+         mel       0.83      0.56      0.67         9
+          nv       0.92      0.86      0.89        14
+        vasc       0.93      1.00      0.97        14
+
+    accuracy                           0.83        81
+   macro avg       0.82      0.80      0.80        81
+weighted avg       0.84      0.83      0.83        81
+
+Model saved at: [93m./out_torchvision/HAM10000-best/2021-11-13-23-00-24/last_model.pth[0m
+[Epoch 76], [Batch 0 / 100], [Loss 0.0008513565990142524]
+              precision    recall  f1-score   support
+
+       akiec       0.73      0.80      0.76        10
+         bcc       0.88      0.78      0.82         9
+         bkl       0.73      0.80      0.76        10
+          df       0.93      0.93      0.93        15
+         mel       0.86      0.67      0.75         9
+          nv       1.00      0.93      0.96        14
+        vasc       0.88      1.00      0.93        14
+
+    accuracy                           0.86        81
+   macro avg       0.86      0.84      0.85        81
+weighted avg       0.87      0.86      0.86        81
+
+Model saved at: [93m./out_torchvision/HAM10000-best/2021-11-13-23-00-24/last_model.pth[0m
+[Epoch 77], [Batch 0 / 100], [Loss 0.0016613357001915574]
+              precision    recall  f1-score   support
+
+       akiec       0.73      0.80      0.76        10
+         bcc       0.88      0.78      0.82         9
+         bkl       0.67      0.80      0.73        10
+          df       0.93      0.93      0.93        15
+         mel       0.80      0.44      0.57         9
+          nv       0.87      0.93      0.90        14
+        vasc       0.93      1.00      0.97        14
+
+    accuracy                           0.84        81
+   macro avg       0.83      0.81      0.81        81
+weighted avg       0.84      0.84      0.83        81
+
+Model saved at: [93m./out_torchvision/HAM10000-best/2021-11-13-23-00-24/last_model.pth[0m
+[Epoch 78], [Batch 0 / 100], [Loss 0.0005546254687942564]
+              precision    recall  f1-score   support
+
+       akiec       0.70      0.70      0.70        10
+         bcc       0.75      0.67      0.71         9
+         bkl       0.67      0.80      0.73        10
+          df       0.88      0.93      0.90        15
+         mel       0.83      0.56      0.67         9
+          nv       0.93      0.93      0.93        14
+        vasc       0.93      1.00      0.97        14
+
+    accuracy                           0.83        81
+   macro avg       0.81      0.80      0.80        81
+weighted avg       0.83      0.83      0.82        81
+
+Model saved at: [93m./out_torchvision/HAM10000-best/2021-11-13-23-00-24/last_model.pth[0m
+[Epoch 79], [Batch 0 / 100], [Loss 0.001091497135348618]
+              precision    recall  f1-score   support
+
+       akiec       0.70      0.70      0.70        10
+         bcc       0.78      0.78      0.78         9
+         bkl       0.70      0.70      0.70        10
+          df       0.93      0.93      0.93        15
+         mel       0.71      0.56      0.63         9
+          nv       0.87      0.93      0.90        14
+        vasc       0.93      1.00      0.97        14
+
+    accuracy                           0.83        81
+   macro avg       0.80      0.80      0.80        81
+weighted avg       0.82      0.83      0.82        81
+
+Model saved at: [93m./out_torchvision/HAM10000-best/2021-11-13-23-00-24/last_model.pth[0m
+[Epoch 80], [Batch 0 / 100], [Loss 0.0005092390929348767]
+              precision    recall  f1-score   support
+
+       akiec       0.80      0.80      0.80        10
+         bcc       0.86      0.67      0.75         9
+         bkl       0.75      0.90      0.82        10
+          df       0.88      0.93      0.90        15
+         mel       0.86      0.67      0.75         9
+          nv       0.93      0.93      0.93        14
+        vasc       0.93      1.00      0.97        14
+
+    accuracy                           0.86        81
+   macro avg       0.86      0.84      0.85        81
+weighted avg       0.87      0.86      0.86        81
+
+Model saved at: [93m./out_torchvision/HAM10000-best/2021-11-13-23-00-24/last_model.pth[0m
+[Epoch 81], [Batch 0 / 100], [Loss 0.0007002617930993438]
+              precision    recall  f1-score   support
+
+       akiec       0.80      0.80      0.80        10
+         bcc       0.88      0.78      0.82         9
+         bkl       0.75      0.90      0.82        10
+          df       0.93      0.93      0.93        15
+         mel       0.86      0.67      0.75         9
+          nv       0.93      0.93      0.93        14
+        vasc       0.93      1.00      0.97        14
+
+    accuracy                           0.88        81
+   macro avg       0.87      0.86      0.86        81
+weighted avg       0.88      0.88      0.87        81
+
+Model saved at: [93m./out_torchvision/HAM10000-best/2021-11-13-23-00-24/last_model.pth[0m
+[Epoch 82], [Batch 0 / 100], [Loss 0.0013110815780237317]
+              precision    recall  f1-score   support
+
+       akiec       0.80      0.80      0.80        10
+         bcc       0.88      0.78      0.82         9
+         bkl       0.69      0.90      0.78        10
+          df       0.93      0.93      0.93        15
+         mel       0.80      0.44      0.57         9
+          nv       0.87      0.93      0.90        14
+        vasc       0.93      1.00      0.97        14
+
+    accuracy                           0.85        81
+   macro avg       0.84      0.83      0.82        81
+weighted avg       0.85      0.85      0.85        81
+
+Model saved at: [93m./out_torchvision/HAM10000-best/2021-11-13-23-00-24/last_model.pth[0m
+[Epoch 83], [Batch 0 / 100], [Loss 0.00037320543196983635]
+              precision    recall  f1-score   support
+
+       akiec       0.75      0.60      0.67        10
+         bcc       0.86      0.67      0.75         9
+         bkl       0.60      0.90      0.72        10
+          df       0.88      0.93      0.90        15
+         mel       0.83      0.56      0.67         9
+          nv       0.93      0.93      0.93        14
+        vasc       0.93      1.00      0.97        14
+
+    accuracy                           0.83        81
+   macro avg       0.83      0.80      0.80        81
+weighted avg       0.84      0.83      0.82        81
+
+Model saved at: [93m./out_torchvision/HAM10000-best/2021-11-13-23-00-24/last_model.pth[0m
+[Epoch 84], [Batch 0 / 100], [Loss 0.0007691681385040283]
+              precision    recall  f1-score   support
+
+       akiec       0.80      0.80      0.80        10
+         bcc       0.78      0.78      0.78         9
+         bkl       0.67      0.80      0.73        10
+          df       0.93      0.93      0.93        15
+         mel       0.67      0.44      0.53         9
+          nv       0.86      0.86      0.86        14
+        vasc       0.93      1.00      0.97        14
+
+    accuracy                           0.83        81
+   macro avg       0.80      0.80      0.80        81
+weighted avg       0.82      0.83      0.82        81
+
+Model saved at: [93m./out_torchvision/HAM10000-best/2021-11-13-23-00-24/last_model.pth[0m
+[Epoch 85], [Batch 0 / 100], [Loss 0.0008853161707520485]
+              precision    recall  f1-score   support
+
+       akiec       0.78      0.70      0.74        10
+         bcc       0.88      0.78      0.82         9
+         bkl       0.58      0.70      0.64        10
+          df       0.93      0.93      0.93        15
+         mel       0.67      0.67      0.67         9
+          nv       1.00      0.93      0.96        14
+        vasc       0.93      1.00      0.97        14
+
+    accuracy                           0.84        81
+   macro avg       0.82      0.82      0.82        81
+weighted avg       0.85      0.84      0.84        81
+
+Model saved at: [93m./out_torchvision/HAM10000-best/2021-11-13-23-00-24/last_model.pth[0m
+[Epoch 86], [Batch 0 / 100], [Loss 0.00040200608782470226]
+              precision    recall  f1-score   support
+
+       akiec       0.80      0.80      0.80        10
+         bcc       0.78      0.78      0.78         9
+         bkl       0.73      0.80      0.76        10
+          df       0.93      0.93      0.93        15
+         mel       0.78      0.78      0.78         9
+          nv       1.00      0.86      0.92        14
+        vasc       0.93      1.00      0.97        14
+
+    accuracy                           0.86        81
+   macro avg       0.85      0.85      0.85        81
+weighted avg       0.87      0.86      0.86        81
+
+Model saved at: [93m./out_torchvision/HAM10000-best/2021-11-13-23-00-24/last_model.pth[0m
+[Epoch 87], [Batch 0 / 100], [Loss 0.0002661367761902511]
+              precision    recall  f1-score   support
+
+       akiec       0.78      0.70      0.74        10
+         bcc       0.78      0.78      0.78         9
+         bkl       0.58      0.70      0.64        10
+          df       0.93      0.93      0.93        15
+         mel       0.62      0.56      0.59         9
+          nv       0.92      0.86      0.89        14
+        vasc       0.93      1.00      0.97        14
+
+    accuracy                           0.81        81
+   macro avg       0.79      0.79      0.79        81
+weighted avg       0.82      0.81      0.81        81
+
+Model saved at: [93m./out_torchvision/HAM10000-best/2021-11-13-23-00-24/last_model.pth[0m
+[Epoch 88], [Batch 0 / 100], [Loss 0.0007155670318752527]
+              precision    recall  f1-score   support
+
+       akiec       0.78      0.70      0.74        10
+         bcc       0.88      0.78      0.82         9
+         bkl       0.58      0.70      0.64        10
+          df       0.93      0.93      0.93        15
+         mel       0.62      0.56      0.59         9
+          nv       0.93      0.93      0.93        14
+        vasc       0.93      1.00      0.97        14
+
+    accuracy                           0.83        81
+   macro avg       0.81      0.80      0.80        81
+weighted avg       0.83      0.83      0.83        81
+
+Model saved at: [93m./out_torchvision/HAM10000-best/2021-11-13-23-00-24/last_model.pth[0m
+[Epoch 89], [Batch 0 / 100], [Loss 0.0007466936949640512]
+              precision    recall  f1-score   support
+
+       akiec       0.80      0.80      0.80        10
+         bcc       0.86      0.67      0.75         9
+         bkl       0.64      0.70      0.67        10
+          df       0.88      0.93      0.90        15
+         mel       0.67      0.67      0.67         9
+          nv       1.00      0.93      0.96        14
+        vasc       0.93      1.00      0.97        14
+
+    accuracy                           0.84        81
+   macro avg       0.82      0.81      0.82        81
+weighted avg       0.84      0.84      0.84        81
+
+Model saved at: [93m./out_torchvision/HAM10000-best/2021-11-13-23-00-24/last_model.pth[0m
+[Epoch 90], [Batch 0 / 100], [Loss 0.0011078810784965754]
+              precision    recall  f1-score   support
+
+       akiec       0.75      0.60      0.67        10
+         bcc       0.78      0.78      0.78         9
+         bkl       0.64      0.90      0.75        10
+          df       0.93      0.93      0.93        15
+         mel       0.83      0.56      0.67         9
+          nv       0.93      0.93      0.93        14
+        vasc       0.93      1.00      0.97        14
+
+    accuracy                           0.84        81
+   macro avg       0.83      0.81      0.81        81
+weighted avg       0.85      0.84      0.84        81
+
+Model saved at: [93m./out_torchvision/HAM10000-best/2021-11-13-23-00-24/last_model.pth[0m
+[Epoch 91], [Batch 0 / 100], [Loss 0.0006613417062908411]
+              precision    recall  f1-score   support
+
+       akiec       0.75      0.60      0.67        10
+         bcc       0.78      0.78      0.78         9
+         bkl       0.62      0.80      0.70        10
+          df       0.93      0.93      0.93        15
+         mel       0.75      0.67      0.71         9
+          nv       1.00      0.93      0.96        14
+        vasc       0.93      1.00      0.97        14
+
+    accuracy                           0.84        81
+   macro avg       0.82      0.82      0.82        81
+weighted avg       0.85      0.84      0.84        81
+
+Model saved at: [93m./out_torchvision/HAM10000-best/2021-11-13-23-00-24/last_model.pth[0m
+[Epoch 92], [Batch 0 / 100], [Loss 0.0005263191414996982]
+              precision    recall  f1-score   support
+
+       akiec       0.80      0.80      0.80        10
+         bcc       0.88      0.78      0.82         9
+         bkl       0.69      0.90      0.78        10
+          df       0.93      0.93      0.93        15
+         mel       0.83      0.56      0.67         9
+          nv       0.93      0.93      0.93        14
+        vasc       0.93      1.00      0.97        14
+
+    accuracy                           0.86        81
+   macro avg       0.86      0.84      0.84        81
+weighted avg       0.87      0.86      0.86        81
+
+Model saved at: [93m./out_torchvision/HAM10000-best/2021-11-13-23-00-24/last_model.pth[0m
+[Epoch 93], [Batch 0 / 100], [Loss 0.0005929672042839229]
+              precision    recall  f1-score   support
+
+       akiec       0.78      0.70      0.74        10
+         bcc       0.86      0.67      0.75         9
+         bkl       0.67      0.80      0.73        10
+          df       0.88      0.93      0.90        15
+         mel       0.75      0.67      0.71         9
+          nv       0.93      0.93      0.93        14
+        vasc       0.93      1.00      0.97        14
+
+    accuracy                           0.84        81
+   macro avg       0.83      0.81      0.82        81
+weighted avg       0.84      0.84      0.84        81
+
+Model saved at: [93m./out_torchvision/HAM10000-best/2021-11-13-23-00-24/last_model.pth[0m
+[Epoch 94], [Batch 0 / 100], [Loss 0.0003642552183009684]
+              precision    recall  f1-score   support
+
+       akiec       0.70      0.70      0.70        10
+         bcc       0.88      0.78      0.82         9
+         bkl       0.58      0.70      0.64        10
+          df       0.93      0.93      0.93        15
+         mel       0.75      0.67      0.71         9
+          nv       1.00      0.93      0.96        14
+        vasc       0.93      1.00      0.97        14
+
+    accuracy                           0.84        81
+   macro avg       0.83      0.82      0.82        81
+weighted avg       0.85      0.84      0.84        81
+
+Model saved at: [93m./out_torchvision/HAM10000-best/2021-11-13-23-00-24/last_model.pth[0m
+[Epoch 95], [Batch 0 / 100], [Loss 0.001735071768052876]
+              precision    recall  f1-score   support
+
+       akiec       0.78      0.70      0.74        10
+         bcc       0.70      0.78      0.74         9
+         bkl       0.69      0.90      0.78        10
+          df       0.93      0.93      0.93        15
+         mel       0.83      0.56      0.67         9
+          nv       0.92      0.86      0.89        14
+        vasc       0.93      1.00      0.97        14
+
+    accuracy                           0.84        81
+   macro avg       0.83      0.82      0.82        81
+weighted avg       0.85      0.84      0.84        81
+
+Model saved at: [93m./out_torchvision/HAM10000-best/2021-11-13-23-00-24/last_model.pth[0m
+[Epoch 96], [Batch 0 / 100], [Loss 0.0011691225226968527]
+              precision    recall  f1-score   support
+
+       akiec       0.73      0.80      0.76        10
+         bcc       0.88      0.78      0.82         9
+         bkl       0.70      0.70      0.70        10
+          df       0.93      0.93      0.93        15
+         mel       0.71      0.56      0.63         9
+          nv       0.87      0.93      0.90        14
+        vasc       0.93      1.00      0.97        14
+
+    accuracy                           0.84        81
+   macro avg       0.82      0.81      0.82        81
+weighted avg       0.84      0.84      0.84        81
+
+Model saved at: [93m./out_torchvision/HAM10000-best/2021-11-13-23-00-24/last_model.pth[0m
+[Epoch 97], [Batch 0 / 100], [Loss 0.00042440989636816084]
+              precision    recall  f1-score   support
+
+       akiec       0.80      0.80      0.80        10
+         bcc       0.88      0.78      0.82         9
+         bkl       0.70      0.70      0.70        10
+          df       0.93      0.93      0.93        15
+         mel       0.67      0.67      0.67         9
+          nv       0.93      0.93      0.93        14
+        vasc       0.93      1.00      0.97        14
+
+    accuracy                           0.85        81
+   macro avg       0.83      0.83      0.83        81
+weighted avg       0.85      0.85      0.85        81
+
+Model saved at: [93m./out_torchvision/HAM10000-best/2021-11-13-23-00-24/last_model.pth[0m
+[Epoch 98], [Batch 0 / 100], [Loss 0.001484801061451435]
+              precision    recall  f1-score   support
+
+       akiec       0.80      0.80      0.80        10
+         bcc       0.88      0.78      0.82         9
+         bkl       0.73      0.80      0.76        10
+          df       0.93      0.93      0.93        15
+         mel       0.71      0.56      0.63         9
+          nv       0.87      0.93      0.90        14
+        vasc       0.93      1.00      0.97        14
+
+    accuracy                           0.85        81
+   macro avg       0.84      0.83      0.83        81
+weighted avg       0.85      0.85      0.85        81
+
+Model saved at: [93m./out_torchvision/HAM10000-best/2021-11-13-23-00-24/last_model.pth[0m
+[Epoch 99], [Batch 0 / 100], [Loss 0.00038853820296935737]
+              precision    recall  f1-score   support
+
+       akiec       0.75      0.60      0.67        10
+         bcc       0.88      0.78      0.82         9
+         bkl       0.62      0.80      0.70        10
+          df       0.93      0.93      0.93        15
+         mel       0.75      0.67      0.71         9
+          nv       0.93      0.93      0.93        14
+        vasc       0.93      1.00      0.97        14
+
+    accuracy                           0.84        81
+   macro avg       0.83      0.82      0.82        81
+weighted avg       0.84      0.84      0.84        81
+
+Model saved at: [93m./out_torchvision/HAM10000-best/2021-11-13-23-00-24/last_model.pth[0m
+              precision    recall  f1-score   support
+
+       akiec       0.62      0.50      0.56        10
+         bcc       0.78      0.78      0.78         9
+         bkl       0.64      0.70      0.67        10
+          df       0.94      1.00      0.97        15
+         mel       0.67      0.67      0.67         9
+          nv       0.92      0.86      0.89        14
+        vasc       0.93      1.00      0.97        14
+
+    accuracy                           0.81        81
+   macro avg       0.79      0.79      0.78        81
+weighted avg       0.81      0.81      0.81        81
+
+              precision    recall  f1-score   support
+
+       akiec       0.80      0.80      0.80        10
+         bcc       0.80      0.89      0.84         9
+         bkl       0.80      0.80      0.80        10
+          df       1.00      1.00      1.00        15
+         mel       0.75      0.67      0.71         9
+          nv       0.92      0.86      0.89        14
+        vasc       0.93      1.00      0.97        14
+
+    accuracy                           0.88        81
+   macro avg       0.86      0.86      0.86        81
+weighted avg       0.88      0.88      0.88        81
+
