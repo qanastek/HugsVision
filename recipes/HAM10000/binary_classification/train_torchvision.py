@@ -7,7 +7,7 @@ from hugsvision.nnet.TorchVisionClassifierTrainer import TorchVisionClassifierTr
 parser = argparse.ArgumentParser(description='Image classifier')
 parser.add_argument('--imgs', type=str, default="/users/ylabrak/datasets/HAM10000/", help='The directory of the input images')
 parser.add_argument('--epochs', type=int, default=100, help='Number of Epochs')
-parser.add_argument('--output', type=str, default="./out_torchvision/HAM10000-best/", help='The output directory of the model')
+parser.add_argument('--output', type=str, default="./OUT_TORCHVISION/HAM10000/", help='The output directory of the model')
 args = parser.parse_args()
 
 # Load the dataset
