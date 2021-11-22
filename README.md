@@ -153,6 +153,36 @@ You can find all the currently available models or tasks under the `recipes/` fo
           </a>
       </td>
   </tr>
+
+  <!-- ------------------------------------------------------------------- -->
+  
+  <tr>
+      <td rowspan="3" width="160">
+        <img src="https://raw.githubusercontent.com/qanastek/HugsVision/main/ressources/images/receipes/HAM10000.png" width="256">
+      </td>    
+      <td rowspan="3">  
+        <b>Training and using a TorchVision Image Classifier in 5 min to identify skin cancer:</b> A fast and easy tutorial to train a TorchVision Image Classifier that can help dermatologist in their identification procedures Melanoma cases with HugsVision and HAM10000 dataset.
+      </td>
+      <td align="center" width="80">
+          <a href="https://nbviewer.jupyter.org/github/qanastek/HugsVision/blob/main/recipes/HAM10000/binary_classification/HAM10000_Image_Classifier.ipynb">
+              <img src="https://raw.githubusercontent.com/qanastek/HugsVision/main/ressources/images/receipes/nbviewer_logo.svg" height="34">
+          </a>
+      </td>
+  </tr>
+  <tr>
+      <td align="center">
+          <a href="https://github.com/qanastek/HugsVision/blob/main/recipes/HAM10000/binary_classification/HAM10000_Image_Classifier.ipynb">
+              <img src="https://raw.githubusercontent.com/qanastek/HugsVision/main/ressources/images/receipes/github_logo.png" height="32">
+          </a>
+      </td>
+  </tr>
+  <tr>
+      <td align="center">
+          <a href="https://colab.research.google.com/drive/1tfRpFTT1GJUgrcwHI0pYdAZ5_z0VSevJ?usp=sharing">
+              <img src="https://raw.githubusercontent.com/qanastek/HugsVision/main/ressources/images/receipes/colab_logo.png" height="28">
+          </a>
+      </td>
+  </tr>
 </table>
 
 # Model architectures
