@@ -6,7 +6,7 @@
 [![GitHub Issues](https://img.shields.io/github/issues/qanastek/HugsVision.svg)](https://github.com/qanastek/HugsVision/issues)
 [![Contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg)](CONTRIBUTING.md)
 [![License: MIT](https://img.shields.io/badge/License-MIT-brightgreen.svg)](https://opensource.org/licenses/MIT)
-
+[![Downloads](https://static.pepy.tech/personalized-badge/hugsvision?period=total&units=international_system&left_color=grey&right_color=orange&left_text=Downloads)](https://pepy.tech/project/hugsvision)
 
 HugsVision is an open-source and easy to use all-in-one huggingface wrapper for computer vision.
 
