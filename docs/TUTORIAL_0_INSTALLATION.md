@@ -68,9 +68,8 @@ More information on managing environments with Anaconda can be found in [the con
 
 ## Test installation
 
-Please, run the following script  from the main folder to make sure your installation is working:
+Please, run the following command to make sure your installation is working:
 
 ```bash
-pytest tests
-pytest --doctest-modules HugsVision
+pip show hugsvision
 ```

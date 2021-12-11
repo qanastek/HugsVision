@@ -150,9 +150,6 @@ class VisionDataset:
         # Both way indexes
         label2id, id2label = VisionDataset.getConfig(dataset)
 
-        img = transforms.ToPILImage()(dataset[0][0])
-        img.save("test_pil.jpg")
-
         # Split
         train, test = VisionDataset.splitDatasets(dataset, id2label, test_ratio, balanced, augmentation)
 
