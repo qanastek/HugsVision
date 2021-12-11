@@ -44,7 +44,8 @@ class VisionClassifierTrainer:
     batch_size    = 8,
     lr            = 2e-5,
     eval_metric   = "accuracy",
-    fp16          = True,
+    fp16          = False,
+    classification_report_digits = 4,
   ):
 
     self.model_name        = model_name
@@ -61,6 +62,7 @@ class VisionClassifierTrainer:
     self.eval_metric       = eval_metric
     self.ids2labels        = self.model.config.id2label
     self.labels2ids        = self.model.config.label2id
+    self.classification_report_digits = classification_report_digits
 
     print(self.ids2labels)
     print(self.labels2ids)
@@ -161,6 +163,7 @@ class VisionClassifierTrainer:
       labels = [int(a) for a in list(self.ids2labels.keys())],
       target_names = list(self.labels2ids.keys()),
       zero_division = 0,
+      digits=self.classification_report_digits,
     )
     print(table)
 

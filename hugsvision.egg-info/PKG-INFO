@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: hugsvision
-Version: 0.70
+Version: 0.72
 Summary: A easy to use huggingface wrapper for computer vision.
 Home-page: https://HugsVision.github.io/
 Author: Yanis Labrak & Others
@@ -14,7 +14,7 @@ Description: <p align="center">
         [![GitHub Issues](https://img.shields.io/github/issues/qanastek/HugsVision.svg)](https://github.com/qanastek/HugsVision/issues)
         [![Contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg)](CONTRIBUTING.md)
         [![License: MIT](https://img.shields.io/badge/License-MIT-brightgreen.svg)](https://opensource.org/licenses/MIT)
-        
+        [![Downloads](https://static.pepy.tech/personalized-badge/hugsvision?period=total&units=international_system&left_color=grey&right_color=orange&left_text=Downloads)](https://pepy.tech/project/hugsvision)
         
         HugsVision is an open-source and easy to use all-in-one huggingface wrapper for computer vision.
         
@@ -161,6 +161,36 @@ Description: <p align="center">
                   </a>
               </td>
           </tr>
+        
+          <!-- ------------------------------------------------------------------- -->
+          
+          <tr>
+              <td rowspan="3" width="160">
+                <img src="https://raw.githubusercontent.com/qanastek/HugsVision/main/ressources/images/receipes/HAM10000.png" width="256">
+              </td>    
+              <td rowspan="3">  
+                <b>Training and using a TorchVision Image Classifier in 5 min to identify skin cancer:</b> A fast and easy tutorial to train a TorchVision Image Classifier that can help dermatologist in their identification procedures Melanoma cases with HugsVision and HAM10000 dataset.
+              </td>
+              <td align="center" width="80">
+                  <a href="https://nbviewer.jupyter.org/github/qanastek/HugsVision/blob/main/recipes/HAM10000/binary_classification/HAM10000_Image_Classifier.ipynb">
+                      <img src="https://raw.githubusercontent.com/qanastek/HugsVision/main/ressources/images/receipes/nbviewer_logo.svg" height="34">
+                  </a>
+              </td>
+          </tr>
+          <tr>
+              <td align="center">
+                  <a href="https://github.com/qanastek/HugsVision/blob/main/recipes/HAM10000/binary_classification/HAM10000_Image_Classifier.ipynb">
+                      <img src="https://raw.githubusercontent.com/qanastek/HugsVision/main/ressources/images/receipes/github_logo.png" height="32">
+                  </a>
+              </td>
+          </tr>
+          <tr>
+              <td align="center">
+                  <a href="https://colab.research.google.com/drive/1tfRpFTT1GJUgrcwHI0pYdAZ5_z0VSevJ?usp=sharing">
+                      <img src="https://raw.githubusercontent.com/qanastek/HugsVision/main/ressources/images/receipes/colab_logo.png" height="28">
+                  </a>
+              </td>
+          </tr>
         </table>
         
         # Model architectures
@@ -183,6 +213,7 @@ Description: <p align="center">
         Upload: `twine upload dist/*`
         
         # Citation
+        
         If you want to cite the tool you can use this:
         
         ```bibtex

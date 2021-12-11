@@ -52,6 +52,8 @@ class TorchVisionClassifierTrainer:
     force_cpu     = False,
     requires_grad = False, # True: Only last layer of the classifier are updated
     load_best_model_at_end = True,
+    classification_report_digits = 4,
+    parallelized = False,
   ):
 
     self.train             = train
@@ -69,12 +71,15 @@ class TorchVisionClassifierTrainer:
     self.ids2labels        = id2label
     self.labels2ids        = label2id
     self.best_acc          = 0
+    self.best_path         = ""
     self.logs_path         = self.output_dir + "logs/"
     self.config_path       = self.output_dir + "config.json"
     self.current_date      = datetime.today().strftime("%Y-%m-%d-%H-%M-%S")
     self.config            = {}
     self.requires_grad     = requires_grad
     self.load_best_model_at_end = load_best_model_at_end
+    self.classification_report_digits = classification_report_digits
+    self.parallelized = parallelized
 
     self.tensor_board = SummaryWriter()
 
@@ -96,8 +101,9 @@ class TorchVisionClassifierTrainer:
     self.num_classes = len(self.ids2labels.keys())
     self.config["num_classes"] = self.num_classes
     
-    # Open the logs file
+    # Open the logs files
     self.__openLogs()
+    self.__openLogsLossAcc()
 
     # Load the model from the TorchVision Models Zoo 
     if pretrained:
@@ -114,7 +120,10 @@ class TorchVisionClassifierTrainer:
     # """
     if self.model_name.startswith('alexnet') or self.model_name.startswith('vgg'):
       self.model.classifier[6] = nn.Linear(self.model.classifier[6].in_features, self.num_classes)
-      self.model.features = torch.nn.DataParallel(self.model.features)
+
+      if self.parallelized == True:
+        self.model.features = torch.nn.DataParallel(self.model.features)
+      
       self.model.to(self.device)
       self.config["hidden_size"] = self.model.classifier[6].in_features
     else:
@@ -143,7 +152,10 @@ class TorchVisionClassifierTrainer:
         self.model.classifier[3] = nn.Linear(self.model.classifier[3].in_features, self.num_classes)
         self.config["hidden_size"] = self.model.classifier[3].in_features
 
-      self.model = torch.nn.DataParallel(self.model).to(self.device)
+      if self.parallelized == True:
+        self.model = torch.nn.DataParallel(self.model)
+
+      self.model = self.model.to(self.device)
 
     if self.requires_grad:
       for param in self.model.parameters():
@@ -181,13 +193,15 @@ class TorchVisionClassifierTrainer:
     self.training()
 
     if self.load_best_model_at_end:
-      print("Best model loaded!")
+      print("\033[95mBest model loaded!\033[0m")
       self.model = torch.load(self.output_dir + 'best_model.pth', map_location=self.device)
 
     self.evaluate_f1_score()
 
     # Close the logs file
     self.logs_file.close()
+    self.logs_loss.close()
+    self.logs_acc.close()
 
   """
   📜 Open the logs file
@@ -199,6 +213,21 @@ class TorchVisionClassifierTrainer:
 
     # Open the logs file
     self.logs_file = open(self.logs_path + "logs_" + self.current_date + ".txt", "a")
+
+  """
+  📜 Open the logs file for loss and accuracy
+  """
+  def __openLogsLossAcc(self):
+
+    if not self.logs_path.endswith("/"):
+      self.logs_path += "/"
+
+    # Check if the directory already exist
+    os.makedirs(self.logs_path, exist_ok=True)
+
+    # Open the logs file
+    self.logs_loss = open(self.logs_path + "logs_loss_" + self.current_date + ".txt", "a")
+    self.logs_acc = open(self.logs_path + "logs_acc_" + self.current_date + ".txt", "a")
 
   """
   🧪 Evaluate the performances of the system of the test sub-dataset given a f1-score
@@ -214,6 +243,7 @@ class TorchVisionClassifierTrainer:
       labels = [int(a) for a in list(self.ids2labels.keys())],
       target_names = list(self.labels2ids.keys()),
       zero_division = 0,
+      digits=self.classification_report_digits,
     )
     print(table)
 
@@ -223,6 +253,7 @@ class TorchVisionClassifierTrainer:
     self.logs_file.close()
 
     print("Logs saved at: \033[93m" + self.logs_path + "\033[0m")
+    print("\033[93m[" + self.model_name + "]\033[0m Best model saved at: \033[93m" + self.best_path + "\033[0m" + " - Accuracy " + "{:.2f}".format(self.best_acc*100))
 
     return all_target, all_preds
   
@@ -242,13 +273,19 @@ class TorchVisionClassifierTrainer:
       all_targets, all_predictions = self.evaluate()
       total_acc = accuracy_score(all_targets, all_predictions)
 
-      f1_score = classification_report(all_targets, all_predictions, target_names=list(self.ids2labels.values()))
+      f1_score = classification_report(
+        all_targets,
+        all_predictions,
+        target_names=list(self.ids2labels.values()),
+        digits=self.classification_report_digits
+      )
       print(f1_score)
 
       os.makedirs(self.output_dir, exist_ok=True)
 
       if total_acc > self.best_acc:
         filename = self.output_dir + 'best_model.pth'
+        self.best_path = filename
       else:
         filename = self.output_dir + 'last_model.pth'
 
@@ -257,9 +294,12 @@ class TorchVisionClassifierTrainer:
       torch.save(self.model, filename)
       saved_at = "Model saved at: \033[93m" + filename + "\033[0m"
       print(saved_at)
+      best_model_path = "\033[93m[" + self.model_name + "]\033[0m Best model saved at: \033[93m" + self.best_path + "\033[0m" + " - Accuracy " + "{:.2f}".format(self.best_acc*100) + "%"
+      print(best_model_path)
 
       self.logs_file.write(f1_score + "\n")
       self.logs_file.write(saved_at + "\n")
+      self.logs_file.write(best_model_path + "\n")
       self.logs_file.close()
 
       self.tensor_board.add_scalar('Loss/train', batches_loss, epoch)
@@ -280,7 +320,7 @@ class TorchVisionClassifierTrainer:
     all_targets = []
 
     # For each batch
-    for i, (input, target) in enumerate(self.data_loader_train):
+    for i, (input, target) in tqdm(enumerate(self.data_loader_train)):
 
       input = input.to(self.device)
       target = target.to(self.device)
@@ -303,7 +343,6 @@ class TorchVisionClassifierTrainer:
 
       if i % (len(self.data_loader_train) / 10) == 0:
         log_line = "[Epoch " + str(epoch) + "], [Batch " + str(i) + " / " + str(self.max_epochs) + "], [Loss " + str(loss.item()) + "]"
-        print(log_line)
         self.logs_file.write(log_line + "\n")
 
     self.scheduler.step()
@@ -311,6 +350,9 @@ class TorchVisionClassifierTrainer:
     # Compute accuracy
     total_acc = accuracy_score(all_targets, all_preds)
     avg_loss = sum_loss / len(self.data_loader_train)
+
+    self.logs_loss.write(str(epoch) + "," + str(avg_loss.item()) + "\n")
+    self.logs_acc.write(str(epoch) + "," + str(total_acc.item()) + "\n")
 
     return total_acc, avg_loss
 

@@ -11,6 +11,7 @@ args = parser.parse_args()
 
 classifier = TorchVisionClassifierInference(
     model_path = args.path,
+    # device="cpu",
 )
 
 print("Process the image: " + args.img) 

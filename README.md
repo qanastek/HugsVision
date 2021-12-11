@@ -205,6 +205,7 @@ Build: `python setup.py sdist bdist_wheel`
 Upload: `twine upload dist/*`
 
 # Citation
+
 If you want to cite the tool you can use this:
 
 ```bibtex
