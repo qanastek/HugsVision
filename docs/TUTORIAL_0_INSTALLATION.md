@@ -1,5 +1,5 @@
 
-# Quick installation
+# Tutorial 0: Quick installation
 
 HugsVision is constantly evolving. New features, tutorials, and documentation will appear over time. HugsVision can be installed via PyPI to rapidly use the standard library. Moreover, a local installation can be used to run experiments and modify/customize the toolkit.
 
@@ -73,3 +73,8 @@ Please, run the following command to make sure your installation is working:
 ```bash
 pip show hugsvision
 ```
+
+## Next documentation
+
+You can now take a look at:
+* [TUTORIAL_1_CORPORA](TUTORIAL_1_CORPORA.md)
