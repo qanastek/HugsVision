@@ -35,7 +35,7 @@ class TorchVisionClassifierInference:
   """
   🤔 Predict from one image at the Pillow format
   """
-  def predict_image(self, img, save_preview=False):
+  def predict_image(self, img, save_preview=False, return_str=True):
     
     img = self.transform(img)
 
@@ -48,13 +48,17 @@ class TorchVisionClassifierInference:
     # Predict and get the corresponding label identifier
     pred = self.model(img)
 
-    # Get string label from index
-    label = self.config["id2label"][str(torch.max(pred, 1)[1].item())]
-    
-    return label
+    if return_str:
+      # Get string label from index
+      return self.config["id2label"][str(torch.max(pred, 1)[1].item())]
+    else:
+      labels = list(self.config["label2id"].keys())
+      softmax = torch.nn.Softmax(dim=0)
+      probabilities = torch.mul(softmax(pred[0]), 100).tolist()
+      return dict(zip(labels, probabilities))
 
   """
   🤔 Predict from one image path
   """
-  def predict(self, img_path: str, save_preview=False):  
-    return self.predict_image(img=Image.open(img_path), save_preview=save_preview)
+  def predict(self, img_path: str, save_preview=False, return_str=True):
+    return self.predict_image(img=Image.open(img_path), save_preview=save_preview, return_str=return_str)

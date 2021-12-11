@@ -19,5 +19,8 @@ print("Process the image: " + args.img)
 label = classifier.predict(img_path=args.img)
 print("Predicted class:", label)
 
+label = classifier.predict(img_path=args.img, return_str=False)
+print("Vector of probabilities:", label)
+
 label = classifier.predict_image(img=Image.open(args.img))
 print("Predicted class:", label)
