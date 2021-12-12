@@ -20,8 +20,10 @@ try:
     )
 
     label = classifier.predict(img_path=args.img)
-
     print("Predicted class:", label)
+
+    probas = classifier.predict(img_path=args.img, return_str=False)
+    print("Probabilities:", probas)
 
 except Exception as e:
     if "containing a preprocessor_config.json file" in str(e) and os.path.isfile(args.path + "config.json") == True:

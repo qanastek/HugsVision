@@ -1,0 +1,6 @@
+Model;Accuracy;Size
+VGG16;38.27%;512.0 MB
+DeiT;71.60%;327.0 MB
+DenseNet121;77.78%;27.1 MB
+MobileNetV2;75.31%;8.77 MB
+ShuffleNetV2;76.54%;4.99 MB

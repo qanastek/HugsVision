@@ -1,5 +1,7 @@
-from transformers import ViTFeatureExtractor, ViTForImageClassification, pipeline
+import torch
 from PIL import Image
+
+from transformers import ViTFeatureExtractor, ViTForImageClassification, pipeline
 
 class VisionClassifierInference:
     
@@ -19,7 +21,7 @@ class VisionClassifierInference:
   ---------
   img: Pillow Image
   """
-  def predict_image(self, img):
+  def predict_image(self, img, return_str=True):
 
     # Change resolution to 128x128
     img.thumbnail((self.resolution,self.resolution))
@@ -33,17 +35,27 @@ class VisionClassifierInference:
     # Get label index
     predicted_class_idx = pred.logits.argmax(-1).tolist()[0]
 
-    # Get string label from index
-    label = self.model.config.id2label[predicted_class_idx]
-    
-    # print(pred.logits)
-    
-    return label
+    if return_str:
+      
+      # Get string label from index
+      return self.model.config.id2label[predicted_class_idx]
+
+    else:
+
+      labels = list(self.model.config.label2id.keys())
+      
+      softmax = torch.nn.Softmax(dim=0)
+      
+      pred_soft = softmax(pred[0][0])
+      pred_soft = torch.mul(pred_soft, 100)
+      probabilities = pred_soft.tolist()
+
+      return dict(zip(labels, probabilities))
 
   """
   Arguments
   ---------
   img_path: str
   """
-  def predict(self, img_path: str):  
-    return self.predict_image(img=Image.open(img_path))
+  def predict(self, img_path: str, return_str=True):  
+    return self.predict_image(img=Image.open(img_path), return_str=return_str)

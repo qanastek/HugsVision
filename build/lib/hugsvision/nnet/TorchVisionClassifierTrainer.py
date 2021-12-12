@@ -200,8 +200,8 @@ class TorchVisionClassifierTrainer:
 
     # Close the logs file
     self.logs_file.close()
-    self.logs_loss.close()
-    self.logs_acc.close()
+    self.logs_loss_train.close()
+    self.logs_acc_train.close()
 
   """
   📜 Open the logs file
@@ -226,8 +226,9 @@ class TorchVisionClassifierTrainer:
     os.makedirs(self.logs_path, exist_ok=True)
 
     # Open the logs file
-    self.logs_loss = open(self.logs_path + "logs_loss_" + self.current_date + ".txt", "a")
-    self.logs_acc = open(self.logs_path + "logs_acc_" + self.current_date + ".txt", "a")
+    self.logs_loss_train = open(self.logs_path + "train_logs_loss_" + self.current_date + ".txt", "a")
+    self.logs_acc_train = open(self.logs_path + "train_logs_acc_" + self.current_date + ".txt", "a")
+    self.logs_acc_test = open(self.logs_path + "test_logs_acc_" + self.current_date + ".txt", "a")
 
   """
   🧪 Evaluate the performances of the system of the test sub-dataset given a f1-score
@@ -303,8 +304,13 @@ class TorchVisionClassifierTrainer:
       self.logs_file.close()
 
       self.tensor_board.add_scalar('Loss/train', batches_loss, epoch)
+      self.logs_loss_train.write(str(epoch) + "," + str(batches_loss.item()) + "\n")
+
       self.tensor_board.add_scalar('Accuracy/train', batches_acc, epoch)
+      self.logs_acc_train.write(str(epoch) + "," + str(batches_acc) + "\n")
+
       self.tensor_board.add_scalar('Accuracy/test', total_acc, epoch)
+      self.logs_acc_test.write(str(epoch) + "," + str(total_acc) + "\n")
 
   """
   🗃️ Compute epoch batches
@@ -350,9 +356,6 @@ class TorchVisionClassifierTrainer:
     # Compute accuracy
     total_acc = accuracy_score(all_targets, all_preds)
     avg_loss = sum_loss / len(self.data_loader_train)
-
-    self.logs_loss.write(str(epoch) + "," + str(avg_loss.item()) + "\n")
-    self.logs_acc.write(str(epoch) + "," + str(total_acc.item()) + "\n")
 
     return total_acc, avg_loss
 
