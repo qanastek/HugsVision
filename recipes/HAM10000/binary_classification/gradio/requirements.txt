@@ -1,0 +1,7 @@
+gradio
+hugsvision
+transformers
+cmake
+opencv-python-headless
+numpy
+Pillow

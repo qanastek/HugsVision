@@ -1,0 +1,3 @@
+DenseNet121
+MobileNetV2
+ShuffleNetV2

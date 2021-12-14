@@ -1,0 +1,1 @@
+docker build --tag qanastek/hugsvision-api-cpu-only:latest .
