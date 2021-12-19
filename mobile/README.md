@@ -14,7 +14,7 @@ docker run -d --name huggingface_api -p 80:5000 qanastek/hugsvision-api-cpu-only
 Run the app:
 
 * Flutter Pub Get
-* 
+* Run the project
 
 Generate icons:
 
