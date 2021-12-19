@@ -18,7 +18,7 @@ import torchvision.models as models
 from torch.utils.data import DataLoader
 from torch.utils.tensorboard import SummaryWriter
 from torch.optim.lr_scheduler import ExponentialLR
-
+from torch.utils.mobile_optimizer import optimize_for_mobile
 
 from sklearn import metrics
 from sklearn.metrics import accuracy_score
@@ -54,6 +54,7 @@ class TorchVisionClassifierTrainer:
     load_best_model_at_end = True,
     classification_report_digits = 4,
     parallelized = False,
+    lite = False,
   ):
 
     self.train             = train
@@ -80,6 +81,7 @@ class TorchVisionClassifierTrainer:
     self.load_best_model_at_end = load_best_model_at_end
     self.classification_report_digits = classification_report_digits
     self.parallelized = parallelized
+    self.lite = lite
 
     self.tensor_board = SummaryWriter()
 
@@ -202,6 +204,14 @@ class TorchVisionClassifierTrainer:
     self.logs_file.close()
     self.logs_loss_train.close()
     self.logs_acc_train.close()
+
+    if self.lite == True:
+      lite_path = output_dir + "model.ptl"
+      print(lite_path)
+      traced_script_module = torch.jit.trace(self.model.to("cpu"), self.image_example.to("cpu"))
+      traced_script_module_optimized = optimize_for_mobile(traced_script_module)
+      traced_script_module_optimized._save_for_lite_interpreter(lite_path)
+      print("Lite exported!")
 
   """
   📜 Open the logs file
