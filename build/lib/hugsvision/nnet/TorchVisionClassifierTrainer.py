@@ -88,6 +88,8 @@ class TorchVisionClassifierTrainer:
     self.data_loader_train = torch.utils.data.DataLoader(self.train, batch_size=self.batch_size, shuffle=True, num_workers=self.workers)
     self.data_loader_test = torch.utils.data.DataLoader(self.test, batch_size=self.batch_size, shuffle=True, num_workers=self.workers)
 
+    self.image_example = next(iter(self.data_loader_train))[0]
+    
     print(self.ids2labels)
     print(self.labels2ids)
 
