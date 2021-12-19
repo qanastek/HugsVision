@@ -1,0 +1,48 @@
+name: hugs_vision
+description: A HugsVision application via API.
+
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.7.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  # Official
+  connectivity: ^0.4.9+3
+  http: ^0.13.0
+  # http: ^0.12.2
+  url_launcher: ^5.7.2
+  path_provider: ^2.0.2
+  # path_provider: ^1.6.18
+  path: ^1.7.0
+  cupertino_icons: ^1.0.2
+  camera: ^0.5.8+8
+  share: ^0.6.5+2
+  flutter_launcher_icons: ^0.8.1
+
+  # Non Official
+  permission_handler: ^5.0.1+1
+  pytorch_mobile: ^0.2.1
+  image_picker: ^0.7.5+3
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+flutter_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/icons/logo.png"
+
+flutter:
+
+  uses-material-design: true
+
+  assets:
+    - assets/models/model.pt
+    - assets/models/labels.csv
