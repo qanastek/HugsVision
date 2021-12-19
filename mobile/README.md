@@ -2,10 +2,6 @@
 
 This is a Flutter 2.0 application for demonstrating mobile device capabilities for the skin cancer identification task using the [docker image](https://hub.docker.com/repository/docker/qanastek/hugsvision-api-cpu-only) of the HugsVision inference API (CPU Only) and [Pytorch Mobile](https://pub.dev/packages/pytorch_mobile).
 
-## User Interface
-
-![IOS Preview](assets/preview.png)
-
 ## Commands
 
 Run the API server:
@@ -25,3 +21,7 @@ Generate icons:
 ```dart
 flutter packages pub run flutter_launcher_icons:main
 ```
+
+## User Interface
+
+![IOS Preview](assets/preview.png)
