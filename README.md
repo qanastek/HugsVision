@@ -185,6 +185,27 @@ You can find all the currently available models or tasks under the `recipes/` fo
   </tr>
 </table>
 
+# HuggingFace Spaces
+
+You can try some of the models or tasks on HuggingFace thanks to theirs amazing spaces :
+
+<table>
+<thead>
+  <tr>
+    <td>
+        <a href="https://huggingface.co/spaces/HugsVision/Skin-Cancer">
+            <img src="https://raw.githubusercontent.com/qanastek/HugsVision/main/ressources/images/spaces/1-to-1_ratio/skin-cancer-classifier.png" width="256">
+        </a>
+    </td>
+    <td>
+        <a href="https://huggingface.co/spaces/zihaoz96/shark-classifier">
+            <img src="https://raw.githubusercontent.com/qanastek/HugsVision/main/ressources/images/spaces/1-to-1_ratio/shark-classifier.png" width="256">
+        </a>
+    </td>
+  </tr>
+</thead>
+</table>
+
 # Model architectures
 
 All the model checkpoints provided by 🤗 Transformers and compatible with our tasks can be seamlessly integrated from the huggingface.co model hub where they are uploaded directly by users and organizations.
