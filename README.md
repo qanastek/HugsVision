@@ -194,12 +194,12 @@ You can try some of the models or tasks on HuggingFace thanks to theirs amazing 
   <tr>
     <td>
         <a href="https://huggingface.co/spaces/HugsVision/Skin-Cancer">
-            <img src="https://raw.githubusercontent.com/qanastek/HugsVision/main/ressources/images/spaces/1-to-1_ratio/skin-cancer-classifier.png" width="256">
+            <img src="https://raw.githubusercontent.com/qanastek/HugsVision/main/ressources/images/spaces/1-to-1_ratio/skin-cancer-classifier.png" width="128">
         </a>
     </td>
     <td>
         <a href="https://huggingface.co/spaces/zihaoz96/shark-classifier">
-            <img src="https://raw.githubusercontent.com/qanastek/HugsVision/main/ressources/images/spaces/1-to-1_ratio/shark-classifier.png" width="256">
+            <img src="https://raw.githubusercontent.com/qanastek/HugsVision/main/ressources/images/spaces/1-to-1_ratio/shark-classifier.png" width="128">
         </a>
     </td>
   </tr>
