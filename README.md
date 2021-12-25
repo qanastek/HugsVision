@@ -127,10 +127,10 @@ You can find all the currently available models or tasks under the `recipes/` fo
   <!-- ------------------------------------------------------------------- -->
   
   <tr>
-      <td rowspan="3" width="160">
+      <td rowspan="4" width="160">
         <img src="https://raw.githubusercontent.com/qanastek/HugsVision/main/ressources/images/receipes/kvasir_v2.png" width="256">
       </td>    
-      <td rowspan="3">  
+      <td rowspan="4">  
         <b>Training a Transformer Image Classifier to help endoscopists:</b> A demonstration of how to train a Image Classifier Transformer model that can help endoscopists to automate detection of various anatomical landmarks, phatological findings or endoscopic procedures in the gastrointestinal tract with HugsVision.
       </td>
       <td align="center" width="80">
@@ -150,6 +150,13 @@ You can find all the currently available models or tasks under the `recipes/` fo
       <td align="center">
           <a href="https://colab.research.google.com/drive/1PMV-5c54ZlyoVh6dtkazaDdJR7I8VaqN?usp=sharing">
               <img src="https://raw.githubusercontent.com/qanastek/HugsVision/main/ressources/images/receipes/colab_logo.png" height="28">
+          </a>
+      </td>
+  </tr>
+  <tr>
+      <td align="center">
+          <a href="https://medium.com/@yanis.labrak/how-to-train-a-custom-vision-transformer-vit-image-classifier-to-help-endoscopists-in-under-5-min-2e7e4110a353">
+              <img src="https://raw.githubusercontent.com/qanastek/HugsVision/main/ressources/images/receipes/medium.png" height="28">
           </a>
       </td>
   </tr>
