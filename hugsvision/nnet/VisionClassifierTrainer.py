@@ -46,6 +46,7 @@ class VisionClassifierTrainer:
     eval_metric   = "accuracy",
     fp16          = False,
     classification_report_digits = 4,
+    resume_from_cp = False,
   ):
 
     self.model_name        = model_name
@@ -63,6 +64,7 @@ class VisionClassifierTrainer:
     self.ids2labels        = self.model.config.id2label
     self.labels2ids        = self.model.config.label2id
     self.classification_report_digits = classification_report_digits
+    self.resume_from_cp    = resume_from_cp
 
     print(self.ids2labels)
     print(self.labels2ids)
@@ -72,14 +74,14 @@ class VisionClassifierTrainer:
 
     # Setup the metric
     self.metric = torchmetrics.Accuracy()
-    
+
     # Get the classifier collator
     self.collator = ImageClassificationCollator(self.feature_extractor)
 
     # Get the model output path
     self.output_path = self.__getOutputPath()
     self.logs_path   = self.output_path
-    
+
     # Open the logs file
     self.__openLogs()
 
@@ -102,7 +104,7 @@ class VisionClassifierTrainer:
         overwrite_output_dir        = True,
         fp16=self.fp16,
     )
-    
+
     self.trainer = Trainer(
       self.model,
       self.training_args,
@@ -116,7 +118,7 @@ class VisionClassifierTrainer:
     ⚙️ Train the given model on the dataset
     """
     print("Start Training!")
-    self.trainer.train()
+    self.trainer.train(resume_from_checkpoint = resume_from_cp)
     self.trainer.save_model(self.output_path + "/trainer/")
     self.model.save_pretrained(self.output_path + "/model/")
     self.feature_extractor.save_pretrained(self.output_path + "/feature_extractor/")
@@ -128,7 +130,7 @@ class VisionClassifierTrainer:
   """
   📜 Open the logs file
   """
-  def __openLogs(self):    
+  def __openLogs(self):
 
     # Open the logs file
     self.logs_file = open(self.logs_path + "/logs.txt", "a")
@@ -180,7 +182,7 @@ class VisionClassifierTrainer:
   🧪 Evaluate the performances of the system of the test sub-dataset
   """
   def evaluate(self):
-        
+
     all_preds  = []
     all_target = []
 
