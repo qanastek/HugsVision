@@ -46,7 +46,7 @@ class VisionClassifierTrainer:
     eval_metric   = "accuracy",
     fp16          = False,
     classification_report_digits = 4,
-    resume_from_cp = False,
+    resume_from_checkpoint = False,
   ):
 
     self.model_name        = model_name
@@ -64,7 +64,7 @@ class VisionClassifierTrainer:
     self.ids2labels        = self.model.config.id2label
     self.labels2ids        = self.model.config.label2id
     self.classification_report_digits = classification_report_digits
-    self.resume_from_cp    = resume_from_cp
+    self.resume_from_checkpoint       = resume_from_checkpoint
 
     print(self.ids2labels)
     print(self.labels2ids)
@@ -118,7 +118,7 @@ class VisionClassifierTrainer:
     ⚙️ Train the given model on the dataset
     """
     print("Start Training!")
-    self.trainer.train(resume_from_checkpoint = resume_from_cp)
+    self.trainer.train(resume_from_checkpoint = self.resume_from_checkpoint)
     self.trainer.save_model(self.output_path + "/trainer/")
     self.model.save_pretrained(self.output_path + "/model/")
     self.feature_extractor.save_pretrained(self.output_path + "/feature_extractor/")
