@@ -100,7 +100,7 @@ class TorchVisionClassifierTrainer:
       self.device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
     # Setup the metric
-    self.metric = torchmetrics.Accuracy()
+    self.metric = torchmetrics.Accuracy(task="multiclass")
 
     self.num_classes = len(self.ids2labels.keys())
     self.config["num_classes"] = self.num_classes

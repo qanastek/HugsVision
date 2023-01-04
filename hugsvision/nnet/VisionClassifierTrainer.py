@@ -71,7 +71,7 @@ class VisionClassifierTrainer:
     self.device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
     # Setup the metric
-    self.metric = torchmetrics.Accuracy()
+    self.metric = torchmetrics.Accuracy(task="multiclass")
     
     # Get the classifier collator
     self.collator = ImageClassificationCollator(self.feature_extractor)
