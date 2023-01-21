@@ -1,11 +1,7 @@
 # -*- coding: utf-8 -*-
 
-import os
 import math
 import random
-import argparse
-from pathlib import Path
-from datetime import datetime
 from collections import Counter
 from operator import itemgetter
 
@@ -13,8 +9,6 @@ import torch
 from torchvision import transforms
 from torchvision.datasets import ImageFolder
 
-import numpy as np
-from tqdm import tqdm
 from PIL import Image, ImageEnhance
 
 from tabulate import tabulate
@@ -39,7 +33,7 @@ class VisionDataset:
         
             # Random Contrast
             im3 = ImageEnhance.Contrast(image)
-            im3.enhance(random.uniform(0.5, 1.0)).show()
+            im3.enhance(random.uniform(0.5, 1.0))
         
             # Random Noise
 
@@ -96,9 +90,9 @@ class VisionDataset:
         # Index of the validation corpora
         train_index = math.floor(len(indices) * (1 - test_ratio))
 
-        # TRAIN
+        # Train set
         train_ds = torch.utils.data.Subset(dataset, indices[:train_index])
-        print("train_ds: ", len(train_ds))
+        print("Training Dataset Elements: ", len(train_ds))
 
         # If data augmentation is enabled
         if augmentation == True:
@@ -116,7 +110,7 @@ class VisionDataset:
             # Replace by the augmented data
             train_ds = new_ds
 
-        # TEST
+        # Test set
         test_ds = torch.utils.data.Subset(dataset, indices[train_index:])
         
         ct_train = Counter(list(map(itemgetter(1), train_ds)))
@@ -125,16 +119,16 @@ class VisionDataset:
         ct_test = Counter(list(map(itemgetter(1), test_ds)))
         test_classes = [ct_test[int(a)] for a in list(id2label.keys())]
 
-        table_repartition = [
+        table_distribution = [
             ["Train"] + train_classes + [str(len(train_ds))],
             ["Test"] + test_classes + [str(len(test_ds))],
         ]
 
-        repartitions_table = tabulate(table_repartition, ["Dataset"] + list(id2label.values()) + ["Total"], tablefmt="pretty")
-        print(repartitions_table)
+        distribution_table = tabulate(table_distribution, ["Dataset"] + list(id2label.values()) + ["Total"], tablefmt="pretty")
+        print(distribution_table)
 
         # # Write logs
-        # self.logs_file.write(repartitions_table + "\n")
+        # self.logs_file.write(distribution_table + "\n")
 
         return torch.utils.data.Subset(train_ds, list(range(0,len(train_ds)))), torch.utils.data.Subset(test_ds, list(range(0,len(test_ds))))
 

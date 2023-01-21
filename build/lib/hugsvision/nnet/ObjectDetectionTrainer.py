@@ -67,7 +67,7 @@ class ObjectDetectionTrainer:
     self.device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
     # Setup the metric
-    self.metric = torchmetrics.Accuracy()
+    self.metric = torchmetrics.Accuracy(task="multiclass")
 
     # Load feature extractor
     self.feature_extractor = DetrFeatureExtractor.from_pretrained(self.model_path)
