@@ -1,17 +1,9 @@
 # -*- coding: utf-8 -*-
 
 import os
-import math
-import random
-import argparse
-from pathlib import Path
 from datetime import datetime
-from collections import Counter
 
 import torch
-import torchmetrics
-from torchmetrics import Accuracy
-from torch.utils.data import DataLoader
 
 from sklearn import metrics
 from sklearn.metrics import precision_recall_fscore_support as f_score
@@ -21,8 +13,7 @@ from transformers.training_args import TrainingArguments
 from transformers.feature_extraction_utils import FeatureExtractionMixin
 
 from tqdm import tqdm
-from tabulate import tabulate
-from PIL import Image, ImageEnhance
+from PIL import Image
 
 from hugsvision.dataio.ImageClassificationCollator import ImageClassificationCollator
 
@@ -69,9 +60,6 @@ class VisionClassifierTrainer:
 
     # Processing device (CPU / GPU)
     self.device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
-
-    # Setup the metric
-    self.metric = torchmetrics.Accuracy(task="multiclass")
     
     # Get the classifier collator
     self.collator = ImageClassificationCollator(self.feature_extractor)
@@ -157,7 +145,7 @@ class VisionClassifierTrainer:
     # Get the hypothesis and predictions
     all_target, all_preds = self.evaluate()
 
-    table = metrics.classification_report(
+    cr = metrics.classification_report(
       all_target,
       all_preds,
       labels = [int(a) for a in list(self.ids2labels.keys())],
@@ -165,11 +153,11 @@ class VisionClassifierTrainer:
       zero_division = 0,
       digits=self.classification_report_digits,
     )
-    print(table)
+    print(cr)
 
     # Write logs
     self.__openLogs()
-    self.logs_file.write(table + "\n")
+    self.logs_file.write(cr + "\n")
     self.logs_file.close()
 
     print("Logs saved at: \033[93m" + self.logs_path + "\033[0m")
