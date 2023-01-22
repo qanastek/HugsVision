@@ -11,6 +11,7 @@ parser.add_argument('--name', type=str, default="MyVitModel", help='The name of 
 parser.add_argument('--imgs', type=str, default="./images/", help='The directory of the input images')
 parser.add_argument('--output', type=str, default="./out/", help='The output directory of the model')
 parser.add_argument('--epochs', type=int, default=1, help='Number of Epochs')
+parser.add_argument('--checkpoint_path', type=str, default=None, help='Path of the last checkpoint')
 args = parser.parse_args() 
 
 # Load the dataset
@@ -47,6 +48,7 @@ trainer = VisionClassifierTrainer(
 	feature_extractor = DeiTFeatureExtractor.from_pretrained(
 		huggingface_model
 	),
+	checkpoint_path=args.checkpoint_path,
 )
 
 # Evaluate on the test sub-dataset
