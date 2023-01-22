@@ -37,6 +37,7 @@ class VisionClassifierTrainer:
     eval_metric   = "accuracy",
     fp16          = False,
     classification_report_digits = 4,
+    checkpoint_path = None,
   ):
 
     self.model_name        = model_name
@@ -54,6 +55,7 @@ class VisionClassifierTrainer:
     self.ids2labels        = self.model.config.id2label
     self.labels2ids        = self.model.config.label2id
     self.classification_report_digits = classification_report_digits
+    self.checkpoint_path = checkpoint_path
 
     print(self.ids2labels)
     print(self.labels2ids)
@@ -104,7 +106,11 @@ class VisionClassifierTrainer:
     ⚙️ Train the given model on the dataset
     """
     print("Start Training!")
-    self.trainer.train()
+
+    if self.checkpoint_path != None:
+      print(f"Your checkpoint is loaded from: {self.checkpoint_path}")
+
+    self.trainer.train(resume_from_checkpoint=self.checkpoint_path)
     self.trainer.save_model(self.output_path + "/trainer/")
     self.model.save_pretrained(self.output_path + "/model/")
     self.feature_extractor.save_pretrained(self.output_path + "/feature_extractor/")
